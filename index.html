@@ -1313,7 +1313,7 @@ let sportsExpanded = false;
 function toggleSports() {
   sportsExpanded = !sportsExpanded;
   document.querySelectorAll('.sport-hidden').forEach(c => {
-    c.style.display = sportsExpanded ? 'grid' : 'none';
+    c.style.display = sportsExpanded ? 'flex' : 'none';
   });
   document.getElementById('showSportsBtn').innerHTML = sportsExpanded
     ? 'Zobraziť menej &nbsp;↑'
