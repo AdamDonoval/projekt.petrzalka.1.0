@@ -211,6 +211,14 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 }
 .sport-icon-wrap{margin-bottom:4px}
 .sport-link{margin-top:6px}
+.sport-item.sport-hidden{display:none}
+.show-sports-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:20px;background:none;border:none;
+  color:var(--green);font-weight:700;font-size:14px;
+  cursor:pointer;font-family:inherit;padding:0;
+}
+.show-sports-btn:hover{text-decoration:underline}
 .sport-icon-wrap{
   width:40px;height:40px;margin-bottom:4px;
   color:var(--green);flex-shrink:0;
@@ -608,7 +616,7 @@ footer ul a:hover{color:#fff}
       </div>
     </div>
 
-    <div class="sport-item">
+    <div class="sport-item sport-hidden">
       <div class="sport-item-photo">
         <img src="assets/skola.jpg" alt="Yoga"/>
       </div>
@@ -626,7 +634,7 @@ footer ul a:hover{color:#fff}
       </div>
     </div>
 
-    <div class="sport-item">
+    <div class="sport-item sport-hidden">
       <div class="sport-item-photo">
         <img src="assets/b2.jpg" alt="Tenis"/>
       </div>
@@ -643,7 +651,7 @@ footer ul a:hover{color:#fff}
       </div>
     </div>
 
-    <div class="sport-item">
+    <div class="sport-item sport-hidden">
       <div class="sport-item-photo">
         <img src="assets/cat-loptove.jpg" alt="Loptové športy"/>
       </div>
@@ -655,7 +663,7 @@ footer ul a:hover{color:#fff}
       </div>
     </div>
 
-    <div class="sport-item">
+    <div class="sport-item sport-hidden">
       <div class="sport-item-photo">
         <img src="assets/b3.jpg" alt="Tanec"/>
       </div>
@@ -671,7 +679,7 @@ footer ul a:hover{color:#fff}
       </div>
     </div>
 
-    <div class="sport-item">
+    <div class="sport-item sport-hidden">
       <div class="sport-item-photo">
         <img src="assets/cat-beh.jpg" alt="Atletika"/>
       </div>
@@ -683,7 +691,7 @@ footer ul a:hover{color:#fff}
       </div>
     </div>
 
-    <div class="sport-item">
+    <div class="sport-item sport-hidden">
       <div class="sport-item-photo">
         <img src="assets/cat-korculovanie.jpg" alt="Zimné športy"/>
       </div>
@@ -695,7 +703,7 @@ footer ul a:hover{color:#fff}
       </div>
     </div>
 
-    <div class="sport-item">
+    <div class="sport-item sport-hidden">
       <div class="sport-item-photo">
         <img src="assets/cat-hokej.jpg" alt="Bojové športy"/>
       </div>
@@ -707,7 +715,7 @@ footer ul a:hover{color:#fff}
       </div>
     </div>
 
-    <div class="sport-item">
+    <div class="sport-item sport-hidden">
       <div class="sport-item-photo">
         <img src="assets/cat-lezenie.jpg" alt="Lezenie"/>
       </div>
@@ -720,6 +728,10 @@ footer ul a:hover{color:#fff}
     </div>
 
   </div>
+
+  <button class="show-sports-btn" id="showSportsBtn" onclick="toggleSports()">
+    Zobraziť všetky športy &nbsp;↓
+  </button>
 </section>
 
 <!-- FACILITIES -->
@@ -1167,6 +1179,17 @@ function filterFac(btn, type) {
 }
 
 // Search chips
+let sportsExpanded = false;
+function toggleSports() {
+  sportsExpanded = !sportsExpanded;
+  document.querySelectorAll('.sport-hidden').forEach(c => {
+    c.style.display = sportsExpanded ? 'grid' : 'none';
+  });
+  document.getElementById('showSportsBtn').innerHTML = sportsExpanded
+    ? 'Zobraziť menej &nbsp;↑'
+    : 'Zobraziť všetky športy &nbsp;↓';
+}
+
 function setSearch(v) { document.getElementById('heroSearch').value = v; }
 function doSearch() {
   const v = document.getElementById('heroSearch').value;
