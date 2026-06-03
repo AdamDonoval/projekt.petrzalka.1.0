@@ -142,71 +142,61 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .chip:hover{border-color:var(--green);color:var(--green);background:#f0f9f3}
 
 /* hero right */
+/* hero right – mozaika */
 .hero-right{
-  position:relative;
-  background:#0f1a13;
   overflow:hidden;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:3px;
+  background:#1a1a1a;
+  position:relative;
 }
-.hero-right-bg{
-  position:absolute;inset:0;
+.hero-mosaic-photo{
+  overflow:hidden;
+  background:#c8d8c0;
+  position:relative;
 }
-.hero-right-bg img{
+.hero-mosaic-photo img{
   width:100%;height:100%;
   object-fit:cover;
-  opacity:.55;
+  transition:transform .5s ease, filter .3s;
+  filter:saturate(.85) brightness(.95);
 }
-/* gradient overlay */
-.hero-right-bg::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(15,26,19,.7) 0%,rgba(15,26,19,.2) 100%);
+.hero-mosaic-photo:hover img{
+  transform:scale(1.06);
+  filter:saturate(1.1) brightness(1);
 }
+.hero-mosaic-photo.tall{grid-row:span 2}
 /* stat bar */
 .hero-stat-bar{
   position:absolute;
   bottom:0;left:0;right:0;
   z-index:2;
   display:flex;
-  background:rgba(10,20,12,.55);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-top:1px solid rgba(255,255,255,.1);
+  background:rgba(10,18,12,.65);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-top:1px solid rgba(255,255,255,.08);
 }
 .hero-stat-bar-item{
   flex:1;
-  padding:16px 20px;
+  padding:13px 14px;
   color:#fff;
-  display:flex;align-items:center;gap:12px;
-  border-right:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;gap:10px;
+  border-right:1px solid rgba(255,255,255,.08);
 }
 .hero-stat-bar-item:last-child{border-right:none}
 .hero-stat-bar-icon{
-  width:32px;height:32px;flex-shrink:0;
+  width:28px;height:28px;flex-shrink:0;
   background:rgba(255,255,255,.1);
-  border-radius:8px;
+  border-radius:6px;
   display:grid;place-items:center;
-  color:rgba(255,255,255,.8);
+  color:rgba(255,255,255,.7);
 }
-.hero-stat-bar-icon svg{width:16px;height:16px}
-.hero-stat-bar-text{}
-.hero-stat-bar-num{font-size:18px;font-weight:800;line-height:1;letter-spacing:-.02em}
-.hero-stat-bar-lbl{font-size:11px;opacity:.55;margin-top:2px;font-weight:500}
-
-/* small photo grid overlay top-right */
-.hero-photos-grid{
-  position:absolute;
-  top:24px;right:24px;
-  display:grid;
-  grid-template-columns:80px 80px;
-  grid-template-rows:80px 80px;
-  gap:6px;
-  z-index:2;
-}
-.hero-photo-sm{
-  border-radius:10px;overflow:hidden;
-  border:2px solid rgba(255,255,255,.25);
-}
-.hero-photo-sm img{width:100%;height:100%;object-fit:cover}
-.hero-photo-sm.tall{grid-row:span 2;border-radius:10px}
+.hero-stat-bar-icon svg{width:14px;height:14px}
+.hero-stat-bar-num{font-size:15px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.hero-stat-bar-lbl{font-size:10px;opacity:.5;margin-top:2px;font-weight:500}
 
 /* ── STATS BAR ── */
 .stats-bar{
@@ -607,19 +597,14 @@ footer ul a:hover{color:#fff}
   </div>
 
   <div class="hero-right">
-    <div class="hero-right-bg">
-      <img src="assets/cat-loptove.jpg" alt="Šport"/>
+    <div class="hero-mosaic-photo tall">
+      <img src="assets/cat-plavanie.jpg" alt="Plávanie"/>
     </div>
-    <div class="hero-photos-grid">
-      <div class="hero-photo-sm tall">
-        <img src="assets/cat-plavanie.jpg" alt="Plávanie"/>
-      </div>
-      <div class="hero-photo-sm">
-        <img src="assets/cat-beh.jpg" alt="Beh"/>
-      </div>
-      <div class="hero-photo-sm">
-        <img src="assets/cat-korculovanie.jpg" alt="Korčuľovanie"/>
-      </div>
+    <div class="hero-mosaic-photo">
+      <img src="assets/cat-beh.jpg" alt="Beh"/>
+    </div>
+    <div class="hero-mosaic-photo">
+      <img src="assets/cat-korculovanie.jpg" alt="Korčuľovanie"/>
     </div>
     <div class="hero-stat-bar">
       <div class="hero-stat-bar-item">
