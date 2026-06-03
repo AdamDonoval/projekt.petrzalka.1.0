@@ -198,6 +198,47 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .hero-stat-bar-num{font-size:15px;font-weight:800;line-height:1;letter-spacing:-.02em}
 .hero-stat-bar-lbl{font-size:10px;opacity:.5;margin-top:2px;font-weight:500}
 
+/* ── NOVINKY ── */
+.novinky-section{background:#fff}
+.novinky-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 40px 12px;
+}
+.novinky-dots{display:flex;gap:6px;align-items:center}
+.novinky-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border);border:none;cursor:pointer;
+  padding:0;transition:all .2s;
+}
+.novinky-dot.active{background:var(--green);width:22px;border-radius:4px}
+.novinky-track-wrap{
+  position:relative;overflow:hidden;
+  line-height:0;
+}
+.novinky-track{
+  display:flex;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+}
+.novinky-slide{
+  flex:0 0 100%;width:100%;
+}
+.novinky-slide img{
+  width:100%;height:auto;display:block;
+  object-fit:cover;
+}
+.novinky-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.9);border:1px solid var(--border);
+  font-size:16px;cursor:pointer;
+  display:grid;place-items:center;
+  transition:all .15s;color:var(--text);
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+.novinky-arrow:hover{background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.novinky-prev{left:16px}
+.novinky-next{right:16px}
+
 /* ── STATS BAR ── */
 .stats-bar{
   background:var(--green);
@@ -599,10 +640,21 @@ footer ul a:hover{color:#fff}
   </div>
 </div>
 
-<!-- HERO BANNER -->
-<a href="#" style="display:block;width:100%;line-height:0;">
-  <img src="assets/summer-camp.png" alt="Summer Hero Camp 2026" style="width:100%;height:auto;object-fit:cover;display:block;"/>
-</a>
+<!-- NOVINKY -->
+<div class="novinky-section">
+  <div class="novinky-header">
+    <span class="section-label" style="margin:0">Novinky</span>
+    <div class="novinky-dots" id="novinkyDots"></div>
+  </div>
+  <div class="novinky-track-wrap">
+    <div class="novinky-track" id="novinkyTrack">
+      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Summer Hero Camp 2026"/></div>
+      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Summer Hero Camp 2026"/></div>
+    </div>
+    <button class="novinky-arrow novinky-prev" onclick="novinkyPrev()">&#8592;</button>
+    <button class="novinky-arrow novinky-next" onclick="novinkyNext()">&#8594;</button>
+  </div>
+</div>
 
 <!-- SPORTS -->
 <section class="section" id="sporty">
@@ -1227,6 +1279,34 @@ function filterFac(btn, type) {
 }
 
 // Search chips
+// NOVINKY CAROUSEL
+let novinkyIdx = 0;
+const novinkySlides = document.getElementById('novinkyTrack')?.children;
+const novinkyDotsWrap = document.getElementById('novinkyDots');
+
+function novinkyGoTo(n) {
+  if (!novinkySlides) return;
+  const total = novinkySlides.length;
+  novinkyIdx = (n + total) % total;
+  document.getElementById('novinkyTrack').style.transform = `translateX(-${novinkyIdx * 100}%)`;
+  document.querySelectorAll('.novinky-dot').forEach((d, i) => d.classList.toggle('active', i === novinkyIdx));
+}
+function novinkyNext() { novinkyGoTo(novinkyIdx + 1); resetNovinkyTimer(); }
+function novinkyPrev() { novinkyGoTo(novinkyIdx - 1); resetNovinkyTimer(); }
+
+// build dots
+if (novinkySlides && novinkyDotsWrap) {
+  Array.from(novinkySlides).forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'novinky-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => { novinkyGoTo(i); resetNovinkyTimer(); };
+    novinkyDotsWrap.appendChild(d);
+  });
+}
+
+let novinkyTimer = setInterval(() => novinkyNext(), 7000);
+function resetNovinkyTimer() { clearInterval(novinkyTimer); novinkyTimer = setInterval(() => novinkyNext(), 7000); }
+
 let sportsExpanded = false;
 function toggleSports() {
   sportsExpanded = !sportsExpanded;
