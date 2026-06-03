@@ -167,46 +167,41 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 /* ── SPORT GRID ── */
 .sport-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;
 }
 .sport-item{
   background:#fff;
-  border:1px solid var(--border);
-  border-radius:10px;
   display:grid;
-  grid-template-columns:160px 1fr;
+  grid-template-columns:1fr 1fr;
   overflow:hidden;
-  transition:box-shadow .2s,transform .2s;
+  transition:background .15s;
   cursor:pointer;
-  min-height:130px;
 }
-.sport-item:hover{
-  box-shadow:0 6px 24px rgba(0,0,0,.09);
-  transform:translateY(-1px);
-}
+.sport-item:hover{background:#f9f9f7}
 .sport-item-photo{
   overflow:hidden;
   background:#d4ddd0;
-  flex-shrink:0;
 }
 .sport-item-photo img{
   width:100%;height:100%;
   object-fit:cover;
   transition:transform .4s;
 }
-.sport-item:hover .sport-item-photo img{transform:scale(1.05)}
+.sport-item:hover .sport-item-photo img{transform:scale(1.04)}
 .sport-item-body{
-  padding:18px 20px;
-  display:flex;flex-direction:column;gap:6px;
+  padding:24px 20px;
+  display:flex;flex-direction:column;gap:8px;
 }
 .sport-icon-wrap{
-  width:36px;height:36px;margin-bottom:2px;
+  width:40px;height:40px;margin-bottom:4px;
   color:var(--green);flex-shrink:0;
 }
-.sport-icon-wrap svg{width:36px;height:36px}
+.sport-icon-wrap svg{width:40px;height:40px}
 .sport-icon-wrap img{
-  width:36px;height:36px;
+  width:40px;height:40px;
   object-fit:contain;
 }
 .sport-name{font-size:16px;font-weight:700;letter-spacing:-.01em}
