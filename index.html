@@ -177,28 +177,28 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   grid-template-columns:1fr 1fr;
   overflow:hidden;
   cursor:pointer;
+  position:relative;
   transition:box-shadow .3s;
 }
-.sport-item:hover{box-shadow:0 0 0 2px var(--green), 0 8px 28px rgba(30,107,53,.2)}
-.sport-item-photo{
-  overflow:hidden;
-  background:#d4ddd0;
-  position:relative;
-}
-/* overlay iba na foto */
-.sport-item-photo::after{
+.sport-item::after{
   content:'';
   position:absolute;inset:0;
   background:rgba(0,0,0,.38);
   transition:opacity .3s ease;
   pointer-events:none;
+  z-index:1;
 }
-.sport-item:hover .sport-item-photo::after{opacity:0}
+.sport-item:hover::after{opacity:0}
+.sport-item:hover{box-shadow:0 0 0 2px var(--green), 0 8px 28px rgba(30,107,53,.22)}
+.sport-item-photo{
+  overflow:hidden;
+  background:#d4ddd0;
+}
 .sport-item-photo img{
   width:100%;height:100%;
   object-fit:cover;
   transition:transform .4s, filter .3s;
-  filter:saturate(.75);
+  filter:saturate(.8);
 }
 .sport-item:hover .sport-item-photo img{
   transform:scale(1.04);
@@ -208,9 +208,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   padding:20px 18px;
   display:flex;flex-direction:column;gap:6px;
   background:#fff;
-  transition:background .3s;
 }
-.sport-item:hover .sport-item-body{background:#f5fbf7}
 .sport-icon-wrap{margin-bottom:4px}
 .sport-link{margin-top:6px}
 .sport-icon-wrap{
@@ -567,7 +565,7 @@ footer ul a:hover{color:#fff}
         <img src="assets/cat-plavanie.jpg" alt="Plávanie"/>
       </div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap"><img src="assets/plavanie.png" alt=""/></div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M6 28c3.5-3.5 7-3.5 10.5 0s7 3.5 10.5 0 7-3.5 10.5 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="20" cy="13" r="5" stroke="currentColor" stroke-width="2.5"/></svg></div>
         <div class="sport-name">Plávanie</div>
         <div class="sport-sub">Bazény, dráhy, plavecké školy</div>
         <a href="#" class="sport-link">Pozrieť zariadenia →</a>
@@ -579,7 +577,7 @@ footer ul a:hover{color:#fff}
         <img src="assets/cat-beh.jpg" alt="Beh"/>
       </div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap"><img src="assets/beh.png" alt=""/></div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="27" cy="8" r="3.5" stroke="currentColor" stroke-width="2.5"/><path d="M23 13l-5 8 3 3-3 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 21l-5 3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
         <div class="sport-name">Beh</div>
         <div class="sport-sub">Trate, skupiny, podujatia</div>
         <a href="#" class="sport-link">Pozrieť zariadenia →</a>
@@ -591,7 +589,7 @@ footer ul a:hover{color:#fff}
         <img src="assets/cat-bicykel.jpg" alt="Bicyklovanie"/>
       </div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap"><img src="assets/bike.jpg" alt=""/></div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="10" cy="28" r="7" stroke="currentColor" stroke-width="2.5"/><circle cx="30" cy="28" r="7" stroke="currentColor" stroke-width="2.5"/><path d="M10 28l10-14 10 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="28" cy="10" r="3" stroke="currentColor" stroke-width="2.5"/></svg></div>
         <div class="sport-name">Bicyklovanie</div>
         <div class="sport-sub">Cyklotrasy, požičovne, BMX</div>
         <a href="#" class="sport-link">Pozrieť zariadenia →</a>
@@ -603,7 +601,7 @@ footer ul a:hover{color:#fff}
         <img src="assets/b1.jpg" alt="Fitness"/>
       </div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap"><img src="assets/workout.png" alt=""/></div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M6 20h4M30 20h4M10 20h20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><rect x="10" y="14" width="4" height="12" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="26" y="14" width="4" height="12" rx="2" stroke="currentColor" stroke-width="2.5"/></svg></div>
         <div class="sport-name">Fitness</div>
         <div class="sport-sub">Posilňovne, skupinové tréningy</div>
         <a href="#" class="sport-link">Pozrieť zariadenia →</a>
@@ -650,7 +648,7 @@ footer ul a:hover{color:#fff}
         <img src="assets/cat-loptove.jpg" alt="Loptové športy"/>
       </div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap"><img src="assets/football.png" alt=""/></div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2.5"/><path d="M20 6l4 6-4 4-4-4 4-6zM6 20l6-4 4 4-4 4-6-4zM34 20l-6-4-4 4 4 4 6-4zM14 30l2-6h8l2 6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
         <div class="sport-name">Loptové športy</div>
         <div class="sport-sub">Futbal, basketbal, volejbal</div>
         <a href="#" class="sport-link">Pozrieť zariadenia →</a>
@@ -678,7 +676,7 @@ footer ul a:hover{color:#fff}
         <img src="assets/cat-beh.jpg" alt="Atletika"/>
       </div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap"><img src="assets/beh.png" alt=""/></div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M8 32h24M8 32l7-18 5 10 5-10 7 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="sport-name">Atletika</div>
         <div class="sport-sub">Dráhy, tréningy, závody</div>
         <a href="#" class="sport-link">Pozrieť zariadenia →</a>
@@ -690,7 +688,7 @@ footer ul a:hover{color:#fff}
         <img src="assets/cat-korculovanie.jpg" alt="Zimné športy"/>
       </div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap"><img src="assets/korculovanie.png" alt=""/></div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M8 30h24M12 30l-2 4M28 30l2 4M20 6v16M14 12l6-6 6 6M10 22h20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="sport-name">Zimné športy</div>
         <div class="sport-sub">Korčuľovanie, hokej</div>
         <a href="#" class="sport-link">Pozrieť zariadenia →</a>
@@ -702,7 +700,7 @@ footer ul a:hover{color:#fff}
         <img src="assets/cat-hokej.jpg" alt="Bojové športy"/>
       </div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap"><img src="assets/hokej.png" alt=""/></div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="10" r="4" stroke="currentColor" stroke-width="2.5"/><path d="M13 18h14l-3 14H16l-3-14z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M16 18l-4-4M24 18l4-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
         <div class="sport-name">Bojové športy</div>
         <div class="sport-sub">Tréningy, kluby, súťaže</div>
         <a href="#" class="sport-link">Pozrieť zariadenia →</a>
@@ -714,7 +712,7 @@ footer ul a:hover{color:#fff}
         <img src="assets/cat-lezenie.jpg" alt="Lezenie"/>
       </div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap"><img src="assets/lozenie.jpg" alt=""/></div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M16 34V20a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M10 26l6-6 4 4 6-8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="28" cy="10" r="3.5" stroke="currentColor" stroke-width="2.5"/></svg></div>
         <div class="sport-name">Lezenie</div>
         <div class="sport-sub">Bouldering, steny, krúžky</div>
         <a href="#" class="sport-link">Pozrieť zariadenia →</a>
