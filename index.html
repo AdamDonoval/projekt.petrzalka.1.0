@@ -173,14 +173,24 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   border-radius:10px;overflow:hidden;
 }
 .sport-item{
-  background:#fff;
   display:grid;
   grid-template-columns:1fr 1fr;
   overflow:hidden;
-  transition:background .15s;
   cursor:pointer;
+  position:relative;
+  transition:box-shadow .3s;
 }
-.sport-item:hover{background:#f9f9f7}
+/* tmavý overlay cez celú kartu */
+.sport-item::after{
+  content:'';
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.38);
+  transition:opacity .3s ease;
+  pointer-events:none;
+  z-index:1;
+}
+.sport-item:hover::after{opacity:0}
+.sport-item:hover{box-shadow:0 0 0 2px var(--green), 0 8px 28px rgba(30,107,53,.22)}
 .sport-item-photo{
   overflow:hidden;
   background:#d4ddd0;
@@ -189,12 +199,20 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   width:100%;height:100%;
   object-fit:cover;
   transition:transform .4s;
+  filter:saturate(.8);
 }
-.sport-item:hover .sport-item-photo img{transform:scale(1.04)}
+.sport-item:hover .sport-item-photo img{
+  transform:scale(1.04);
+  filter:saturate(1.1);
+}
 .sport-item-body{
   padding:20px 18px;
   display:flex;flex-direction:column;gap:6px;
+  transition:opacity .3s ease;
 }
+/* text tiež stmavne mierne pri overlaye */
+.sport-item:not(:hover) .sport-item-body{opacity:.72}
+.sport-item:hover .sport-item-body{opacity:1}
 .sport-icon-wrap{margin-bottom:4px}
 .sport-link{margin-top:6px}
 .sport-icon-wrap{
