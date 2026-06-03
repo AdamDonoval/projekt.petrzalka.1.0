@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Šport v meste</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1a6b35;
+  --green2:#238a45;
+  --light:#f5f5f3;
+  --border:#e2e2de;
+  --text:#1a1a1a;
+  --muted:#6b6b6b;
+  --font:'Inter',system-ui,sans-serif;
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--text);background:#fff;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:200;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  padding:0 40px;height:60px;gap:40px;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-weight:800;font-size:15px;letter-spacing:-.02em;
+  flex-shrink:0;
+}
+.nav-logo svg{color:var(--green)}
+.nav-links{
+  display:flex;align-items:center;gap:28px;
+  list-style:none;
+}
+.nav-links a{
+  font-size:14px;font-weight:500;color:var(--muted);
+  transition:color .15s;white-space:nowrap;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a.active{font-weight:600}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  border-radius:6px;font-size:14px;font-weight:600;
+  padding:8px 16px;border:none;transition:all .15s;
+}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green2)}
+.btn-ghost{background:none;color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:#aaa}
+
+/* ── HERO ── */
+.hero{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:520px;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:72px 64px 72px 40px;
+  background:#fff;
+}
+.hero-eyebrow{
+  font-size:12px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--green);
+  margin-bottom:20px;
+}
+.hero h1{
+  font-size:clamp(36px,3.5vw,52px);
+  font-weight:900;line-height:1.08;
+  letter-spacing:-.03em;
+  margin-bottom:20px;
+}
+.hero-desc{
+  font-size:16px;line-height:1.65;
+  color:var(--muted);max-width:440px;
+  margin-bottom:36px;
+}
+.hero-search{
+  display:flex;align-items:center;
+  border:1.5px solid var(--border);
+  border-radius:8px;overflow:hidden;
+  background:#fff;max-width:460px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+.hero-search input{
+  flex:1;border:none;outline:none;
+  padding:14px 16px;font-size:15px;
+  background:transparent;font-family:inherit;
+}
+.hero-search button{
+  background:var(--green);color:#fff;border:none;
+  padding:14px 20px;font-size:14px;font-weight:600;
+  white-space:nowrap;font-family:inherit;
+  transition:background .15s;
+}
+.hero-search button:hover{background:var(--green2)}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-size:13px;font-weight:500;
+  border:1px solid var(--border);
+  border-radius:99px;padding:5px 14px;
+  color:var(--muted);transition:all .15s;cursor:pointer;
+}
+.chip:hover{border-color:var(--green);color:var(--green)}
+
+.hero-right{
+  display:grid;
+  grid-template:1fr 1fr / 1fr 1fr;
+  gap:3px;background:#ddd;
+}
+.hero-photo{overflow:hidden;background:#c8d8c0}
+.hero-photo img{transition:transform .4s}
+.hero-photo:hover img{transform:scale(1.03)}
+.hero-photo.wide{grid-column:span 2}
+
+/* ── STATS BAR ── */
+.stats-bar{
+  background:var(--green);
+  display:flex;justify-content:center;
+  gap:0;
+}
+.stat-item{
+  flex:1;max-width:200px;
+  text-align:center;
+  padding:24px 20px;
+  border-right:1px solid rgba(255,255,255,.15);
+  color:#fff;
+}
+.stat-item:last-child{border-right:none}
+.stat-num{font-size:28px;font-weight:900;letter-spacing:-.02em}
+.stat-lbl{font-size:12px;opacity:.75;margin-top:3px;font-weight:500}
+
+/* ── SECTION ── */
+.section{padding:80px 40px}
+.section-sm{padding:48px 40px}
+.section-gray{background:var(--light)}
+
+.section-top{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:40px;
+}
+.section-top h2{
+  font-size:clamp(22px,2.5vw,30px);
+  font-weight:800;letter-spacing:-.02em;
+}
+.link-all{
+  font-size:13px;font-weight:600;color:var(--green);
+  display:flex;align-items:center;gap:4px;
+  white-space:nowrap;
+}
+.link-all:hover{text-decoration:underline}
+.section-label{
+  font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--green);
+  margin-bottom:10px;
+}
+
+/* ── SPORT GRID ── */
+.sport-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;
+}
+.sport-item{
+  background:#fff;padding:24px 20px;
+  display:flex;flex-direction:column;gap:8px;
+  transition:background .15s;cursor:pointer;
+  position:relative;
+}
+.sport-item:hover{background:#f9f9f7}
+.sport-icon-wrap{
+  width:40px;height:40px;margin-bottom:4px;
+  color:var(--green);
+}
+.sport-icon-wrap svg{width:40px;height:40px}
+.sport-name{font-size:16px;font-weight:700;letter-spacing:-.01em}
+.sport-sub{font-size:12px;color:var(--muted);line-height:1.4}
+.sport-link{
+  font-size:12px;font-weight:600;color:var(--green);
+  margin-top:auto;display:flex;align-items:center;gap:3px;
+}
+
+/* ── FILTERS ── */
+.filters{
+  display:flex;gap:10px;flex-wrap:wrap;
+  margin-bottom:32px;align-items:center;
+}
+.filter-btn{
+  font-size:13px;font-weight:600;
+  border:1.5px solid var(--border);
+  border-radius:6px;padding:8px 16px;
+  background:#fff;color:var(--muted);
+  display:flex;align-items:center;gap:6px;
+  transition:all .15s;
+}
+.filter-btn:hover,.filter-btn.active{
+  border-color:var(--green);color:var(--green);
+  background:#f0f8f3;
+}
+.filter-sep{width:1px;height:28px;background:var(--border);margin:0 4px}
+
+/* ── FACILITY CARDS ── */
+.facility-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.fac-card{
+  border-radius:10px;overflow:hidden;
+  border:1px solid var(--border);
+  transition:box-shadow .2s,transform .2s;
+  cursor:pointer;background:#fff;
+}
+.fac-card:hover{
+  box-shadow:0 8px 32px rgba(0,0,0,.1);
+  transform:translateY(-2px);
+}
+.fac-img{height:200px;overflow:hidden;background:#d0ddd0;position:relative}
+.fac-img img{transition:transform .4s}
+.fac-card:hover .fac-img img{transform:scale(1.04)}
+.fac-tag{
+  position:absolute;top:12px;left:12px;
+  background:#fff;border-radius:4px;
+  font-size:11px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;padding:4px 10px;color:var(--text);
+}
+.fac-body{padding:18px 20px 20px}
+.fac-name{font-size:17px;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
+.fac-meta{
+  font-size:13px;color:var(--muted);
+  display:flex;flex-direction:column;gap:4px;
+}
+.fac-meta-row{display:flex;align-items:center;gap:6px}
+.fac-meta-row svg{flex-shrink:0;color:var(--green);width:14px;height:14px}
+.fac-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
+}
+.fac-price{font-size:14px;font-weight:700}
+.fac-price span{font-weight:400;font-size:13px;color:var(--muted)}
+.fac-book{
+  font-size:12px;font-weight:700;color:var(--green);
+  border:1.5px solid var(--green);border-radius:5px;
+  padding:5px 12px;transition:all .15s;
+}
+.fac-card:hover .fac-book{background:var(--green);color:#fff}
+
+/* ── EVENTS ── */
+.events-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.ev-card{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:20px;border-radius:10px;
+  border:1px solid var(--border);
+  transition:box-shadow .2s;cursor:pointer;background:#fff;
+}
+.ev-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.ev-date{
+  flex-shrink:0;width:52px;text-align:center;
+  background:var(--light);border-radius:8px;padding:10px 0;
+}
+.ev-day{font-size:22px;font-weight:900;line-height:1;color:var(--green)}
+.ev-mon{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.ev-info{}
+.ev-tag{
+  font-size:10px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--green);margin-bottom:5px;
+}
+.ev-name{font-size:15px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.ev-loc{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px}
+
+/* ── CATEGORIES (big) ── */
+.cat-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.cat-card{
+  position:relative;border-radius:10px;overflow:hidden;
+  height:260px;cursor:pointer;
+}
+.cat-card img{transition:transform .4s}
+.cat-card:hover img{transform:scale(1.05)}
+.cat-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.1) 60%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:24px;color:#fff;
+}
+.cat-overlay h3{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
+.cat-overlay p{font-size:13px;opacity:.8}
+.cat-overlay .arrow{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;background:rgba(255,255,255,.2);
+  border-radius:50%;display:grid;place-items:center;
+  font-size:14px;backdrop-filter:blur(4px);
+  transition:background .2s;
+}
+.cat-card:hover .arrow{background:rgba(255,255,255,.35)}
+
+/* ── FAQ ── */
+.faq-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.faq-left h2{font-size:clamp(22px,2.5vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+.faq-left p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;
+  padding:18px 0;font-size:15px;font-weight:600;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;font-family:inherit;letter-spacing:-.01em;
+}
+.faq-q .icon{
+  flex-shrink:0;width:22px;height:22px;
+  border:1.5px solid var(--border);border-radius:50%;
+  display:grid;place-items:center;
+  font-size:14px;color:var(--muted);transition:all .2s;
+}
+.faq-q.open .icon{background:var(--green);border-color:var(--green);color:#fff;transform:rotate(45deg)}
+.faq-a{
+  font-size:14px;color:var(--muted);line-height:1.7;
+  padding-bottom:18px;display:none;
+}
+.faq-a.open{display:block}
+
+/* ── HOW ── */
+.how-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:10px;overflow:hidden;
+}
+.how-step{
+  background:#fff;padding:32px 28px;
+}
+.step-n{
+  font-size:13px;font-weight:700;color:var(--green);
+  margin-bottom:16px;
+}
+.step-n::before{
+  content:'';display:inline-block;
+  width:28px;height:2px;background:var(--green);
+  vertical-align:middle;margin-right:8px;
+}
+.how-step h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em}
+.how-step p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ── FOOTER ── */
+footer{
+  background:#111;color:#fff;
+  padding:64px 40px 32px;
+}
+.footer-top{
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;
+  gap:48px;margin-bottom:56px;
+  padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.footer-brand p{
+  font-size:14px;color:rgba(255,255,255,.5);
+  line-height:1.7;margin-top:12px;max-width:260px;
+}
+.footer-socials{display:flex;gap:10px;margin-top:20px}
+.social-link{
+  width:34px;height:34px;border-radius:6px;
+  border:1px solid rgba(255,255,255,.15);
+  display:grid;place-items:center;font-size:14px;
+  transition:border-color .15s;
+}
+.social-link:hover{border-color:rgba(255,255,255,.4)}
+footer h4{
+  font-size:12px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);
+  margin-bottom:16px;
+}
+footer ul{list-style:none}
+footer ul li{margin-bottom:10px}
+footer ul a{
+  font-size:14px;color:rgba(255,255,255,.65);
+  transition:color .15s;
+}
+footer ul a:hover{color:#fff}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;color:rgba(255,255,255,.35);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .sport-grid{grid-template-columns:repeat(3,1fr)}
+  .facility-grid{grid-template-columns:repeat(2,1fr)}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .how-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .faq-wrap{grid-template-columns:1fr;gap:40px}
+}
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:56px 20px}
+  .nav{padding:0 20px;gap:20px}
+  .nav-links{display:none}
+  .section{padding:56px 20px}
+  .section-sm{padding:36px 20px}
+  .sport-grid{grid-template-columns:repeat(2,1fr)}
+  .facility-grid{grid-template-columns:1fr}
+  .events-grid{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  footer{padding:48px 20px 24px}
+  .stats-bar{flex-wrap:wrap}
+  .stat-item{flex:1 0 40%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="28" height="28" rx="6" fill="currentColor" opacity=".12"/>
+      <circle cx="14" cy="10" r="3" fill="currentColor"/>
+      <path d="M8 22c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+    Mesto športuje
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Domov</a></li>
+    <li><a href="#sporty">Športy</a></li>
+    <li><a href="#zariadenia">Zariadenia</a></li>
+    <li><a href="#komunita">Komunita</a></li>
+    <li><a href="#akcie">Akcie</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn btn-ghost">Prihlásiť sa</button>
+    <button class="btn btn-primary">Rezervovať</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Mestská časť — Aktívny šport</p>
+    <h1>Šport pre každého v tvojom meste</h1>
+    <p class="hero-desc">Nájdi bazény, ihriská, haly a kurzy priamo vo svojom okolí. Rezervuj online bez zbytočného hľadania.</p>
+
+    <div class="hero-search">
+      <input id="heroSearch" type="text" placeholder="Hľadaj šport, miesto alebo aktivitu…" autocomplete="off"/>
+      <button onclick="doSearch()">Hľadať</button>
+    </div>
+
+    <div class="hero-chips">
+      <span class="chip" onclick="setSearch('Plávanie')">Plávanie</span>
+      <span class="chip" onclick="setSearch('Tenis')">Tenis</span>
+      <span class="chip" onclick="setSearch('Beh')">Beh</span>
+      <span class="chip" onclick="setSearch('Fitness')">Fitness</span>
+      <span class="chip" onclick="setSearch('Yoga')">Yoga</span>
+      <span class="chip" onclick="setSearch('Bicykel')">Bicykel</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo wide">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80" alt="Šport"/>
+    </div>
+    <div class="hero-photo">
+      <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&q=80" alt="Plávanie"/>
+    </div>
+    <div class="hero-photo">
+      <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=500&q=80" alt="Beh"/>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">18</div>
+    <div class="stat-lbl">Druhov športu</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">42</div>
+    <div class="stat-lbl">Zariadení</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">6 400+</div>
+    <div class="stat-lbl">Aktívnych obyvateľov</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">7 dní</div>
+    <div class="stat-lbl">Otvorené v týždni</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">od 4 €</div>
+    <div class="stat-lbl">Vstupné</div>
+  </div>
+</div>
+
+<!-- SPORTS -->
+<section class="section" id="sporty">
+  <div class="section-top">
+    <div>
+      <p class="section-label">Čo ponúkame</p>
+      <h2>Všetky športy</h2>
+    </div>
+    <a href="#" class="link-all">Zobraziť všetky →</a>
+  </div>
+
+  <div class="sport-grid">
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 26c4-4 8-4 12 0s8 4 12 0 8-4 12 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="20" cy="14" r="5" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <div class="sport-name">Plávanie</div>
+      <div class="sport-sub">Bazény, dráhy, plavecké školy</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="8" r="3.5" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M24 12l-6 8 4 4-4 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 20l-6 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sport-name">Beh</div>
+      <div class="sport-sub">Trate, skupiny, podujatia</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="29" cy="8" r="3.5" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M8 28a8 8 0 1 1 16 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="28" r="8" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="32" cy="28" r="8" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M24 28h-8M8 28l10-14 14 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sport-name">Bicyklovanie</div>
+      <div class="sport-sub">Cyklotrasy, požičovne, BMX</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="7" r="3.5" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M16 12l-6 8h12l4 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 20l-4 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sport-name">Fitness</div>
+      <div class="sport-sub">Posilňovne, skupinové tréningy</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="8" r="4" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M12 20c4-8 12-8 16 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M8 32c3-6 7-9 12-9s9 3 12 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sport-name">Yoga a pilates</div>
+      <div class="sport-sub">Rovnováha, mobilita, core</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 8l6 6M26 26l6 6M8 32l6-6M26 14l6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <ellipse cx="20" cy="20" rx="8" ry="8" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <div class="sport-name">Tenis</div>
+      <div class="sport-sub">Kurty, tréningy, turnaje</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 30l8-20 4 8 4-8 8 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="sport-name">Loptové športy</div>
+      <div class="sport-sub">Futbal, basketbal, volejbal</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 6v12M14 12h12M12 20l8 14 8-14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="sport-name">Tanec</div>
+      <div class="sport-sub">Kurzy, krúžky, vystúpenia</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 32l8-24 4 10 4-10 8 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 22h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sport-name">Atletika</div>
+      <div class="sport-sub">Dráhy, tréningy, závody</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 32s4-16 12-16 12 16 12 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M14 20l6-12 6 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="sport-name">Zimné športy</div>
+      <div class="sport-sub">Korčuľovanie, hokej</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12l16 16M28 12L12 28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <div class="sport-name">Bojové športy</div>
+      <div class="sport-sub">Tréningy, kluby, súťaže</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+    <div class="sport-item">
+      <div class="sport-icon-wrap">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 24V16a10 10 0 0 1 20 0v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M8 24h4v8H8zM28 24h4v8h-4z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="sport-name">Lezenie</div>
+      <div class="sport-sub">Bouldering, steny, krúžky</div>
+      <a href="#" class="sport-link">Pozrieť zariadenia →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section class="section section-gray" id="zariadenia">
+  <div class="section-top">
+    <div>
+      <p class="section-label">Kde športovať</p>
+      <h2>Zariadenia v meste</h2>
+    </div>
+    <a href="#" class="link-all">Všetky zariadenia →</a>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterFac(this,'all')">Všetky</button>
+    <button class="filter-btn" onclick="filterFac(this,'bazen')">Bazény</button>
+    <button class="filter-btn" onclick="filterFac(this,'hala')">Haly</button>
+    <button class="filter-btn" onclick="filterFac(this,'ihrisko')">Ihriská</button>
+    <button class="filter-btn" onclick="filterFac(this,'kurt')">Kurty</button>
+    <div class="filter-sep"></div>
+    <button class="filter-btn" onclick="filterFac(this,'deti')">Pre deti</button>
+  </div>
+
+  <div class="facility-grid">
+
+    <div class="fac-card" data-type="bazen">
+      <div class="fac-img">
+        <img src="https://images.unsplash.com/photo-1600965962102-9d260a71890d?w=700&q=80" alt="Mestský bazén"/>
+        <span class="fac-tag">Bazén</span>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">Mestský krytý bazén</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+            Športová 14, centrum
+          </div>
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Po–Ne  6:00–22:00
+          </div>
+        </div>
+        <div class="fac-footer">
+          <div class="fac-price">od 5 € <span>/ vstup</span></div>
+          <a href="#" class="fac-book">Rezervovať</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-card" data-type="hala">
+      <div class="fac-img">
+        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=700&q=80" alt="Športová hala"/>
+        <span class="fac-tag">Hala</span>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">Multifunkčná športová hala</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+            Hlavná 3, sever
+          </div>
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Po–Pi  7:00–22:00, So–Ne  8:00–20:00
+          </div>
+        </div>
+        <div class="fac-footer">
+          <div class="fac-price">od 12 € <span>/ hodina</span></div>
+          <a href="#" class="fac-book">Rezervovať</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-card" data-type="kurt">
+      <div class="fac-img">
+        <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=700&q=80" alt="Tenisové kurty"/>
+        <span class="fac-tag">Kurty</span>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">Tenisový areál — 8 kurtov</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+            Parková 8, západ
+          </div>
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Po–Ne  7:00–21:00 (sezónne)
+          </div>
+        </div>
+        <div class="fac-footer">
+          <div class="fac-price">od 8 € <span>/ hodina</span></div>
+          <a href="#" class="fac-book">Rezervovať</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-card" data-type="ihrisko deti">
+      <div class="fac-img">
+        <img src="https://images.unsplash.com/photo-1551958219-acbc608571c7?w=700&q=80" alt="Ihrisko"/>
+        <span class="fac-tag">Ihrisko</span>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">Vonkajší workoutový park</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+            Riečna 22, juh
+          </div>
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Voľný prístup, 24 hodín
+          </div>
+        </div>
+        <div class="fac-footer">
+          <div class="fac-price">Zadarmo</div>
+          <a href="#" class="fac-book">Detail</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-card" data-type="bazen deti">
+      <div class="fac-img">
+        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=700&q=80" alt="Letné kúpalisko"/>
+        <span class="fac-tag">Kúpalisko</span>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">Letné mestské kúpalisko</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+            Lužná 5, sever
+          </div>
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Jún–september  9:00–20:00
+          </div>
+        </div>
+        <div class="fac-footer">
+          <div class="fac-price">od 4 € <span>/ vstup</span></div>
+          <a href="#" class="fac-book">Rezervovať</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-card" data-type="hala ihrisko">
+      <div class="fac-img">
+        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=700&q=80" alt="Hokej"/>
+        <span class="fac-tag">Zimný štadión</span>
+      </div>
+      <div class="fac-body">
+        <div class="fac-name">Zimný štadión — klzisko</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+            Zimná 1, centrum
+          </div>
+          <div class="fac-meta-row">
+            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Október–Marec  8:00–21:00
+          </div>
+        </div>
+        <div class="fac-footer">
+          <div class="fac-price">od 6 € <span>/ vstup</span></div>
+          <a href="#" class="fac-book">Rezervovať</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CATEGORIES / KOMUNITA -->
+<section class="section" id="komunita">
+  <div class="section-top">
+    <div>
+      <p class="section-label">Spoločne sme aktívni</p>
+      <h2>Školy, kluby a komunity</h2>
+    </div>
+    <a href="#" class="link-all">Zobraziť všetky →</a>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=700&q=80" alt="Školy"/>
+      <div class="cat-overlay">
+        <span class="arrow">→</span>
+        <h3>Aktívne školy</h3>
+        <p>Športové programy, krúžky a tábory pre deti</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80" alt="Komunity"/>
+      <div class="cat-overlay">
+        <span class="arrow">→</span>
+        <h3>Komunity a kluby</h3>
+        <p>Amatérske ligy, skupinové tréningy, miestne kluby</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=700&q=80" alt="Miesta"/>
+      <div class="cat-overlay">
+        <span class="arrow">→</span>
+        <h3>Verejné miesta</h3>
+        <p>Parky, workoutové zóny a ihriská zadarmo</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="section section-gray" id="akcie">
+  <div class="section-top">
+    <div>
+      <p class="section-label">Čo sa deje</p>
+      <h2>Najbližšie podujatia</h2>
+    </div>
+    <a href="#" class="link-all">Všetky podujatia →</a>
+  </div>
+
+  <div class="events-grid">
+
+    <div class="ev-card">
+      <div class="ev-date">
+        <div class="ev-day">12</div>
+        <div class="ev-mon">Júl</div>
+      </div>
+      <div class="ev-info">
+        <div class="ev-tag">Letný tábor · Plávanie</div>
+        <div class="ev-name">Summer Hero Camp 2026</div>
+        <div class="ev-loc">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
+          Mestský bazén · Júl–August
+        </div>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-date">
+        <div class="ev-day">19</div>
+        <div class="ev-mon">Júl</div>
+      </div>
+      <div class="ev-info">
+        <div class="ev-tag">Kurz · Plávanie</div>
+        <div class="ev-name">Plavecký kurz pre deti</div>
+        <div class="ev-loc">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
+          ZŠ Prokofievova · Máj–Jún
+        </div>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-date">
+        <div class="ev-day">6</div>
+        <div class="ev-mon">Sep</div>
+      </div>
+      <div class="ev-info">
+        <div class="ev-tag">Pretek · Beh</div>
+        <div class="ev-name">Mestský beh 2026</div>
+        <div class="ev-loc">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
+          Lesný park · 6. september
+        </div>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-date">
+        <div class="ev-day">14</div>
+        <div class="ev-mon">Sep</div>
+      </div>
+      <div class="ev-info">
+        <div class="ev-tag">Turnaj · Tenis</div>
+        <div class="ev-name">Otvorený tenisový turnaj</div>
+        <div class="ev-loc">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
+          Tenisový areál · Parková 8
+        </div>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-date">
+        <div class="ev-day">21</div>
+        <div class="ev-mon">Sep</div>
+      </div>
+      <div class="ev-info">
+        <div class="ev-tag">Workshop · Yoga</div>
+        <div class="ev-name">Jesenný yoga deň</div>
+        <div class="ev-loc">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
+          Mestský park · voľný vstup
+        </div>
+      </div>
+    </div>
+
+    <div class="ev-card">
+      <div class="ev-date">
+        <div class="ev-day">4</div>
+        <div class="ev-mon">Okt</div>
+      </div>
+      <div class="ev-info">
+        <div class="ev-tag">Sezóna · Klzisko</div>
+        <div class="ev-name">Otvorenie zimnej sezóny</div>
+        <div class="ev-loc">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
+          Zimný štadión · Zimná 1
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="section">
+  <div class="section-top">
+    <div>
+      <p class="section-label">Postup</p>
+      <h2>Ako to funguje</h2>
+    </div>
+  </div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="step-n">01</div>
+      <h3>Nájdi aktivitu</h3>
+      <p>Prehľadaj športy, zariadenia alebo použij vyhľadávač. Filtruj podľa veku, lokality alebo termínu.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-n">02</div>
+      <h3>Vyber termín</h3>
+      <p>Zobraz dostupné termíny priamo v kalendári zariadenia. Vidíš obsadenosť v reálnom čase.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-n">03</div>
+      <h3>Rezervuj online</h3>
+      <p>Zaregistruj sa, vyber termín a zaplať kartou alebo prevodom. Potvrdenie dostaneš emailom.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-n">04</div>
+      <h3>Choď športovať</h3>
+      <p>Ukáž QR kód z potvrdenia pri vstupe. Žiadne čakanie, žiadna administratíva.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-gray" id="faq">
+  <div class="faq-wrap">
+    <div class="faq-left">
+      <p class="section-label">Pomoc</p>
+      <h2>Najčastejšie otázky</h2>
+      <p>Nenašiel si odpoveď? Kontaktuj nás na <strong>sport@mesto.sk</strong> alebo zavolaj na recepciu zariadenia.</p>
+      <button class="btn btn-primary" style="margin-top:8px">Kontaktovať nás</button>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div style="font-weight:800;font-size:16px;letter-spacing:-.02em">Mesto športuje</div>
+      <p>Portál mestskej časti na vyhľadávanie a rezerváciu športových aktivít pre všetkých obyvateľov.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-link">f</a>
+        <a href="#" class="social-link">in</a>
+        <a href="#" class="social-link">ig</a>
+      </div>
+    </div>
+    <div>
+      <h4>Navigácia</h4>
+      <ul>
+        <li><a href="#">Domov</a></li>
+        <li><a href="#">Športy</a></li>
+        <li><a href="#">Zariadenia</a></li>
+        <li><a href="#">Komunita</a></li>
+        <li><a href="#">Podujatia</a></li>
+        <li><a href="#">Ako to funguje</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Užitočné</h4>
+      <ul>
+        <li><a href="#">Podmienky používania</a></li>
+        <li><a href="#">Ochrana osobných údajov</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Kontakt</a></li>
+        <li><a href="#">Storno podmienky</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <ul>
+        <li><a href="tel:+421200000000">+421 2 00 000 000</a></li>
+        <li><a href="mailto:sport@mesto.sk">sport@mesto.sk</a></li>
+        <li><a href="#">Mestský úrad<br>Hlavná 1, 851 01</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Mesto športuje. Všetky práva vyhradené.</span>
+    <span>Mestská časť — Aktívny šport</span>
+  </div>
+</footer>
+
+<script>
+// FAQ
+const faqs = [
+  { q: 'Aké sú možnosti platby?', a: 'Akceptujeme platbu kartou online pri rezervácii, ako aj hotovosť alebo kartu priamo v zariadení. Pri niektorých aktivitách je možná platba vopred aj na mieste.' },
+  { q: 'Ako sa môžem prihlásiť na aktivitu alebo kemp?', a: 'Klikni na tlačidlo Rezervovať pri vybranom zariadení, vyber termín a dokonči registráciu. Potvrdenie príde emailom do pár minút.' },
+  { q: 'Musím byť z tejto mestskej časti, aby som sa mohol prihlásiť?', a: 'Nie, aktivity sú otvorené pre všetkých. Obyvatelia mestskej časti môžu mať nárok na zľavnené vstupné — stačí preukázať trvalý pobyt.' },
+  { q: 'Ako zrušiť rezerváciu alebo prihlášku?', a: 'Rezerváciu môžeš stornovať najneskôr 24 hodín pred termínom priamo v používateľskom účte. Vrátenie platby prebehne do 5 pracovných dní.' },
+  { q: 'Fungujú zariadenia aj cez víkend a sviatky?', a: 'Väčšina zariadení je otvorená aj cez víkend. Otváracie hodiny počas sviatkov nájdeš pri konkrétnom zariadení — môžu sa líšiť.' },
+];
+
+const faqList = document.getElementById('faqList');
+faqs.forEach((f, i) => {
+  const d = document.createElement('div');
+  d.className = 'faq-item';
+  d.innerHTML = `
+    <button class="faq-q" onclick="toggleFaq(${i},this)">
+      ${f.q}
+      <span class="icon">+</span>
+    </button>
+    <div class="faq-a" id="fa${i}">${f.a}</div>`;
+  faqList.appendChild(d);
+});
+
+function toggleFaq(i, btn) {
+  const a = document.getElementById('fa' + i);
+  const open = a.classList.toggle('open');
+  btn.classList.toggle('open', open);
+}
+
+// Facility filter
+function filterFac(btn, type) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.fac-card').forEach(c => {
+    const t = c.dataset.type || '';
+    c.style.display = (type === 'all' || t.includes(type)) ? '' : 'none';
+  });
+}
+
+// Search chips
+function setSearch(v) { document.getElementById('heroSearch').value = v; }
+function doSearch() {
+  const v = document.getElementById('heroSearch').value;
+  if (v) document.getElementById('zariadenia').scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('heroSearch').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
