@@ -160,28 +160,36 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   content:'';position:absolute;inset:0;
   background:linear-gradient(135deg,rgba(15,26,19,.7) 0%,rgba(15,26,19,.2) 100%);
 }
-/* floating stat cards */
-.hero-stat-cards{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  justify-content:flex-end;
-  padding:28px;
-  gap:10px;
+/* stat bar */
+.hero-stat-bar{
+  position:absolute;
+  bottom:0;left:0;right:0;
   z-index:2;
+  display:flex;
+  background:rgba(10,20,12,.55);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-top:1px solid rgba(255,255,255,.1);
 }
-.hero-stat-row{display:flex;gap:10px}
-.hero-stat{
-  background:rgba(255,255,255,.12);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:12px;
-  padding:14px 18px;
-  color:#fff;
+.hero-stat-bar-item{
   flex:1;
+  padding:16px 20px;
+  color:#fff;
+  display:flex;align-items:center;gap:12px;
+  border-right:1px solid rgba(255,255,255,.1);
 }
-.hero-stat-num{font-size:22px;font-weight:900;line-height:1}
-.hero-stat-lbl{font-size:11px;opacity:.7;margin-top:4px;font-weight:500}
+.hero-stat-bar-item:last-child{border-right:none}
+.hero-stat-bar-icon{
+  width:32px;height:32px;flex-shrink:0;
+  background:rgba(255,255,255,.1);
+  border-radius:8px;
+  display:grid;place-items:center;
+  color:rgba(255,255,255,.8);
+}
+.hero-stat-bar-icon svg{width:16px;height:16px}
+.hero-stat-bar-text{}
+.hero-stat-bar-num{font-size:18px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.hero-stat-bar-lbl{font-size:11px;opacity:.55;margin-top:2px;font-weight:500}
 
 /* small photo grid overlay top-right */
 .hero-photos-grid{
@@ -617,19 +625,41 @@ footer ul a:hover{color:#fff}
         <img src="assets/cat-korculovanie.jpg" alt="Korčuľovanie"/>
       </div>
     </div>
-    <div class="hero-stat-cards">
-      <div class="hero-stat-row">
-        <div class="hero-stat">
-          <div class="hero-stat-num">42</div>
-          <div class="hero-stat-lbl">Zariadení</div>
+    <div class="hero-stat-bar">
+      <div class="hero-stat-bar-item">
+        <div class="hero-stat-bar-icon">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
         </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">18</div>
-          <div class="hero-stat-lbl">Druhov športu</div>
+        <div class="hero-stat-bar-text">
+          <div class="hero-stat-bar-num">42</div>
+          <div class="hero-stat-bar-lbl">Zariadení</div>
         </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">od 4 €</div>
-          <div class="hero-stat-lbl">Vstupné</div>
+      </div>
+      <div class="hero-stat-bar-item">
+        <div class="hero-stat-bar-icon">
+          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5 8c1.5-2 4.5-2 6 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5.5" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="hero-stat-bar-text">
+          <div class="hero-stat-bar-num">18</div>
+          <div class="hero-stat-bar-lbl">Druhov športu</div>
+        </div>
+      </div>
+      <div class="hero-stat-bar-item">
+        <div class="hero-stat-bar-icon">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="hero-stat-bar-text">
+          <div class="hero-stat-bar-num">7 dní</div>
+          <div class="hero-stat-bar-lbl">Otvorené</div>
+        </div>
+      </div>
+      <div class="hero-stat-bar-item">
+        <div class="hero-stat-bar-icon">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="hero-stat-bar-text">
+          <div class="hero-stat-bar-num">od 4 €</div>
+          <div class="hero-stat-bar-lbl">Vstupné</div>
         </div>
       </div>
     </div>
