@@ -59,98 +59,146 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 
 /* ── HERO ── */
 .hero{
-  display:grid;grid-template-columns:1fr 1fr;
-  min-height:300px;
-  background:var(--light);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:540px;
+  background:#fff;
+  overflow:hidden;
 }
 .hero-left{
   display:flex;flex-direction:column;justify-content:center;
-  padding:40px 48px 40px 40px;
+  padding:64px 52px 64px 40px;
 }
 .hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
   font-size:11px;font-weight:700;letter-spacing:.12em;
   text-transform:uppercase;color:var(--green);
-  margin-bottom:18px;
+  margin-bottom:20px;
+}
+.hero-eyebrow::before{
+  content:'';display:inline-block;
+  width:24px;height:2px;background:var(--green);
 }
 .hero h1{
-  font-size:clamp(38px,3.8vw,58px);
-  font-weight:900;line-height:1.06;
-  letter-spacing:-.03em;
-  margin-bottom:18px;
+  font-size:clamp(40px,4vw,62px);
+  font-weight:900;line-height:1.05;
+  letter-spacing:-.04em;
+  margin-bottom:16px;
+  color:#0f1a13;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--green);
 }
 .hero-desc{
-  font-size:15px;line-height:1.7;
-  color:var(--muted);max-width:420px;
-  margin-bottom:32px;
+  font-size:15px;line-height:1.75;
+  color:var(--muted);max-width:400px;
+  margin-bottom:36px;
 }
 .hero-search{
-  display:flex;align-items:center;gap:10px;
-  border:1.5px solid var(--border);
-  border-radius:10px;overflow:hidden;
-  background:#fff;max-width:460px;
-  box-shadow:0 2px 10px rgba(0,0,0,.06);
+  display:flex;align-items:center;
+  background:#f5f5f3;
+  border-radius:10px;
+  max-width:440px;
   margin-bottom:16px;
-  padding:4px 4px 4px 16px;
+  padding:6px 6px 6px 18px;
+  transition:box-shadow .2s;
+}
+.hero-search:focus-within{
+  box-shadow:0 0 0 2px var(--green);
+  background:#fff;
 }
 .hero-search input{
   flex:1;border:none;outline:none;
-  padding:10px 0;font-size:15px;
+  padding:10px 0;font-size:14px;
   background:transparent;font-family:inherit;
+  color:var(--text);
 }
 .hero-search button{
   background:var(--green);color:#fff;border:none;
   border-radius:7px;
-  padding:10px 20px;font-size:14px;font-weight:600;
+  padding:10px 18px;font-size:13px;font-weight:700;
   white-space:nowrap;font-family:inherit;
-  transition:background .15s;
+  transition:background .15s;cursor:pointer;
 }
 .hero-search button:hover{background:var(--green2)}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
-.hero-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.hero-chips{
+  display:flex;flex-wrap:wrap;gap:6px;
+  align-items:center;
+}
+.hero-chips-label{
+  font-size:11px;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.06em;
+  margin-right:4px;
+}
 .chip{
-  font-size:12px;font-weight:500;
-  border:1px solid var(--border);
-  border-radius:99px;padding:5px 13px;
+  font-size:12px;font-weight:600;
+  border:1.5px solid var(--border);
+  border-radius:99px;padding:5px 14px;
   color:var(--muted);transition:all .15s;cursor:pointer;
   background:#fff;
 }
-.chip:hover{border-color:var(--green);color:var(--green)}
+.chip:hover{border-color:var(--green);color:var(--green);background:#f0f9f3}
 
-/* hero right – photo collage */
+/* hero right */
 .hero-right{
   position:relative;
-  padding:20px 24px 20px 16px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-rows:130px 130px;
-  gap:8px;
+  background:#0f1a13;
+  overflow:hidden;
 }
-.hero-photo{
-  overflow:hidden;border-radius:14px;background:#c8d8c0;
-  position:relative;
+.hero-right-bg{
+  position:absolute;inset:0;
 }
-.hero-photo img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .4s;
+.hero-right-bg img{
+  width:100%;height:100%;
+  object-fit:cover;
+  opacity:.55;
 }
-.hero-photo:hover img{transform:scale(1.04)}
-.hero-photo.tall{grid-row:span 2}
+/* gradient overlay */
+.hero-right-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(15,26,19,.7) 0%,rgba(15,26,19,.2) 100%);
+}
+/* floating stat cards */
+.hero-stat-cards{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:28px;
+  gap:10px;
+  z-index:2;
+}
+.hero-stat-row{display:flex;gap:10px}
+.hero-stat{
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:12px;
+  padding:14px 18px;
+  color:#fff;
+  flex:1;
+}
+.hero-stat-num{font-size:22px;font-weight:900;line-height:1}
+.hero-stat-lbl{font-size:11px;opacity:.7;margin-top:4px;font-weight:500}
 
-/* plávajúce ikonky */
-.hero-badge{
+/* small photo grid overlay top-right */
+.hero-photos-grid{
   position:absolute;
-  background:#fff;border-radius:14px;
-  padding:12px 14px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 20px rgba(0,0,0,.12);
-  color:var(--green);
-  z-index:10;
+  top:24px;right:24px;
+  display:grid;
+  grid-template-columns:80px 80px;
+  grid-template-rows:80px 80px;
+  gap:6px;
+  z-index:2;
 }
-.hero-badge svg{width:28px;height:28px}
-.hero-badge-tl{top:44px;left:32px}
-.hero-badge-tr{top:44px;right:44px}
-.hero-badge-bl{bottom:44px;left:32px}
-.hero-badge-br{bottom:44px;right:44px}
+.hero-photo-sm{
+  border-radius:10px;overflow:hidden;
+  border:2px solid rgba(255,255,255,.25);
+}
+.hero-photo-sm img{width:100%;height:100%;object-fit:cover}
+.hero-photo-sm.tall{grid-row:span 2;border-radius:10px}
 
 /* ── STATS BAR ── */
 .stats-bar{
@@ -531,7 +579,7 @@ footer ul a:hover{color:#fff}
 <div class="hero">
   <div class="hero-left">
     <p class="hero-eyebrow">Mestská časť — Aktívny šport</p>
-    <h1>Vyber si šport,<br>ktorý ťa baví</h1>
+    <h1>Vyber si šport,<br>ktorý ťa <em>baví</em></h1>
     <p class="hero-desc">Rezervuj si termíny v bazénoch, na klzisku, v halách či tanečných sálach. Jednoduché online rezervácie na jednom mieste.</p>
 
     <div class="hero-search">
@@ -545,53 +593,45 @@ footer ul a:hover{color:#fff}
     </div>
 
     <div class="hero-chips">
+      <span class="hero-chips-label">Populárne:</span>
       <span class="chip" onclick="setSearch('Plávanie')">Plávanie</span>
       <span class="chip" onclick="setSearch('Tenis')">Tenis</span>
       <span class="chip" onclick="setSearch('Beh')">Beh</span>
       <span class="chip" onclick="setSearch('Fitness')">Fitness</span>
       <span class="chip" onclick="setSearch('Yoga')">Yoga</span>
-      <span class="chip" onclick="setSearch('Bicykel')">Bicykel</span>
     </div>
   </div>
 
   <div class="hero-right">
-    <!-- plávajúce ikonky -->
-    <div class="hero-badge hero-badge-tl">
-      <svg viewBox="0 0 28 28" fill="none">
-        <path d="M3 18c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0 5-2.5 7.5 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="14" cy="10" r="4" stroke="currentColor" stroke-width="2"/>
-      </svg>
+    <div class="hero-right-bg">
+      <img src="assets/cat-loptove.jpg" alt="Šport"/>
     </div>
-    <div class="hero-badge hero-badge-tr">
-      <svg viewBox="0 0 28 28" fill="none">
-        <path d="M6 22l5-12 3 5 3-5 5 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+    <div class="hero-photos-grid">
+      <div class="hero-photo-sm tall">
+        <img src="assets/cat-plavanie.jpg" alt="Plávanie"/>
+      </div>
+      <div class="hero-photo-sm">
+        <img src="assets/cat-beh.jpg" alt="Beh"/>
+      </div>
+      <div class="hero-photo-sm">
+        <img src="assets/cat-korculovanie.jpg" alt="Korčuľovanie"/>
+      </div>
     </div>
-    <div class="hero-badge hero-badge-bl">
-      <svg viewBox="0 0 28 28" fill="none">
-        <circle cx="7" cy="20" r="5" stroke="currentColor" stroke-width="2"/>
-        <circle cx="21" cy="20" r="5" stroke="currentColor" stroke-width="2"/>
-        <path d="M7 20l7-10 7 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="19" cy="7" r="2.5" stroke="currentColor" stroke-width="2"/>
-      </svg>
-    </div>
-    <div class="hero-badge hero-badge-br">
-      <svg viewBox="0 0 28 28" fill="none">
-        <path d="M4 14h4M20 14h4M8 14h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <rect x="8" y="10" width="3" height="8" rx="1.5" stroke="currentColor" stroke-width="2"/>
-        <rect x="17" y="10" width="3" height="8" rx="1.5" stroke="currentColor" stroke-width="2"/>
-      </svg>
-    </div>
-
-    <!-- fotky -->
-    <div class="hero-photo tall">
-      <img src="assets/cat-plavanie.jpg" alt="Plávanie"/>
-    </div>
-    <div class="hero-photo">
-      <img src="assets/cat-beh.jpg" alt="Beh"/>
-    </div>
-    <div class="hero-photo">
-      <img src="assets/cat-korculovanie.jpg" alt="Zimné športy"/>
+    <div class="hero-stat-cards">
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <div class="hero-stat-num">42</div>
+          <div class="hero-stat-lbl">Zariadení</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">18</div>
+          <div class="hero-stat-lbl">Druhov športu</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">od 4 €</div>
+          <div class="hero-stat-lbl">Vstupné</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
