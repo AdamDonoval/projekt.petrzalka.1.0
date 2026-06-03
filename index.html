@@ -3,597 +3,350 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Šport v meste</title>
+<title>Petržalka športuje — Aktívna mestská časť</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --green:#1a6b35;
   --green2:#238a45;
-  --light:#f5f5f3;
-  --border:#e2e2de;
-  --text:#1a1a1a;
+  --green-light:#edf7f1;
+  --yellow:#f5c518;
+  --dark:#0f1a13;
+  --border:#e4e4e0;
   --muted:#6b6b6b;
-  --font:'Inter',system-ui,sans-serif;
+  --font:'Inter',system-ui,-apple-system,sans-serif;
 }
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:var(--font);color:var(--text);background:#fff;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--dark);background:#fff;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
 button{cursor:pointer;font-family:inherit}
 img{display:block;width:100%;height:100%;object-fit:cover}
 
-/* ── NAV ── */
+/* ─── NAV ─── */
 .nav{
   position:sticky;top:0;z-index:200;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;
-  padding:0 40px;height:60px;gap:40px;
+  background:#fff;border-bottom:1px solid var(--border);
+  height:64px;display:flex;align-items:center;
+  padding:0 clamp(20px,4vw,60px);gap:32px;
 }
 .nav-logo{
   display:flex;align-items:center;gap:10px;
-  font-weight:800;font-size:15px;letter-spacing:-.02em;
-  flex-shrink:0;
+  font-weight:800;font-size:15px;letter-spacing:-.02em;flex-shrink:0;
+  color:var(--dark);
 }
-.nav-logo svg{color:var(--green)}
-.nav-links{
-  display:flex;align-items:center;gap:28px;
-  list-style:none;
+.nav-logo-mark{
+  width:34px;height:34px;background:var(--green);border-radius:8px;
+  display:grid;place-items:center;
 }
+.nav-logo-mark svg{width:20px;height:20px;color:#fff}
+.nav-links{display:flex;gap:4px;list-style:none;margin-left:8px;}
 .nav-links a{
   font-size:14px;font-weight:500;color:var(--muted);
-  transition:color .15s;white-space:nowrap;
+  padding:6px 12px;border-radius:6px;transition:all .15s;white-space:nowrap;
 }
-.nav-links a:hover,.nav-links a.active{color:var(--text)}
-.nav-links a.active{font-weight:600}
-.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-links a:hover{color:var(--dark);background:#f5f5f3}
+.nav-links a.active{color:var(--dark);font-weight:600}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
 .btn{
   display:inline-flex;align-items:center;gap:6px;
-  border-radius:6px;font-size:14px;font-weight:600;
-  padding:8px 16px;border:none;transition:all .15s;
+  border-radius:8px;font-size:14px;font-weight:600;
+  padding:9px 18px;border:none;transition:all .15s;cursor:pointer;font-family:inherit;
 }
 .btn-primary{background:var(--green);color:#fff}
 .btn-primary:hover{background:var(--green2)}
-.btn-ghost{background:none;color:var(--text);border:1px solid var(--border)}
-.btn-ghost:hover{border-color:#aaa}
+.btn-outline{background:none;color:var(--dark);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:#999;background:#f9f9f7}
 
-/* ── HERO ── */
+/* ─── HERO ─── */
 .hero{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  min-height:540px;
   background:#fff;
-  overflow:hidden;
-}
-.hero-left{
-  display:flex;flex-direction:column;justify-content:center;
-  padding:64px 52px 64px 40px;
+  padding:80px clamp(20px,5vw,80px) 64px;
+  text-align:center;
+  border-bottom:1px solid var(--border);
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:700;letter-spacing:.12em;
+  font-size:12px;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;color:var(--green);
-  margin-bottom:20px;
-}
-.hero-eyebrow::before{
-  content:'';display:inline-block;
-  width:24px;height:2px;background:var(--green);
+  background:var(--green-light);border-radius:99px;
+  padding:6px 14px;margin-bottom:28px;
 }
 .hero h1{
-  font-size:clamp(40px,4vw,62px);
-  font-weight:900;line-height:1.05;
-  letter-spacing:-.04em;
-  margin-bottom:16px;
-  color:#0f1a13;
+  font-size:clamp(40px,6vw,72px);font-weight:900;
+  line-height:1.04;letter-spacing:-.04em;
+  color:var(--dark);max-width:820px;margin:0 auto 20px;
 }
-.hero h1 em{
-  font-style:normal;
-  color:var(--green);
+.hero h1 em{font-style:normal;color:var(--green)}
+.hero-sub{
+  font-size:clamp(15px,1.5vw,18px);color:var(--muted);
+  max-width:520px;margin:0 auto 44px;line-height:1.65;
 }
-.hero-desc{
-  font-size:15px;line-height:1.75;
-  color:var(--muted);max-width:400px;
-  margin-bottom:36px;
-}
+
+/* search */
+.hero-search-wrap{max-width:600px;margin:0 auto 24px;position:relative;}
 .hero-search{
   display:flex;align-items:center;
-  background:#f5f5f3;
-  border-radius:10px;
-  max-width:440px;
-  margin-bottom:16px;
-  padding:6px 6px 6px 18px;
-  transition:box-shadow .2s;
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+  padding:6px 6px 6px 20px;
+  transition:border-color .2s,box-shadow .2s;
 }
-.hero-search:focus-within{
-  box-shadow:0 0 0 2px var(--green);
-  background:#fff;
-}
+.hero-search:focus-within{border-color:var(--green);box-shadow:0 4px 24px rgba(26,107,53,.15)}
 .hero-search input{
-  flex:1;border:none;outline:none;
-  padding:10px 0;font-size:14px;
-  background:transparent;font-family:inherit;
-  color:var(--text);
+  flex:1;border:none;outline:none;font-size:16px;
+  background:transparent;font-family:inherit;color:var(--dark);padding:10px 0;
 }
+.hero-search input::placeholder{color:#aaa}
 .hero-search button{
   background:var(--green);color:#fff;border:none;
-  border-radius:7px;
-  padding:10px 18px;font-size:13px;font-weight:700;
-  white-space:nowrap;font-family:inherit;
-  transition:background .15s;cursor:pointer;
+  border-radius:8px;padding:12px 24px;
+  font-size:14px;font-weight:700;font-family:inherit;
+  transition:background .15s;white-space:nowrap;
 }
 .hero-search button:hover{background:var(--green2)}
-.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
-.hero-chips{
-  display:flex;flex-wrap:wrap;gap:6px;
-  align-items:center;
-}
-.hero-chips-label{
-  font-size:11px;font-weight:600;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.06em;
-  margin-right:4px;
-}
+
+/* chips */
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.hero-chips-label{font-size:12px;color:var(--muted);display:flex;align-items:center;font-weight:500}
 .chip{
-  font-size:12px;font-weight:600;
-  border:1.5px solid var(--border);
-  border-radius:99px;padding:5px 14px;
-  color:var(--muted);transition:all .15s;cursor:pointer;
-  background:#fff;
+  font-size:13px;font-weight:600;
+  border:1.5px solid var(--border);border-radius:99px;
+  padding:6px 16px;color:var(--muted);cursor:pointer;
+  background:#fff;transition:all .15s;
 }
-.chip:hover{border-color:var(--green);color:var(--green);background:#f0f9f3}
+.chip:hover{border-color:var(--green);color:var(--green);background:var(--green-light)}
 
-/* hero right */
-.hero-right{
-  overflow:hidden;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-rows:1fr 1fr;
-  gap:3px;
-  background:#1a1a1a;
-  position:relative;
-}
-.hero-mosaic-photo{
-  overflow:hidden;
-  background:#c8d8c0;
-  position:relative;
-}
-.hero-mosaic-photo img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform .5s ease, filter .3s;
-  filter:saturate(.85) brightness(.95);
-}
-.hero-mosaic-photo:hover img{
-  transform:scale(1.06);
-  filter:saturate(1.1) brightness(1);
-}
-.hero-mosaic-photo.tall{grid-row:span 2}
-/* stat bar */
-.hero-stat-bar{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  z-index:2;
-  display:flex;
-  background:rgba(10,18,12,.65);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border-top:1px solid rgba(255,255,255,.08);
-}
-.hero-stat-bar-item{
-  flex:1;
-  padding:13px 14px;
-  color:#fff;
-  display:flex;align-items:center;gap:10px;
-  border-right:1px solid rgba(255,255,255,.08);
-}
-.hero-stat-bar-item:last-child{border-right:none}
-.hero-stat-bar-icon{
-  width:28px;height:28px;flex-shrink:0;
-  background:rgba(255,255,255,.1);
-  border-radius:6px;
-  display:grid;place-items:center;
-  color:rgba(255,255,255,.7);
-}
-.hero-stat-bar-icon svg{width:14px;height:14px}
-.hero-stat-bar-num{font-size:15px;font-weight:800;line-height:1;letter-spacing:-.02em}
-.hero-stat-bar-lbl{font-size:10px;opacity:.5;margin-top:2px;font-weight:500}
-
-/* ── NOVINKY ── */
-.novinky-section{background:#fff}
+/* ─── NOVINKY (CAROUSEL) ─── */
+.novinky-section{border-bottom:1px solid var(--border);}
 .novinky-header{
   display:flex;align-items:center;justify-content:space-between;
-  padding:20px 40px 12px;
+  padding:20px clamp(20px,4vw,60px) 14px;
 }
-.novinky-dots{display:flex;gap:6px;align-items:center}
-.novinky-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--border);border:none;cursor:pointer;
-  padding:0;transition:all .2s;
-}
-.novinky-dot.active{background:var(--green);width:22px;border-radius:4px}
-.novinky-track-wrap{
-  position:relative;overflow:hidden;
-  line-height:0;
-}
-.novinky-track{
-  display:flex;
-  transition:transform .5s cubic-bezier(.4,0,.2,1);
-}
-.novinky-slide{
-  flex:0 0 100%;width:100%;
-}
-.novinky-slide img{
-  width:100%;height:auto;display:block;
-  object-fit:cover;
-}
+.novinky-header-left{display:flex;align-items:center;gap:12px}
+.novinky-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.novinky-dots{display:flex;gap:5px;align-items:center}
+.novinky-dot{width:7px;height:7px;border-radius:50%;background:var(--border);border:none;cursor:pointer;padding:0;transition:all .2s;}
+.novinky-dot.active{background:var(--green);width:20px;border-radius:4px}
+.novinky-track-wrap{position:relative;overflow:hidden;line-height:0;}
+.novinky-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.novinky-slide{flex:0 0 100%;width:100%;}
+.novinky-slide img{width:100%;height:auto;display:block;object-fit:cover;}
 .novinky-arrow{
   position:absolute;top:50%;transform:translateY(-50%);
   width:40px;height:40px;border-radius:50%;
-  background:rgba(255,255,255,.9);border:1px solid var(--border);
-  font-size:16px;cursor:pointer;
-  display:grid;place-items:center;
-  transition:all .15s;color:var(--text);
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
+  background:rgba(255,255,255,.92);border:1px solid var(--border);
+  font-size:16px;cursor:pointer;display:grid;place-items:center;
+  transition:all .15s;color:var(--dark);box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
-.novinky-arrow:hover{background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.15)}
-.novinky-prev{left:16px}
-.novinky-next{right:16px}
+.novinky-arrow:hover{background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.15)}
+.novinky-prev{left:16px}.novinky-next{right:16px}
 
-/* ── STATS BAR ── */
-.stats-bar{
-  background:var(--green);
-  display:flex;justify-content:center;
-  gap:0;
-}
-.stat-item{
-  flex:1;max-width:200px;
-  text-align:center;
-  padding:24px 20px;
-  border-right:1px solid rgba(255,255,255,.15);
-  color:#fff;
-}
-.stat-item:last-child{border-right:none}
-.stat-num{font-size:28px;font-weight:900;letter-spacing:-.02em}
-.stat-lbl{font-size:12px;opacity:.75;margin-top:3px;font-weight:500}
-
-/* ── SECTION ── */
-.section{padding:80px 40px}
-.section-sm{padding:48px 40px}
-.section-gray{background:var(--light)}
-
-.section-top{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  margin-bottom:40px;
-}
-.section-top h2{
-  font-size:clamp(22px,2.5vw,30px);
-  font-weight:800;letter-spacing:-.02em;
-}
-.link-all{
-  font-size:13px;font-weight:600;color:var(--green);
-  display:flex;align-items:center;gap:4px;
-  white-space:nowrap;
-}
+/* ─── SECTION WRAPPER ─── */
+.section{padding:72px clamp(20px,4vw,60px);}
+.section-gray{background:#fafaf8;}
+.section-head{margin-bottom:40px;}
+.section-head h2{font-size:clamp(24px,2.5vw,32px);font-weight:900;letter-spacing:-.03em;margin-bottom:6px;}
+.section-head p{font-size:15px;color:var(--muted)}
+.section-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px;}
+.section-row h2{font-size:clamp(22px,2.5vw,30px);font-weight:900;letter-spacing:-.03em;}
+.link-all{font-size:13px;font-weight:600;color:var(--green);white-space:nowrap;}
 .link-all:hover{text-decoration:underline}
-.section-label{
-  font-size:11px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--green);
-  margin-bottom:10px;
-}
 
-/* ── SPORT GRID ── */
+/* ─── SPORT GRID ─── */
 .sport-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
+  display:grid;grid-template-columns:repeat(4,1fr);
   gap:1px;background:var(--border);
-  border:1px solid var(--border);
-  overflow:hidden;
+  border:1px solid var(--border);overflow:hidden;
 }
 .sport-item{
-  display:flex;
-  overflow:hidden;
-  cursor:pointer;
-  background:#fff;
-  transition:background .2s;
-  height:140px; /* fixná výška — nikdy sa nezmení */
-  align-items:stretch;
+  display:flex;overflow:hidden;cursor:pointer;background:#fff;
+  transition:background .2s;height:148px;align-items:stretch;
 }
-.sport-item:hover{background:#f8fdf9}
+.sport-item:hover{background:#f9fdf9}
 .sport-item-photo{
-  width:0;
-  flex-shrink:0;
-  overflow:hidden;
-  background:#d4ddd0;
+  width:0;flex-shrink:0;overflow:hidden;background:#d4ddd0;
   transition:width .35s cubic-bezier(.4,0,.2,1);
 }
-.sport-item:hover .sport-item-photo{
-  width:50%;
-}
-.sport-item-photo img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform .4s;
-}
+.sport-item:hover .sport-item-photo{width:50%;}
+.sport-item-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
 .sport-item:hover .sport-item-photo img{transform:scale(1.04)}
-.sport-item-body{
-  flex:1;
-  min-width:0;
-  padding:18px 18px;
-  display:flex;flex-direction:column;gap:5px;
-  overflow:hidden;
-}
-.sport-icon-wrap{margin-bottom:2px;flex-shrink:0}
-.sport-link{margin-top:auto}
+.sport-item-body{flex:1;min-width:0;padding:20px 18px;display:flex;flex-direction:column;gap:5px;overflow:hidden;}
+.sport-icon-wrap{width:36px;height:36px;color:var(--green);flex-shrink:0;margin-bottom:6px;}
+.sport-icon-wrap svg{width:36px;height:36px;}
+.sport-name{font-size:15px;font-weight:700;letter-spacing:-.01em;}
+.sport-sub{font-size:11px;color:var(--muted);line-height:1.4;}
+.sport-link{font-size:12px;font-weight:600;color:var(--green);margin-top:auto;display:flex;align-items:center;gap:3px;}
 .sport-item.sport-hidden{display:none}
+
 .show-sports-btn{
-  display:inline-flex;align-items:center;gap:8px;
+  display:inline-flex;align-items:center;gap:6px;
   margin-top:20px;background:none;border:none;
-  color:var(--green);font-weight:700;font-size:14px;
-  cursor:pointer;font-family:inherit;padding:0;
+  color:var(--green);font-weight:700;font-size:14px;cursor:pointer;padding:0;
 }
 .show-sports-btn:hover{text-decoration:underline}
-.sport-icon-wrap{
-  width:40px;height:40px;margin-bottom:4px;
-  color:var(--green);flex-shrink:0;
-}
-.sport-icon-wrap svg{width:40px;height:40px}
-.sport-icon-wrap img{
-  width:40px;height:40px;
-  object-fit:contain;
-  mix-blend-mode:multiply;
-}
-.sport-name{font-size:16px;font-weight:700;letter-spacing:-.01em}
-.sport-sub{font-size:12px;color:var(--muted);line-height:1.4}
-.sport-link{
-  font-size:12px;font-weight:600;color:var(--green);
-  margin-top:auto;display:flex;align-items:center;gap:3px;
-}
 
-/* ── FILTERS ── */
-.filters{
-  display:flex;gap:10px;flex-wrap:wrap;
-  margin-bottom:32px;align-items:center;
+/* ─── COMMUNITY ─── */
+.community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.community-card{
+  border-radius:12px;overflow:hidden;
+  position:relative;height:280px;cursor:pointer;
 }
+.community-card img{transition:transform .45s;}
+.community-card:hover img{transform:scale(1.05)}
+.community-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.1) 55%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:24px;color:#fff;
+}
+.community-tag{
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);margin-bottom:6px;
+}
+.community-overlay h3{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px;}
+.community-overlay p{font-size:13px;opacity:.75;line-height:1.5}
+.community-arrow{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;background:rgba(255,255,255,.18);
+  border-radius:50%;display:grid;place-items:center;
+  font-size:14px;backdrop-filter:blur(4px);transition:background .2s;
+}
+.community-card:hover .community-arrow{background:rgba(255,255,255,.32)}
+
+/* ─── FACILITIES ─── */
+.fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.fac-card{
+  border-radius:10px;overflow:hidden;border:1px solid var(--border);
+  background:#fff;transition:box-shadow .2s,transform .2s;cursor:pointer;
+}
+.fac-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.09);transform:translateY(-2px);}
+.fac-img{height:186px;overflow:hidden;background:#d0ddd0;position:relative;}
+.fac-img img{transition:transform .4s;}
+.fac-card:hover .fac-img img{transform:scale(1.04);}
+.fac-tag{
+  position:absolute;top:12px;left:12px;background:#fff;border-radius:4px;
+  font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:4px 10px;color:var(--dark);
+}
+.fac-body{padding:18px 20px 20px;}
+.fac-name{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em;}
+.fac-meta{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:5px;}
+.fac-meta-row{display:flex;align-items:center;gap:7px;}
+.fac-meta-row svg{flex-shrink:0;color:var(--green);width:14px;height:14px;}
+.fac-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
+.fac-price{font-size:14px;font-weight:700;}
+.fac-price span{font-weight:400;font-size:13px;color:var(--muted);}
+.fac-book{font-size:12px;font-weight:700;color:var(--green);border:1.5px solid var(--green);border-radius:6px;padding:6px 14px;transition:all .15s;}
+.fac-card:hover .fac-book{background:var(--green);color:#fff;}
+
+/* filters */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;align-items:center;}
 .filter-btn{
   font-size:13px;font-weight:600;
-  border:1.5px solid var(--border);
-  border-radius:6px;padding:8px 16px;
-  background:#fff;color:var(--muted);
-  display:flex;align-items:center;gap:6px;
-  transition:all .15s;
+  border:1.5px solid var(--border);border-radius:99px;
+  padding:7px 16px;background:#fff;color:var(--muted);
+  display:flex;align-items:center;gap:5px;transition:all .15s;cursor:pointer;
 }
-.filter-btn:hover,.filter-btn.active{
-  border-color:var(--green);color:var(--green);
-  background:#f0f8f3;
-}
-.filter-sep{width:1px;height:28px;background:var(--border);margin:0 4px}
+.filter-btn:hover,.filter-btn.active{border-color:var(--green);color:var(--green);background:var(--green-light);}
+.filter-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
 
-/* ── FACILITY CARDS ── */
-.facility-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.fac-card{
-  border-radius:10px;overflow:hidden;
-  border:1px solid var(--border);
-  transition:box-shadow .2s,transform .2s;
-  cursor:pointer;background:#fff;
-}
-.fac-card:hover{
-  box-shadow:0 8px 32px rgba(0,0,0,.1);
-  transform:translateY(-2px);
-}
-.fac-img{height:200px;overflow:hidden;background:#d0ddd0;position:relative}
-.fac-img img{transition:transform .4s}
-.fac-card:hover .fac-img img{transform:scale(1.04)}
-.fac-tag{
-  position:absolute;top:12px;left:12px;
-  background:#fff;border-radius:4px;
-  font-size:11px;font-weight:700;letter-spacing:.05em;
-  text-transform:uppercase;padding:4px 10px;color:var(--text);
-}
-.fac-body{padding:18px 20px 20px}
-.fac-name{font-size:17px;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
-.fac-meta{
-  font-size:13px;color:var(--muted);
-  display:flex;flex-direction:column;gap:4px;
-}
-.fac-meta-row{display:flex;align-items:center;gap:6px}
-.fac-meta-row svg{flex-shrink:0;color:var(--green);width:14px;height:14px}
-.fac-footer{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
-}
-.fac-price{font-size:14px;font-weight:700}
-.fac-price span{font-weight:400;font-size:13px;color:var(--muted)}
-.fac-book{
-  font-size:12px;font-weight:700;color:var(--green);
-  border:1.5px solid var(--green);border-radius:5px;
-  padding:5px 12px;transition:all .15s;
-}
-.fac-card:hover .fac-book{background:var(--green);color:#fff}
-
-/* ── EVENTS ── */
-.events-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
+/* ─── EVENTS ─── */
+.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 .ev-card{
   display:flex;gap:16px;align-items:flex-start;
-  padding:20px;border-radius:10px;
-  border:1px solid var(--border);
-  transition:box-shadow .2s;cursor:pointer;background:#fff;
+  padding:20px;border-radius:10px;border:1px solid var(--border);
+  background:#fff;transition:box-shadow .2s;cursor:pointer;
 }
 .ev-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07)}
 .ev-date{
-  flex-shrink:0;width:52px;text-align:center;
-  background:var(--light);border-radius:8px;padding:10px 0;
+  flex-shrink:0;width:50px;text-align:center;
+  background:#f5f5f3;border-radius:8px;padding:10px 0;
 }
 .ev-day{font-size:22px;font-weight:900;line-height:1;color:var(--green)}
-.ev-mon{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-top:2px}
-.ev-info{}
-.ev-tag{
-  font-size:10px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--green);margin-bottom:5px;
-}
-.ev-name{font-size:15px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.ev-mon{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.ev-tag{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin-bottom:5px;}
+.ev-name{font-size:15px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em;}
 .ev-loc{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px}
 
-/* ── CATEGORIES (big) ── */
-.cat-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+/* ─── HOW ─── */
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);overflow:hidden;}
+.how-step{padding:36px 32px;border-right:1px solid var(--border);background:#fff;}
+.how-step:last-child{border-right:none}
+.how-num{
+  width:40px;height:40px;background:var(--green);color:#fff;
+  border-radius:10px;display:grid;place-items:center;
+  font-size:16px;font-weight:900;margin-bottom:20px;
 }
-.cat-card{
-  position:relative;border-radius:10px;overflow:hidden;
-  height:260px;cursor:pointer;
-}
-.cat-card img{transition:transform .4s}
-.cat-card:hover img{transform:scale(1.05)}
-.cat-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.1) 60%,transparent 100%);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:24px;color:#fff;
-}
-.cat-overlay h3{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
-.cat-overlay p{font-size:13px;opacity:.8}
-.cat-overlay .arrow{
-  position:absolute;top:16px;right:16px;
-  width:32px;height:32px;background:rgba(255,255,255,.2);
-  border-radius:50%;display:grid;place-items:center;
-  font-size:14px;backdrop-filter:blur(4px);
-  transition:background .2s;
-}
-.cat-card:hover .arrow{background:rgba(255,255,255,.35)}
+.how-step h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em;}
+.how-step p{font-size:13px;color:var(--muted);line-height:1.65;}
 
-/* ── FAQ ── */
-.faq-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.faq-left h2{font-size:clamp(22px,2.5vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
-.faq-left p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px}
-.faq-item{border-bottom:1px solid var(--border)}
+/* ─── FAQ ─── */
+.faq-wrap{display:grid;grid-template-columns:360px 1fr;gap:80px;align-items:start;}
+.faq-aside h2{font-size:clamp(22px,2.5vw,30px);font-weight:900;letter-spacing:-.03em;margin-bottom:12px;}
+.faq-aside p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+.faq-item{border-bottom:1px solid var(--border);}
 .faq-q{
   width:100%;text-align:left;background:none;border:none;
   padding:18px 0;font-size:15px;font-weight:600;
-  display:flex;justify-content:space-between;align-items:center;
-  gap:16px;font-family:inherit;letter-spacing:-.01em;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  font-family:inherit;cursor:pointer;letter-spacing:-.01em;
 }
-.faq-q .icon{
-  flex-shrink:0;width:22px;height:22px;
-  border:1.5px solid var(--border);border-radius:50%;
-  display:grid;place-items:center;
-  font-size:14px;color:var(--muted);transition:all .2s;
-}
-.faq-q.open .icon{background:var(--green);border-color:var(--green);color:#fff;transform:rotate(45deg)}
-.faq-a{
-  font-size:14px;color:var(--muted);line-height:1.7;
-  padding-bottom:18px;display:none;
-}
+.faq-icon{width:22px;height:22px;border:1.5px solid var(--border);border-radius:50%;display:grid;place-items:center;font-size:14px;color:var(--muted);transition:all .2s;flex-shrink:0;}
+.faq-q.open .faq-icon{background:var(--green);border-color:var(--green);color:#fff;transform:rotate(45deg);}
+.faq-a{font-size:14px;color:var(--muted);line-height:1.75;padding-bottom:18px;display:none;}
 .faq-a.open{display:block}
 
-/* ── HOW ── */
-.how-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:1px;background:var(--border);
-  border:1px solid var(--border);border-radius:10px;overflow:hidden;
-}
-.how-step{
-  background:#fff;padding:32px 28px;
-}
-.step-n{
-  font-size:13px;font-weight:700;color:var(--green);
-  margin-bottom:16px;
-}
-.step-n::before{
-  content:'';display:inline-block;
-  width:28px;height:2px;background:var(--green);
-  vertical-align:middle;margin-right:8px;
-}
-.how-step h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em}
-.how-step p{font-size:13px;color:var(--muted);line-height:1.6}
-
-/* ── FOOTER ── */
-footer{
-  background:#111;color:#fff;
-  padding:64px 40px 32px;
-}
+/* ─── FOOTER ─── */
+footer{background:var(--dark);color:#fff;padding:64px clamp(20px,4vw,60px) 32px;}
 .footer-top{
-  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;
-  gap:48px;margin-bottom:56px;
-  padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1);
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;
+  margin-bottom:52px;padding-bottom:48px;
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
-.footer-brand p{
-  font-size:14px;color:rgba(255,255,255,.5);
-  line-height:1.7;margin-top:12px;max-width:260px;
-}
-.footer-socials{display:flex;gap:10px;margin-top:20px}
-.social-link{
-  width:34px;height:34px;border-radius:6px;
-  border:1px solid rgba(255,255,255,.15);
-  display:grid;place-items:center;font-size:14px;
-  transition:border-color .15s;
-}
-.social-link:hover{border-color:rgba(255,255,255,.4)}
-footer h4{
-  font-size:12px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:rgba(255,255,255,.4);
-  margin-bottom:16px;
-}
-footer ul{list-style:none}
-footer ul li{margin-bottom:10px}
-footer ul a{
-  font-size:14px;color:rgba(255,255,255,.65);
-  transition:color .15s;
-}
+.footer-brand p{font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;margin-top:10px;max-width:240px;}
+footer h4{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px;}
+footer ul{list-style:none;}
+footer ul li{margin-bottom:10px;}
+footer ul a{font-size:14px;color:rgba(255,255,255,.6);transition:color .15s;}
 footer ul a:hover{color:#fff}
-.footer-bottom{
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:13px;color:rgba(255,255,255,.35);
-}
+.footer-bottom{display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.3);}
 
-/* ── RESPONSIVE ── */
+/* ─── RESPONSIVE ─── */
 @media(max-width:1100px){
   .sport-grid{grid-template-columns:repeat(3,1fr)}
-  .facility-grid{grid-template-columns:repeat(2,1fr)}
-  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .fac-grid{grid-template-columns:repeat(2,1fr)}
+  .community-grid{grid-template-columns:repeat(2,1fr)}
   .how-grid{grid-template-columns:repeat(2,1fr)}
   .footer-top{grid-template-columns:1fr 1fr}
   .faq-wrap{grid-template-columns:1fr;gap:40px}
 }
-@media(max-width:800px){
-  .hero{grid-template-columns:1fr}
-  .hero-right{display:none}
-  .hero-left{padding:56px 20px}
-  .nav{padding:0 20px;gap:20px}
+@media(max-width:768px){
+  .nav{padding:0 20px}
   .nav-links{display:none}
-  .section{padding:56px 20px}
-  .section-sm{padding:36px 20px}
-  .sport-grid{grid-template-columns:1fr}
-  .sport-item{grid-template-columns:120px 1fr}
-  .facility-grid{grid-template-columns:1fr}
-  .events-grid{grid-template-columns:1fr}
-  .cat-grid{grid-template-columns:1fr}
+  .hero{padding:60px 20px 48px}
+  .sport-grid{grid-template-columns:repeat(2,1fr)}
+  .fac-grid,.events-grid,.community-grid{grid-template-columns:1fr}
   .how-grid{grid-template-columns:1fr}
+  .how-step{border-right:none;border-bottom:1px solid var(--border)}
   .footer-top{grid-template-columns:1fr}
   footer{padding:48px 20px 24px}
-  .stats-bar{flex-wrap:wrap}
-  .stat-item{flex:1 0 40%}
+  .section{padding:56px 20px}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── NAV ── -->
 <nav class="nav">
   <a href="#" class="nav-logo">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="28" height="28" rx="6" fill="currentColor" opacity=".12"/>
-      <circle cx="14" cy="10" r="3" fill="currentColor"/>
-      <path d="M8 22c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-    </svg>
-    Mesto športuje
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="7" r="3" fill="currentColor"/>
+        <path d="M4 18c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    Petržalka športuje
   </a>
   <ul class="nav-links">
     <li><a href="#" class="active">Domov</a></li>
@@ -604,52 +357,47 @@ footer ul a:hover{color:#fff}
     <li><a href="#faq">FAQ</a></li>
   </ul>
   <div class="nav-right">
-    <button class="btn btn-ghost">Prihlásiť sa</button>
+    <button class="btn btn-outline">Prihlásiť sa</button>
     <button class="btn btn-primary">Rezervovať</button>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 <div class="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">Mestská časť — Aktívny šport</p>
-    <h1>Vyber si šport,<br>ktorý ťa <em>baví</em></h1>
-    <p class="hero-desc">Rezervuj si termíny v bazénoch, na klzisku, v halách či tanečných sálach. Jednoduché online rezervácie na jednom mieste.</p>
+  <div class="hero-eyebrow">Aktívna Petržalka</div>
+  <h1>Nájdi šport,<br>ktorý <em>ťa baví</em></h1>
+  <p class="hero-sub">Bazény, ihriská, haly a kurzy priamo vo tvojom okolí. Rezervuj online, bez zbytočného hľadania.</p>
 
+  <div class="hero-search-wrap">
     <div class="hero-search">
       <input id="heroSearch" type="text" placeholder="Hľadaj šport, miesto alebo aktivitu…" autocomplete="off"/>
       <button onclick="doSearch()">Hľadať</button>
     </div>
-
-    <div class="hero-btns">
-      <button class="btn btn-primary" onclick="document.getElementById('sporty').scrollIntoView({behavior:'smooth'})">Zobraziť aktivity →</button>
-      <button class="btn btn-ghost" onclick="document.getElementById('ako').scrollIntoView({behavior:'smooth'})">Ako to funguje →</button>
-    </div>
-
-    <div class="hero-chips">
-      <span class="hero-chips-label">Populárne:</span>
-      <span class="chip" onclick="setSearch('Plávanie')">Plávanie</span>
-      <span class="chip" onclick="setSearch('Tenis')">Tenis</span>
-      <span class="chip" onclick="setSearch('Beh')">Beh</span>
-      <span class="chip" onclick="setSearch('Fitness')">Fitness</span>
-      <span class="chip" onclick="setSearch('Yoga')">Yoga</span>
-    </div>
   </div>
 
-  <div class="hero-right">
-    <img src="assets/akofunguje.png" alt="Ako to funguje" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#f5f5f3;"/>
+  <div class="hero-chips">
+    <span class="hero-chips-label">Populárne:&nbsp;</span>
+    <span class="chip" onclick="setSearch('Plávanie')">Plávanie</span>
+    <span class="chip" onclick="setSearch('Tenis')">Tenis</span>
+    <span class="chip" onclick="setSearch('Beh')">Beh</span>
+    <span class="chip" onclick="setSearch('Fitness')">Fitness</span>
+    <span class="chip" onclick="setSearch('Yoga')">Yoga</span>
+    <span class="chip" onclick="setSearch('Bicykel')">Bicykel</span>
   </div>
 </div>
 
-<!-- NOVINKY -->
+<!-- ── NOVINKY ── -->
 <div class="novinky-section">
   <div class="novinky-header">
-    <span class="section-label" style="margin:0">Novinky</span>
-    <div class="novinky-dots" id="novinkyDots"></div>
+    <div class="novinky-header-left">
+      <span class="novinky-label">Novinky</span>
+      <div class="novinky-dots" id="novinkyDots"></div>
+    </div>
+    <a href="#" class="link-all">Všetky novinky →</a>
   </div>
   <div class="novinky-track-wrap">
     <div class="novinky-track" id="novinkyTrack">
-      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Novinka 1"/></div>
+      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Summer Hero Camp 2026"/></div>
       <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Novinka 2"/></div>
       <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Novinka 3"/></div>
       <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Novinka 4"/></div>
@@ -659,562 +407,319 @@ footer ul a:hover{color:#fff}
   </div>
 </div>
 
-<!-- SPORTS -->
+<!-- ── SPORTS ── -->
 <section class="section" id="sporty">
-  <div class="section-top">
-    <div>
-      <p class="section-label">Čo ponúkame</p>
-      <h2>Všetky športy</h2>
-    </div>
+  <div class="section-row">
+    <h2>Športy v Petržalke</h2>
     <a href="#" class="link-all">Zobraziť všetky →</a>
   </div>
 
   <div class="sport-grid">
 
     <div class="sport-item">
-      <div class="sport-item-photo">
-        <img src="assets/cat-plavanie.jpg" alt="Plávanie"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/cat-plavanie.jpg" alt="Plávanie"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M6 28c3.5-3.5 7-3.5 10.5 0s7 3.5 10.5 0 7-3.5 10.5 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="20" cy="13" r="5" stroke="currentColor" stroke-width="2.5"/></svg></div>
         <div class="sport-name">Plávanie</div>
         <div class="sport-sub">Bazény, dráhy</div>
-        <a href="sporty/plavanie.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/plavanie.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item">
-      <div class="sport-item-photo">
-        <img src="assets/cat-beh.jpg" alt="Beh"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/cat-beh.jpg" alt="Beh"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="27" cy="8" r="3.5" stroke="currentColor" stroke-width="2.5"/><path d="M23 13l-5 8 3 3-3 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 21l-5 3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
         <div class="sport-name">Beh</div>
         <div class="sport-sub">Trate, skupiny</div>
-        <a href="sporty/beh.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/beh.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item">
-      <div class="sport-item-photo">
-        <img src="assets/cat-bicykel.jpg" alt="Bicyklovanie"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/cat-bicykel.jpg" alt="Bicyklovanie"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="10" cy="28" r="7" stroke="currentColor" stroke-width="2.5"/><circle cx="30" cy="28" r="7" stroke="currentColor" stroke-width="2.5"/><path d="M10 28l10-14 10 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="28" cy="10" r="3" stroke="currentColor" stroke-width="2.5"/></svg></div>
         <div class="sport-name">Bicyklovanie</div>
         <div class="sport-sub">Cyklotrasy, BMX</div>
-        <a href="sporty/bicyklovanie.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/bicyklovanie.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item">
-      <div class="sport-item-photo">
-        <img src="assets/b1.jpg" alt="Fitness"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/b1.jpg" alt="Fitness"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M6 20h4M30 20h4M10 20h20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><rect x="10" y="14" width="4" height="12" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="26" y="14" width="4" height="12" rx="2" stroke="currentColor" stroke-width="2.5"/></svg></div>
         <div class="sport-name">Fitness</div>
         <div class="sport-sub">Posilňovne, tréningy</div>
-        <a href="sporty/fitness.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/fitness.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item sport-hidden">
-      <div class="sport-item-photo">
-        <img src="assets/skola.jpg" alt="Yoga"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/skola.jpg" alt="Yoga"/></div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap">
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="20" cy="8" r="4" stroke="currentColor" stroke-width="2.5"/>
-            <path d="M12 20c4-8 12-8 16 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M8 32c3-6 7-9 12-9s9 3 12 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="8" r="4" stroke="currentColor" stroke-width="2.5"/><path d="M12 20c4-8 12-8 16 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M8 32c3-6 7-9 12-9s9 3 12 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
         <div class="sport-name">Yoga a pilates</div>
         <div class="sport-sub">Rovnováha, mobilita</div>
-        <a href="sporty/yoga.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/yoga.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item sport-hidden">
-      <div class="sport-item-photo">
-        <img src="assets/b2.jpg" alt="Tenis"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/b2.jpg" alt="Tenis"/></div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap">
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 8l6 6M26 26l6 6M8 32l6-6M26 14l6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-            <ellipse cx="20" cy="20" rx="8" ry="8" stroke="currentColor" stroke-width="2.5"/>
-          </svg>
-        </div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M8 8l6 6M26 26l6 6M8 32l6-6M26 14l6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="20" cy="20" rx="8" ry="8" stroke="currentColor" stroke-width="2.5"/></svg></div>
         <div class="sport-name">Tenis</div>
         <div class="sport-sub">Kurty, turnaje</div>
-        <a href="sporty/tenis.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/tenis.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item sport-hidden">
-      <div class="sport-item-photo">
-        <img src="assets/cat-loptove.jpg" alt="Loptové športy"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/cat-loptove.jpg" alt="Loptové"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2.5"/><path d="M20 6l4 6-4 4-4-4 4-6zM6 20l6-4 4 4-4 4-6-4zM34 20l-6-4-4 4 4 4 6-4zM14 30l2-6h8l2 6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
         <div class="sport-name">Loptové športy</div>
         <div class="sport-sub">Futbal, basketbal</div>
-        <a href="sporty/loptove.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/loptove.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item sport-hidden">
-      <div class="sport-item-photo">
-        <img src="assets/b3.jpg" alt="Tanec"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/b3.jpg" alt="Tanec"/></div>
       <div class="sport-item-body">
-        <div class="sport-icon-wrap">
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 6v12M14 12h12M12 20l8 14 8-14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M20 6v12M14 12h12M12 20l8 14 8-14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="sport-name">Tanec</div>
         <div class="sport-sub">Kurzy, krúžky</div>
-        <a href="sporty/tanec.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/tanec.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item sport-hidden">
-      <div class="sport-item-photo">
-        <img src="assets/cat-beh.jpg" alt="Atletika"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/cat-beh.jpg" alt="Atletika"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M8 32h24M8 32l7-18 5 10 5-10 7 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="sport-name">Atletika</div>
         <div class="sport-sub">Dráhy, závody</div>
-        <a href="sporty/atletika.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/atletika.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item sport-hidden">
-      <div class="sport-item-photo">
-        <img src="assets/cat-korculovanie.jpg" alt="Zimné športy"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/cat-korculovanie.jpg" alt="Zimné"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M8 30h24M12 30l-2 4M28 30l2 4M20 6v16M14 12l6-6 6 6M10 22h20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="sport-name">Zimné športy</div>
         <div class="sport-sub">Korčuľovanie, hokej</div>
-        <a href="sporty/zimne.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/zimne.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item sport-hidden">
-      <div class="sport-item-photo">
-        <img src="assets/cat-hokej.jpg" alt="Bojové športy"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/cat-hokej.jpg" alt="Bojové"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="10" r="4" stroke="currentColor" stroke-width="2.5"/><path d="M13 18h14l-3 14H16l-3-14z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M16 18l-4-4M24 18l4-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
         <div class="sport-name">Bojové športy</div>
         <div class="sport-sub">Tréningy, súťaže</div>
-        <a href="sporty/bojove.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/bojove.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
     <div class="sport-item sport-hidden">
-      <div class="sport-item-photo">
-        <img src="assets/cat-lezenie.jpg" alt="Lezenie"/>
-      </div>
+      <div class="sport-item-photo"><img src="assets/cat-lezenie.jpg" alt="Lezenie"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><path d="M16 34V20a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M10 26l6-6 4 4 6-8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="28" cy="10" r="3.5" stroke="currentColor" stroke-width="2.5"/></svg></div>
         <div class="sport-name">Lezenie</div>
         <div class="sport-sub">Bouldering, steny</div>
-        <a href="sporty/lezenie.html" class="sport-link">>Pozrieť zariadenia →</a>
+        <a href="sporty/lezenie.html" class="sport-link">Pozrieť zariadenia →</a>
       </div>
     </div>
 
   </div>
-
-  <button class="show-sports-btn" id="showSportsBtn" onclick="toggleSports()">
-    Zobraziť všetky športy &nbsp;↓
-  </button>
+  <button class="show-sports-btn" id="showSportsBtn" onclick="toggleSports()">Zobraziť všetky športy ↓</button>
 </section>
 
-<!-- FACILITIES -->
-<section class="section section-gray" id="zariadenia">
-  <div class="section-top">
-    <div>
-      <p class="section-label">Kde športovať</p>
-      <h2>Zariadenia v meste</h2>
+<!-- ── COMMUNITY ── -->
+<section class="section section-gray" id="komunita">
+  <div class="section-row">
+    <h2>Školy, komunity a kluby</h2>
+    <a href="#" class="link-all">Zobraziť všetky →</a>
+  </div>
+  <div class="community-grid">
+    <div class="community-card">
+      <img src="assets/skola.jpg" alt="Aktívne školy"/>
+      <div class="community-overlay">
+        <span class="community-arrow">→</span>
+        <div class="community-tag">Vzdelávanie & šport</div>
+        <h3>Aktívne školy</h3>
+        <p>Športové programy, krúžky a tábory pre deti</p>
+      </div>
     </div>
+    <div class="community-card">
+      <img src="assets/cat-loptove.jpg" alt="Aktívne komunity"/>
+      <div class="community-overlay">
+        <span class="community-arrow">→</span>
+        <div class="community-tag">Skupiny & susedia</div>
+        <h3>Aktívne komunity</h3>
+        <p>Skupinové tréningy, parky a verejné ihriská</p>
+      </div>
+    </div>
+    <div class="community-card">
+      <img src="assets/cat-hokej.jpg" alt="Aktívne kluby"/>
+      <div class="community-overlay">
+        <span class="community-arrow">→</span>
+        <div class="community-tag">Kluby & ligy</div>
+        <h3>Aktívne kluby</h3>
+        <p>Amatérske ligy, turnaje a miestne športové kluby</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FACILITIES ── -->
+<section class="section" id="zariadenia">
+  <div class="section-row">
+    <h2>Zariadenia v Petržalke</h2>
     <a href="#" class="link-all">Všetky zariadenia →</a>
   </div>
-
   <div class="filters">
     <button class="filter-btn active" onclick="filterFac(this,'all')">Všetky</button>
     <button class="filter-btn" onclick="filterFac(this,'bazen')">Bazény</button>
     <button class="filter-btn" onclick="filterFac(this,'hala')">Haly</button>
     <button class="filter-btn" onclick="filterFac(this,'ihrisko')">Ihriská</button>
-    <button class="filter-btn" onclick="filterFac(this,'kurt')">Kurty</button>
     <div class="filter-sep"></div>
     <button class="filter-btn" onclick="filterFac(this,'deti')">Pre deti</button>
   </div>
-
-  <div class="facility-grid">
+  <div class="fac-grid">
 
     <div class="fac-card" data-type="bazen">
-      <div class="fac-img">
-        <img src="https://images.unsplash.com/photo-1600965962102-9d260a71890d?w=700&q=80" alt="Mestský bazén"/>
-        <span class="fac-tag">Bazén</span>
-      </div>
+      <div class="fac-img"><img src="assets/bazen_petrzalka.jpg" alt="Petržalská plaváreň"/><span class="fac-tag">Plaváreň</span></div>
       <div class="fac-body">
-        <div class="fac-name">Mestský krytý bazén</div>
+        <div class="fac-name">Petržalská plaváreň</div>
         <div class="fac-meta">
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
-            Športová 14, centrum
-          </div>
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Po–Ne  6:00–22:00
-          </div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Kutlíkova 2, Petržalka</div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Ne  6:00–22:00</div>
         </div>
-        <div class="fac-footer">
-          <div class="fac-price">od 5 € <span>/ vstup</span></div>
-          <a href="#" class="fac-book">Rezervovať</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="fac-card" data-type="hala">
-      <div class="fac-img">
-        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=700&q=80" alt="Športová hala"/>
-        <span class="fac-tag">Hala</span>
-      </div>
-      <div class="fac-body">
-        <div class="fac-name">Multifunkčná športová hala</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
-            Hlavná 3, sever
-          </div>
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Po–Pi  7:00–22:00, So–Ne  8:00–20:00
-          </div>
-        </div>
-        <div class="fac-footer">
-          <div class="fac-price">od 12 € <span>/ hodina</span></div>
-          <a href="#" class="fac-book">Rezervovať</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="fac-card" data-type="kurt">
-      <div class="fac-img">
-        <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=700&q=80" alt="Tenisové kurty"/>
-        <span class="fac-tag">Kurty</span>
-      </div>
-      <div class="fac-body">
-        <div class="fac-name">Tenisový areál — 8 kurtov</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
-            Parková 8, západ
-          </div>
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Po–Ne  7:00–21:00 (sezónne)
-          </div>
-        </div>
-        <div class="fac-footer">
-          <div class="fac-price">od 8 € <span>/ hodina</span></div>
-          <a href="#" class="fac-book">Rezervovať</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="fac-card" data-type="ihrisko deti">
-      <div class="fac-img">
-        <img src="https://images.unsplash.com/photo-1551958219-acbc608571c7?w=700&q=80" alt="Ihrisko"/>
-        <span class="fac-tag">Ihrisko</span>
-      </div>
-      <div class="fac-body">
-        <div class="fac-name">Vonkajší workoutový park</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
-            Riečna 22, juh
-          </div>
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Voľný prístup, 24 hodín
-          </div>
-        </div>
-        <div class="fac-footer">
-          <div class="fac-price">Zadarmo</div>
-          <a href="#" class="fac-book">Detail</a>
-        </div>
+        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="sporty/plavanie.html" class="fac-book">Rezervovať</a></div>
       </div>
     </div>
 
     <div class="fac-card" data-type="bazen deti">
-      <div class="fac-img">
-        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=700&q=80" alt="Letné kúpalisko"/>
-        <span class="fac-tag">Kúpalisko</span>
-      </div>
+      <div class="fac-img"><img src="assets/bazen_holicka.jpg" alt="Bazén Holíčska"/><span class="fac-tag">Bazén</span></div>
       <div class="fac-body">
-        <div class="fac-name">Letné mestské kúpalisko</div>
+        <div class="fac-name">Bazén Holíčska</div>
         <div class="fac-meta">
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
-            Lužná 5, sever
-          </div>
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Jún–september  9:00–20:00
-          </div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Holíčska, Petržalka</div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Otvorené do 30. 6. 2026</div>
         </div>
-        <div class="fac-footer">
-          <div class="fac-price">od 4 € <span>/ vstup</span></div>
-          <a href="#" class="fac-book">Rezervovať</a>
+        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="sporty/plavanie.html" class="fac-book">Rezervovať</a></div>
+      </div>
+    </div>
+
+    <div class="fac-card" data-type="bazen">
+      <div class="fac-img"><img src="assets/bazen_pankuchova.jpg" alt="Bazén Pankúchova"/><span class="fac-tag">Bazén</span></div>
+      <div class="fac-body">
+        <div class="fac-name">Bazén Pankúchova</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Pankúchova, Petržalka</div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Sezónne otváracie hodiny</div>
         </div>
+        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="sporty/plavanie.html" class="fac-book">Rezervovať</a></div>
+      </div>
+    </div>
+
+    <div class="fac-card" data-type="hala">
+      <div class="fac-img"><img src="assets/b1.jpg" alt="Hala Prokofievova"/><span class="fac-tag">Hala</span></div>
+      <div class="fac-body">
+        <div class="fac-name">Športová hala Prokofievova</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Prokofievova, Petržalka</div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Pi 7:00–22:00, So–Ne 8:00–20:00</div>
+        </div>
+        <div class="fac-footer"><div class="fac-price">od 5 € <span>/ vstup</span></div><a href="sporty/fitness.html" class="fac-book">Rezervovať</a></div>
       </div>
     </div>
 
     <div class="fac-card" data-type="hala ihrisko">
-      <div class="fac-img">
-        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=700&q=80" alt="Hokej"/>
-        <span class="fac-tag">Zimný štadión</span>
-      </div>
+      <div class="fac-img"><img src="assets/cat-korculovanie.jpg" alt="Aréna Draždiak"/><span class="fac-tag">Zimný štadión</span></div>
       <div class="fac-body">
-        <div class="fac-name">Zimný štadión — klzisko</div>
+        <div class="fac-name">Aréna Draždiak</div>
         <div class="fac-meta">
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
-            Zimná 1, centrum
-          </div>
-          <div class="fac-meta-row">
-            <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Október–Marec  8:00–21:00
-          </div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Draždiak, Petržalka</div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Október–Marec 8:00–21:00</div>
         </div>
-        <div class="fac-footer">
-          <div class="fac-price">od 6 € <span>/ vstup</span></div>
-          <a href="#" class="fac-book">Rezervovať</a>
+        <div class="fac-footer"><div class="fac-price">od 6 € <span>/ vstup</span></div><a href="sporty/zimne.html" class="fac-book">Rezervovať</a></div>
+      </div>
+    </div>
+
+    <div class="fac-card" data-type="ihrisko deti">
+      <div class="fac-img"><img src="assets/cat-loptove.jpg" alt="Ihriská"/><span class="fac-tag">Ihrisko</span></div>
+      <div class="fac-body">
+        <div class="fac-name">Verejné ihriská & parky</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Celá Petržalka</div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Voľný prístup, 24 hodín</div>
         </div>
+        <div class="fac-footer"><div class="fac-price">Zadarmo</div><a href="#" class="fac-book">Detail</a></div>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- CATEGORIES / KOMUNITA -->
-<section class="section" id="komunita">
-  <div class="section-top">
-    <div>
-      <p class="section-label">Spoločne sme aktívni</p>
-      <h2>Školy, kluby a komunity</h2>
-    </div>
-    <a href="#" class="link-all">Zobraziť všetky →</a>
-  </div>
-
-  <div class="cat-grid">
-    <div class="cat-card">
-      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=700&q=80" alt="Školy"/>
-      <div class="cat-overlay">
-        <span class="arrow">→</span>
-        <h3>Aktívne školy</h3>
-        <p>Športové programy, krúžky a tábory pre deti</p>
-      </div>
-    </div>
-    <div class="cat-card">
-      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80" alt="Komunity"/>
-      <div class="cat-overlay">
-        <span class="arrow">→</span>
-        <h3>Komunity a kluby</h3>
-        <p>Amatérske ligy, skupinové tréningy, miestne kluby</p>
-      </div>
-    </div>
-    <div class="cat-card">
-      <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=700&q=80" alt="Miesta"/>
-      <div class="cat-overlay">
-        <span class="arrow">→</span>
-        <h3>Verejné miesta</h3>
-        <p>Parky, workoutové zóny a ihriská zadarmo</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EVENTS -->
+<!-- ── EVENTS ── -->
 <section class="section section-gray" id="akcie">
-  <div class="section-top">
-    <div>
-      <p class="section-label">Čo sa deje</p>
-      <h2>Najbližšie podujatia</h2>
-    </div>
+  <div class="section-row">
+    <h2>Najbližšie podujatia</h2>
     <a href="#" class="link-all">Všetky podujatia →</a>
   </div>
-
   <div class="events-grid">
-
-    <div class="ev-card">
-      <div class="ev-date">
-        <div class="ev-day">12</div>
-        <div class="ev-mon">Júl</div>
-      </div>
-      <div class="ev-info">
-        <div class="ev-tag">Letný tábor · Plávanie</div>
-        <div class="ev-name">Summer Hero Camp 2026</div>
-        <div class="ev-loc">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
-          Mestský bazén · Júl–August
-        </div>
-      </div>
-    </div>
-
-    <div class="ev-card">
-      <div class="ev-date">
-        <div class="ev-day">19</div>
-        <div class="ev-mon">Júl</div>
-      </div>
-      <div class="ev-info">
-        <div class="ev-tag">Kurz · Plávanie</div>
-        <div class="ev-name">Plavecký kurz pre deti</div>
-        <div class="ev-loc">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
-          ZŠ Prokofievova · Máj–Jún
-        </div>
-      </div>
-    </div>
-
-    <div class="ev-card">
-      <div class="ev-date">
-        <div class="ev-day">6</div>
-        <div class="ev-mon">Sep</div>
-      </div>
-      <div class="ev-info">
-        <div class="ev-tag">Pretek · Beh</div>
-        <div class="ev-name">Mestský beh 2026</div>
-        <div class="ev-loc">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
-          Lesný park · 6. september
-        </div>
-      </div>
-    </div>
-
-    <div class="ev-card">
-      <div class="ev-date">
-        <div class="ev-day">14</div>
-        <div class="ev-mon">Sep</div>
-      </div>
-      <div class="ev-info">
-        <div class="ev-tag">Turnaj · Tenis</div>
-        <div class="ev-name">Otvorený tenisový turnaj</div>
-        <div class="ev-loc">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
-          Tenisový areál · Parková 8
-        </div>
-      </div>
-    </div>
-
-    <div class="ev-card">
-      <div class="ev-date">
-        <div class="ev-day">21</div>
-        <div class="ev-mon">Sep</div>
-      </div>
-      <div class="ev-info">
-        <div class="ev-tag">Workshop · Yoga</div>
-        <div class="ev-name">Jesenný yoga deň</div>
-        <div class="ev-loc">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
-          Mestský park · voľný vstup
-        </div>
-      </div>
-    </div>
-
-    <div class="ev-card">
-      <div class="ev-date">
-        <div class="ev-day">4</div>
-        <div class="ev-mon">Okt</div>
-      </div>
-      <div class="ev-info">
-        <div class="ev-tag">Sezóna · Klzisko</div>
-        <div class="ev-name">Otvorenie zimnej sezóny</div>
-        <div class="ev-loc">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
-          Zimný štadión · Zimná 1
-        </div>
-      </div>
-    </div>
-
+    <div class="ev-card"><div class="ev-date"><div class="ev-day">12</div><div class="ev-mon">Júl</div></div><div><div class="ev-tag">Letný tábor · Plávanie</div><div class="ev-name">Summer Hero Camp 2026</div><div class="ev-loc"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>Mestský bazén · Júl–August</div></div></div>
+    <div class="ev-card"><div class="ev-date"><div class="ev-day">6</div><div class="ev-mon">Sep</div></div><div><div class="ev-tag">Pretek · Beh</div><div class="ev-name">Mestský beh Petržalka 2026</div><div class="ev-loc"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>Sad Janka Kráľa</div></div></div>
+    <div class="ev-card"><div class="ev-date"><div class="ev-day">4</div><div class="ev-mon">Okt</div></div><div><div class="ev-tag">Sezóna · Korčuľovanie</div><div class="ev-name">Otvorenie zimnej sezóny</div><div class="ev-loc"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>Aréna Draždiak</div></div></div>
   </div>
 </section>
 
-<!-- HOW -->
-<section class="section">
-  <div class="section-top">
-    <div>
-      <p class="section-label">Postup</p>
-      <h2>Ako to funguje</h2>
-    </div>
-  </div>
+<!-- ── HOW ── -->
+<section class="section" id="ako">
+  <div class="section-row"><h2>Ako to funguje</h2></div>
   <div class="how-grid">
-    <div class="how-step">
-      <div class="step-n">01</div>
-      <h3>Nájdi aktivitu</h3>
-      <p>Prehľadaj športy, zariadenia alebo použij vyhľadávač. Filtruj podľa veku, lokality alebo termínu.</p>
-    </div>
-    <div class="how-step">
-      <div class="step-n">02</div>
-      <h3>Vyber termín</h3>
-      <p>Zobraz dostupné termíny priamo v kalendári zariadenia. Vidíš obsadenosť v reálnom čase.</p>
-    </div>
-    <div class="how-step">
-      <div class="step-n">03</div>
-      <h3>Rezervuj online</h3>
-      <p>Zaregistruj sa, vyber termín a zaplať kartou alebo prevodom. Potvrdenie dostaneš emailom.</p>
-    </div>
-    <div class="how-step">
-      <div class="step-n">04</div>
-      <h3>Choď športovať</h3>
-      <p>Ukáž QR kód z potvrdenia pri vstupe. Žiadne čakanie, žiadna administratíva.</p>
-    </div>
+    <div class="how-step"><div class="how-num">1</div><h3>Nájdi aktivitu</h3><p>Prehľadaj športy alebo zariadenia. Filtruj podľa veku, lokality alebo termínu.</p></div>
+    <div class="how-step"><div class="how-num">2</div><h3>Vyber termín</h3><p>Pozri dostupné termíny priamo v kalendári zariadenia — v reálnom čase.</p></div>
+    <div class="how-step"><div class="how-num">3</div><h3>Rezervuj online</h3><p>Zaregistruj sa, vyber termín a zaplať kartou alebo prevodom. Potvrdenie emailom.</p></div>
+    <div class="how-step"><div class="how-num">4</div><h3>Choď športovať</h3><p>Ukáž QR kód z potvrdenia pri vstupe. Žiadne čakanie, žiadna papierovačka.</p></div>
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- ── FAQ ── -->
 <section class="section section-gray" id="faq">
   <div class="faq-wrap">
-    <div class="faq-left">
-      <p class="section-label">Pomoc</p>
+    <div class="faq-aside">
+      <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px;">Pomoc</p>
       <h2>Najčastejšie otázky</h2>
-      <p>Nenašiel si odpoveď? Kontaktuj nás na <strong>sport@mesto.sk</strong> alebo zavolaj na recepciu zariadenia.</p>
-      <button class="btn btn-primary" style="margin-top:8px">Kontaktovať nás</button>
+      <p>Nenašiel si odpoveď? Kontaktuj nás na <strong>sportuje@petrzalka.sk</strong> alebo zavolaj na recepciu zariadenia.</p>
+      <a href="#" class="btn btn-primary" style="margin-top:16px;display:inline-flex;">Kontaktovať nás</a>
     </div>
-    <div class="faq-list" id="faqList"></div>
+    <div id="faqList"></div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <div style="font-weight:800;font-size:16px;letter-spacing:-.02em">Mesto športuje</div>
-      <p>Portál mestskej časti na vyhľadávanie a rezerváciu športových aktivít pre všetkých obyvateľov.</p>
-      <div class="footer-socials">
-        <a href="#" class="social-link">f</a>
-        <a href="#" class="social-link">in</a>
-        <a href="#" class="social-link">ig</a>
-      </div>
+    <div>
+      <div style="font-weight:900;font-size:16px;letter-spacing:-.02em;">Petržalka športuje</div>
+      <p>Portál mestskej časti pre vyhľadávanie a rezerváciu športových aktivít pre všetkých obyvateľov Petržalky.</p>
     </div>
     <div>
       <h4>Navigácia</h4>
       <ul>
         <li><a href="#">Domov</a></li>
-        <li><a href="#">Športy</a></li>
-        <li><a href="#">Zariadenia</a></li>
-        <li><a href="#">Komunita</a></li>
-        <li><a href="#">Podujatia</a></li>
-        <li><a href="#">Ako to funguje</a></li>
+        <li><a href="#sporty">Športy</a></li>
+        <li><a href="#zariadenia">Zariadenia</a></li>
+        <li><a href="#komunita">Komunita</a></li>
+        <li><a href="#akcie">Podujatia</a></li>
       </ul>
     </div>
     <div>
@@ -1222,159 +727,107 @@ footer ul a:hover{color:#fff}
       <ul>
         <li><a href="#">Podmienky používania</a></li>
         <li><a href="#">Ochrana osobných údajov</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Kontakt</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#">Storno podmienky</a></li>
       </ul>
     </div>
     <div>
       <h4>Kontakt</h4>
       <ul>
-        <li><a href="tel:+421200000000">+421 2 00 000 000</a></li>
-        <li><a href="mailto:sport@mesto.sk">sport@mesto.sk</a></li>
-        <li><a href="#">Mestský úrad<br>Hlavná 1, 851 01</a></li>
+        <li><a href="mailto:sportuje@petrzalka.sk">sportuje@petrzalka.sk</a></li>
+        <li><a href="tel:+421268288500">+421 2 68 288 500</a></li>
+        <li><a href="#">Kutlíkova 17, 852 12 Bratislava</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Mesto športuje. Všetky práva vyhradené.</span>
-    <span>Mestská časť — Aktívny šport</span>
+    <span>© 2026 Petržalka športuje. Všetky práva vyhradené.</span>
+    <span>Mestská časť Petržalka</span>
   </div>
 </footer>
 
 <script>
-// FAQ
-const faqs = [
-  { q: 'Aké sú možnosti platby?', a: 'Akceptujeme platbu kartou online pri rezervácii, ako aj hotovosť alebo kartu priamo v zariadení. Pri niektorých aktivitách je možná platba vopred aj na mieste.' },
-  { q: 'Ako sa môžem prihlásiť na aktivitu alebo kemp?', a: 'Klikni na tlačidlo Rezervovať pri vybranom zariadení, vyber termín a dokonči registráciu. Potvrdenie príde emailom do pár minút.' },
-  { q: 'Musím byť z tejto mestskej časti, aby som sa mohol prihlásiť?', a: 'Nie, aktivity sú otvorené pre všetkých. Obyvatelia mestskej časti môžu mať nárok na zľavnené vstupné — stačí preukázať trvalý pobyt.' },
-  { q: 'Ako zrušiť rezerváciu alebo prihlášku?', a: 'Rezerváciu môžeš stornovať najneskôr 24 hodín pred termínom priamo v používateľskom účte. Vrátenie platby prebehne do 5 pracovných dní.' },
-  { q: 'Fungujú zariadenia aj cez víkend a sviatky?', a: 'Väčšina zariadení je otvorená aj cez víkend. Otváracie hodiny počas sviatkov nájdeš pri konkrétnom zariadení — môžu sa líšiť.' },
-];
-
-const faqList = document.getElementById('faqList');
-faqs.forEach((f, i) => {
-  const d = document.createElement('div');
-  d.className = 'faq-item';
-  d.innerHTML = `
-    <button class="faq-q" onclick="toggleFaq(${i},this)">
-      ${f.q}
-      <span class="icon">+</span>
-    </button>
-    <div class="faq-a" id="fa${i}">${f.a}</div>`;
-  faqList.appendChild(d);
-});
-
-function toggleFaq(i, btn) {
-  const a = document.getElementById('fa' + i);
-  const open = a.classList.toggle('open');
-  btn.classList.toggle('open', open);
-}
-
-// Facility filter
-function filterFac(btn, type) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.fac-card').forEach(c => {
-    const t = c.dataset.type || '';
-    c.style.display = (type === 'all' || t.includes(type)) ? '' : 'none';
-  });
-}
-
-// Search chips
-// NOVINKY CAROUSEL – infinite loop
+// NOVINKY CAROUSEL
 (function() {
   const track = document.getElementById('novinkyTrack');
   const dotsWrap = document.getElementById('novinkyDots');
   if (!track) return;
-
   const origSlides = Array.from(track.children);
   const total = origSlides.length;
-
-  // klonujeme prvý na koniec a posledný na začiatok
   const cloneFirst = origSlides[0].cloneNode(true);
-  const cloneLast  = origSlides[total - 1].cloneNode(true);
+  const cloneLast = origSlides[total-1].cloneNode(true);
   track.appendChild(cloneFirst);
   track.insertBefore(cloneLast, origSlides[0]);
-
-  let cur = 1; // reálny index (0 = klon posledného, 1..total = originály, total+1 = klon prvého)
-  let transitioning = false;
-
+  let cur = 1, transitioning = false;
   function setPos(idx, animate) {
     track.style.transition = animate ? 'transform .5s cubic-bezier(.4,0,.2,1)' : 'none';
-    track.style.transform = `translateX(-${idx * 100}%)`;
+    track.style.transform = `translateX(-${idx*100}%)`;
   }
   setPos(cur, false);
-
-  function updateDots(realIdx) {
-    document.querySelectorAll('.novinky-dot').forEach((d, i) => d.classList.toggle('active', i === realIdx));
-  }
+  function updateDots(ri) { document.querySelectorAll('.novinky-dot').forEach((d,i) => d.classList.toggle('active', i===ri)); }
   updateDots(0);
-
   track.addEventListener('transitionend', () => {
     transitioning = false;
-    if (cur === 0) { cur = total; setPos(cur, false); }
-    if (cur === total + 1) { cur = 1; setPos(cur, false); }
-    updateDots((cur - 1 + total) % total);
+    if (cur===0){ cur=total; setPos(cur,false); }
+    if (cur===total+1){ cur=1; setPos(cur,false); }
+    updateDots((cur-1+total)%total);
   });
-
-  function novinkyNext() {
-    if (transitioning) return;
-    transitioning = true;
-    cur++;
-    setPos(cur, true);
-  }
-  function novinkyPrev() {
-    if (transitioning) return;
-    transitioning = true;
-    cur--;
-    setPos(cur, true);
-    setTimeout(() => updateDots((cur - 1 + total + total) % total), 0);
-  }
-
-  window.novinkyNext = novinkyNext;
-  window.novinkyPrev = novinkyPrev;
-
-  // dots
-  origSlides.forEach((_, i) => {
+  function next() { if(transitioning)return; transitioning=true; cur++; setPos(cur,true); }
+  function prev() { if(transitioning)return; transitioning=true; cur--; setPos(cur,true); }
+  origSlides.forEach((_,i) => {
     const d = document.createElement('button');
-    d.className = 'novinky-dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => {
-      if (transitioning) return;
-      transitioning = true;
-      cur = i + 1;
-      setPos(cur, true);
-      resetTimer();
-    };
+    d.className = 'novinky-dot' + (i===0?' active':'');
+    d.onclick = () => { if(transitioning)return; transitioning=true; cur=i+1; setPos(cur,true); resetT(); };
     dotsWrap.appendChild(d);
   });
-
-  let timer = setInterval(novinkyNext, 7000);
-  function resetTimer() { clearInterval(timer); timer = setInterval(novinkyNext, 7000); }
-
-  document.querySelector('.novinky-prev').onclick = () => { novinkyPrev(); resetTimer(); };
-  document.querySelector('.novinky-next').onclick = () => { novinkyNext(); resetTimer(); };
+  let timer = setInterval(next, 7000);
+  function resetT() { clearInterval(timer); timer = setInterval(next, 7000); }
+  document.querySelector('.novinky-prev').onclick = () => { prev(); resetT(); };
+  document.querySelector('.novinky-next').onclick = () => { next(); resetT(); };
 })();
 
+// SPORTS TOGGLE
 let sportsExpanded = false;
 function toggleSports() {
   sportsExpanded = !sportsExpanded;
-  document.querySelectorAll('.sport-hidden').forEach(c => {
-    c.style.display = sportsExpanded ? 'flex' : 'none';
-  });
-  document.getElementById('showSportsBtn').innerHTML = sportsExpanded
-    ? 'Zobraziť menej &nbsp;↑'
-    : 'Zobraziť všetky športy &nbsp;↓';
+  document.querySelectorAll('.sport-hidden').forEach(c => { c.style.display = sportsExpanded ? 'flex' : 'none'; });
+  document.getElementById('showSportsBtn').textContent = sportsExpanded ? 'Zobraziť menej ↑' : 'Zobraziť všetky športy ↓';
 }
 
-function setSearch(v) { document.getElementById('heroSearch').value = v; }
-function doSearch() {
-  const v = document.getElementById('heroSearch').value;
-  if (v) document.getElementById('zariadenia').scrollIntoView({behavior:'smooth'});
+// FACILITY FILTER
+function filterFac(btn, type) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.fac-card').forEach(c => {
+    c.style.display = (type==='all' || (c.dataset.type||'').includes(type)) ? '' : 'none';
+  });
 }
-document.getElementById('heroSearch').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doSearch();
+
+// FAQ
+const faqs = [
+  { q:'Aké sú možnosti platby?', a:'Akceptujeme platbu kartou online pri rezervácii aj hotovosť priamo v zariadení.' },
+  { q:'Ako sa môžem prihlásiť na aktivitu alebo kemp?', a:'Klikni Rezervovať pri vybranom zariadení, vyber termín a dokonči registráciu. Potvrdenie príde emailom.' },
+  { q:'Musím byť z Petržalky?', a:'Nie, aktivity sú otvorené pre všetkých. Obyvatelia Petržalky majú nárok na zľavnené vstupné — stačí preukázať trvalý pobyt.' },
+  { q:'Ako zrušiť rezerváciu?', a:'Rezerváciu zrušíš najneskôr 24 hodín pred termínom v používateľskom účte. Vrátenie platby prebehne do 5 pracovných dní.' },
+  { q:'Fungujú zariadenia aj cez sviatky?', a:'Otváracie hodiny počas sviatkov nájdeš pri konkrétnom zariadení — môžu sa líšiť od bežných.' },
+];
+const faqList = document.getElementById('faqList');
+faqs.forEach((f,i) => {
+  const d = document.createElement('div');
+  d.className = 'faq-item';
+  d.innerHTML = `<button class="faq-q" onclick="toggleFaq(${i},this)">${f.q}<span class="faq-icon">+</span></button><div class="faq-a" id="fa${i}">${f.a}</div>`;
+  faqList.appendChild(d);
 });
+function toggleFaq(i, btn) {
+  const a = document.getElementById('fa'+i);
+  const open = a.classList.toggle('open');
+  btn.classList.toggle('open', open);
+}
+
+// SEARCH
+function setSearch(v) { document.getElementById('heroSearch').value = v; document.getElementById('heroSearch').focus(); }
+function doSearch() { const v = document.getElementById('heroSearch').value; if(v) document.getElementById('sporty').scrollIntoView({behavior:'smooth'}); }
+document.getElementById('heroSearch').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
 </script>
 </body>
 </html>
