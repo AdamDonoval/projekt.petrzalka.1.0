@@ -264,6 +264,8 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   cursor:pointer;
   background:#fff;
   transition:background .2s;
+  height:140px; /* fixná výška — nikdy sa nezmení */
+  align-items:stretch;
 }
 .sport-item:hover{background:#f8fdf9}
 .sport-item-photo{
@@ -285,11 +287,12 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .sport-item-body{
   flex:1;
   min-width:0;
-  padding:20px 18px;
-  display:flex;flex-direction:column;gap:6px;
+  padding:18px 18px;
+  display:flex;flex-direction:column;gap:5px;
+  overflow:hidden;
 }
-.sport-icon-wrap{margin-bottom:4px}
-.sport-link{margin-top:6px}
+.sport-icon-wrap{margin-bottom:2px;flex-shrink:0}
+.sport-link{margin-top:auto}
 .sport-item.sport-hidden{display:none}
 .show-sports-btn{
   display:inline-flex;align-items:center;gap:8px;
