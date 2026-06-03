@@ -648,11 +648,13 @@ footer ul a:hover{color:#fff}
   </div>
   <div class="novinky-track-wrap">
     <div class="novinky-track" id="novinkyTrack">
-      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Summer Hero Camp 2026"/></div>
-      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Summer Hero Camp 2026"/></div>
+      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Novinka 1"/></div>
+      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Novinka 2"/></div>
+      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Novinka 3"/></div>
+      <div class="novinky-slide"><img src="assets/summer-camp.png" alt="Novinka 4"/></div>
     </div>
-    <button class="novinky-arrow novinky-prev" onclick="novinkyPrev()">&#8592;</button>
-    <button class="novinky-arrow novinky-next" onclick="novinkyNext()">&#8594;</button>
+    <button class="novinky-arrow novinky-prev">&#8592;</button>
+    <button class="novinky-arrow novinky-next">&#8594;</button>
   </div>
 </div>
 
@@ -1279,33 +1281,79 @@ function filterFac(btn, type) {
 }
 
 // Search chips
-// NOVINKY CAROUSEL
-let novinkyIdx = 0;
-const novinkySlides = document.getElementById('novinkyTrack')?.children;
-const novinkyDotsWrap = document.getElementById('novinkyDots');
+// NOVINKY CAROUSEL – infinite loop
+(function() {
+  const track = document.getElementById('novinkyTrack');
+  const dotsWrap = document.getElementById('novinkyDots');
+  if (!track) return;
 
-function novinkyGoTo(n) {
-  if (!novinkySlides) return;
-  const total = novinkySlides.length;
-  novinkyIdx = (n + total) % total;
-  document.getElementById('novinkyTrack').style.transform = `translateX(-${novinkyIdx * 100}%)`;
-  document.querySelectorAll('.novinky-dot').forEach((d, i) => d.classList.toggle('active', i === novinkyIdx));
-}
-function novinkyNext() { novinkyGoTo(novinkyIdx + 1); resetNovinkyTimer(); }
-function novinkyPrev() { novinkyGoTo(novinkyIdx - 1); resetNovinkyTimer(); }
+  const origSlides = Array.from(track.children);
+  const total = origSlides.length;
 
-// build dots
-if (novinkySlides && novinkyDotsWrap) {
-  Array.from(novinkySlides).forEach((_, i) => {
+  // klonujeme prvý na koniec a posledný na začiatok
+  const cloneFirst = origSlides[0].cloneNode(true);
+  const cloneLast  = origSlides[total - 1].cloneNode(true);
+  track.appendChild(cloneFirst);
+  track.insertBefore(cloneLast, origSlides[0]);
+
+  let cur = 1; // reálny index (0 = klon posledného, 1..total = originály, total+1 = klon prvého)
+  let transitioning = false;
+
+  function setPos(idx, animate) {
+    track.style.transition = animate ? 'transform .5s cubic-bezier(.4,0,.2,1)' : 'none';
+    track.style.transform = `translateX(-${idx * 100}%)`;
+  }
+  setPos(cur, false);
+
+  function updateDots(realIdx) {
+    document.querySelectorAll('.novinky-dot').forEach((d, i) => d.classList.toggle('active', i === realIdx));
+  }
+  updateDots(0);
+
+  track.addEventListener('transitionend', () => {
+    transitioning = false;
+    if (cur === 0) { cur = total; setPos(cur, false); }
+    if (cur === total + 1) { cur = 1; setPos(cur, false); }
+    updateDots((cur - 1 + total) % total);
+  });
+
+  function novinkyNext() {
+    if (transitioning) return;
+    transitioning = true;
+    cur++;
+    setPos(cur, true);
+  }
+  function novinkyPrev() {
+    if (transitioning) return;
+    transitioning = true;
+    cur--;
+    setPos(cur, true);
+    setTimeout(() => updateDots((cur - 1 + total + total) % total), 0);
+  }
+
+  window.novinkyNext = novinkyNext;
+  window.novinkyPrev = novinkyPrev;
+
+  // dots
+  origSlides.forEach((_, i) => {
     const d = document.createElement('button');
     d.className = 'novinky-dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => { novinkyGoTo(i); resetNovinkyTimer(); };
-    novinkyDotsWrap.appendChild(d);
+    d.onclick = () => {
+      if (transitioning) return;
+      transitioning = true;
+      cur = i + 1;
+      setPos(cur, true);
+      resetTimer();
+    };
+    dotsWrap.appendChild(d);
   });
-}
 
-let novinkyTimer = setInterval(() => novinkyNext(), 7000);
-function resetNovinkyTimer() { clearInterval(novinkyTimer); novinkyTimer = setInterval(() => novinkyNext(), 7000); }
+  let timer = setInterval(novinkyNext, 7000);
+  function resetTimer() { clearInterval(timer); timer = setInterval(novinkyNext, 7000); }
+
+  document.querySelector('.novinky-prev').onclick = () => { novinkyPrev(); resetTimer(); };
+  document.querySelector('.novinky-next').onclick = () => { novinkyNext(); resetTimer(); };
+})();
 
 let sportsExpanded = false;
 function toggleSports() {
