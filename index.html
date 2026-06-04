@@ -65,20 +65,22 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   text-align:left;
   border-bottom:1px solid var(--border);
 }
-.hero-location{
-  font-size:13px;color:var(--muted);font-weight:500;
-  margin-bottom:14px;
-  display:flex;align-items:center;gap:5px;
-}
-.hero-location::before{
-  content:'';display:inline-block;
-  width:6px;height:6px;border-radius:50%;
-  background:var(--green);flex-shrink:0;
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--green);
+  background:var(--green-light);border-radius:99px;
+  padding:6px 14px;margin-bottom:28px;
 }
 .hero h1{
-  font-size:clamp(36px,5vw,64px);font-weight:900;
-  line-height:1.06;letter-spacing:-.04em;
-  color:var(--dark);max-width:640px;margin:0 0 32px;
+  font-size:clamp(40px,6vw,72px);font-weight:900;
+  line-height:1.04;letter-spacing:-.04em;
+  color:var(--dark);max-width:720px;margin:0 0 20px;
+}
+.hero h1 em{font-style:normal;color:var(--green)}
+.hero-sub{
+  font-size:clamp(15px,1.5vw,17px);color:var(--muted);
+  max-width:480px;margin:0 0 40px;line-height:1.65;
 }
 
 /* search */
@@ -362,15 +364,19 @@ footer ul a:hover{color:#fff}
 
 <!-- ── HERO ── -->
 <div class="hero">
-  <p class="hero-location">Petržalka, Bratislava</p>
-  <h1>Kde chceš dnes športovať?</h1>
+  <div class="hero-eyebrow">Aktívna Petržalka</div>
+  <h1>Nájdi šport,<br>ktorý <em>ťa baví</em></h1>
+  <p class="hero-sub">Bazény, ihriská, haly a kurzy priamo vo tvojom okolí. Rezervuj online, bez zbytočného hľadania.</p>
+
   <div class="hero-search-wrap">
     <div class="hero-search">
-      <input id="heroSearch" type="text" placeholder="Plávanie, beh, fitnes, tenis…" autocomplete="off"/>
+      <input id="heroSearch" type="text" placeholder="Hľadaj šport, miesto alebo aktivitu…" autocomplete="off"/>
       <button onclick="doSearch()">Hľadať</button>
     </div>
   </div>
+
   <div class="hero-chips">
+    <span class="hero-chips-label">Populárne:&nbsp;</span>
     <span class="chip" onclick="setSearch('Plávanie')">Plávanie</span>
     <span class="chip" onclick="setSearch('Tenis')">Tenis</span>
     <span class="chip" onclick="setSearch('Beh')">Beh</span>
