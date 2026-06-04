@@ -61,9 +61,16 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 /* ─── HERO ─── */
 .hero{
   background:#fff;
-  padding:80px clamp(20px,4vw,60px) 64px;
-  text-align:left;
+  padding:0;
   border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:560px;
+  overflow:hidden;
+}
+.hero-left{
+  padding:72px clamp(20px,4vw,60px);
+  display:flex;flex-direction:column;justify-content:center;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
@@ -73,18 +80,81 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   padding:6px 14px;margin-bottom:28px;
 }
 .hero h1{
-  font-size:clamp(40px,6vw,72px);font-weight:900;
-  line-height:1.04;letter-spacing:-.04em;
-  color:var(--dark);max-width:720px;margin:0 0 20px;
+  font-size:clamp(36px,3.5vw,56px);font-weight:900;
+  line-height:1.06;letter-spacing:-.04em;
+  color:var(--dark);max-width:520px;margin:0 0 18px;
 }
 .hero h1 em{font-style:normal;color:var(--green)}
 .hero-sub{
-  font-size:clamp(15px,1.5vw,17px);color:var(--muted);
-  max-width:480px;margin:0 0 40px;line-height:1.65;
+  font-size:15px;color:var(--muted);
+  max-width:420px;margin:0 0 36px;line-height:1.65;
 }
 
 /* search */
-.hero-search-wrap{max-width:520px;margin:0 0 20px;position:relative;}
+.hero-search-wrap{max-width:460px;margin:0 0 20px;position:relative;}
+
+/* ─── HERO RIGHT (decorative card) ─── */
+.hero-right{
+  background:var(--green-light);
+  display:flex;align-items:center;justify-content:center;
+  padding:32px;
+  position:relative;
+}
+.hero-card{
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 8px 40px rgba(26,107,53,.1);
+  width:100%;max-width:420px;
+  padding:20px;
+  position:relative;
+  display:grid;
+  grid-template-rows:1fr 1fr;
+  gap:10px;
+  height:100%;max-height:420px;
+}
+/* dotted pattern */
+.hero-card::before{
+  content:'';position:absolute;
+  top:12px;right:12px;
+  width:120px;height:120px;
+  background-image:radial-gradient(circle,#a8d8b8 1.5px,transparent 1.5px);
+  background-size:14px 14px;
+  opacity:.6;pointer-events:none;border-radius:8px;
+}
+.hero-card::after{
+  content:'';position:absolute;
+  bottom:80px;left:12px;
+  width:80px;height:80px;
+  background-image:radial-gradient(circle,#a8d8b8 1.5px,transparent 1.5px);
+  background-size:14px 14px;
+  opacity:.5;pointer-events:none;
+}
+.hero-photos-row{display:grid;gap:10px;}
+.hero-photos-row:first-child{grid-template-columns:1fr;}
+.hero-photos-row:last-child{grid-template-columns:1fr 1fr;}
+.hero-photo-slot{
+  background:var(--green-light);
+  border-radius:14px;
+  overflow:hidden;
+  min-height:120px;
+}
+.hero-photo-slot img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* floating icon badges */
+.hero-badge{
+  position:absolute;
+  background:#fff;
+  border-radius:16px;
+  padding:12px 14px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.1);
+  color:var(--green);
+  z-index:10;
+}
+.hero-badge svg{width:26px;height:26px;}
+.hb-tl{top:-14px;left:-14px;}
+.hb-tr{top:-14px;right:-14px;}
+.hb-br{bottom:-14px;right:-14px;}
 .hero-search{
   display:flex;align-items:center;
   background:#fff;border:1.5px solid var(--border);
@@ -324,7 +394,9 @@ footer ul a:hover{color:#fff}
 @media(max-width:768px){
   .nav{padding:0 20px}
   .nav-links{display:none}
-  .hero{padding:60px 20px 48px}
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:56px 20px}
   .sport-grid{grid-template-columns:repeat(2,1fr)}
   .fac-grid,.events-grid,.community-grid{grid-template-columns:1fr}
   .how-grid{grid-template-columns:1fr}
@@ -364,25 +436,51 @@ footer ul a:hover{color:#fff}
 
 <!-- ── HERO ── -->
 <div class="hero">
-  <div class="hero-eyebrow">Aktívna Petržalka</div>
-  <h1>Nájdi šport,<br>ktorý <em>ťa baví</em></h1>
-  <p class="hero-sub">Bazény, ihriská, haly a kurzy priamo vo tvojom okolí. Rezervuj online, bez zbytočného hľadania.</p>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Aktívna Petržalka</div>
+    <h1>Nájdi šport,<br>ktorý <em>ťa baví</em></h1>
+    <p class="hero-sub">Bazény, ihriská, haly a kurzy priamo vo tvojom okolí. Rezervuj online, bez zbytočného hľadania.</p>
 
-  <div class="hero-search-wrap">
-    <div class="hero-search">
-      <input id="heroSearch" type="text" placeholder="Hľadaj šport, miesto alebo aktivitu…" autocomplete="off"/>
-      <button onclick="doSearch()">Hľadať</button>
+    <div class="hero-search-wrap">
+      <div class="hero-search">
+        <input id="heroSearch" type="text" placeholder="Hľadaj šport, miesto alebo aktivitu…" autocomplete="off"/>
+        <button onclick="doSearch()">Hľadať</button>
+      </div>
+    </div>
+
+    <div class="hero-chips">
+      <span class="hero-chips-label">Populárne:&nbsp;</span>
+      <span class="chip" onclick="setSearch('Plávanie')">Plávanie</span>
+      <span class="chip" onclick="setSearch('Tenis')">Tenis</span>
+      <span class="chip" onclick="setSearch('Beh')">Beh</span>
+      <span class="chip" onclick="setSearch('Fitness')">Fitness</span>
+      <span class="chip" onclick="setSearch('Yoga')">Yoga</span>
+      <span class="chip" onclick="setSearch('Bicykel')">Bicykel</span>
     </div>
   </div>
 
-  <div class="hero-chips">
-    <span class="hero-chips-label">Populárne:&nbsp;</span>
-    <span class="chip" onclick="setSearch('Plávanie')">Plávanie</span>
-    <span class="chip" onclick="setSearch('Tenis')">Tenis</span>
-    <span class="chip" onclick="setSearch('Beh')">Beh</span>
-    <span class="chip" onclick="setSearch('Fitness')">Fitness</span>
-    <span class="chip" onclick="setSearch('Yoga')">Yoga</span>
-    <span class="chip" onclick="setSearch('Bicykel')">Bicykel</span>
+  <div class="hero-right">
+    <div class="hero-card">
+      <!-- floating badges -->
+      <div class="hero-badge hb-tl">
+        <svg viewBox="0 0 26 26" fill="none"><path d="M3 17c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0 5-2.5 7.5 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="9" r="4" stroke="currentColor" stroke-width="2"/></svg>
+      </div>
+      <div class="hero-badge hb-tr">
+        <svg viewBox="0 0 26 26" fill="none"><path d="M7 20l4-12 2 5 2-5 4 12M5 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="hero-badge hb-br">
+        <svg viewBox="0 0 26 26" fill="none"><circle cx="7" cy="18" r="4" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="18" r="4" stroke="currentColor" stroke-width="2"/><path d="M7 18l6-9 6 9M17 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <!-- foto sloty -->
+      <div class="hero-photos-row">
+        <div class="hero-photo-slot" id="heroSlot1"></div>
+      </div>
+      <div class="hero-photos-row">
+        <div class="hero-photo-slot" id="heroSlot2"></div>
+        <div class="hero-photo-slot" id="heroSlot3"></div>
+      </div>
+    </div>
   </div>
 </div>
 
