@@ -749,7 +749,7 @@ footer ul a:hover{color:#fff}
     <h2>Obľúbené športoviská</h2>
   </div>
   <div style="margin-bottom:20px;">
-    <button class="fac-more-btn" id="facMoreBtn" onclick="toggleFacMore()">Zobraziť všetky športoviská ↓</button>
+    <button class="fac-more-btn" id="facMoreBtn" onclick="window.location.href='sportoviska.html'">Zobraziť všetky športoviská ↓</button>
   </div>
   <div class="fac-grid">
 
@@ -865,7 +865,7 @@ footer ul a:hover{color:#fff}
   </div>
 
   <div class="fac-more-wrap">
-    <a href="sportoviska.html" class="fac-all-link">Zobraziť viac športovísk</a>
+    <a href="#" class="fac-all-link" id="facMoreLink" onclick="toggleFacMore();return false;">Zobraziť viac športovísk</a>
   </div>
 </section>
 
@@ -1036,7 +1036,7 @@ let facMoreExpanded = false;
 function toggleFacMore() {
   facMoreExpanded = !facMoreExpanded;
   document.querySelectorAll('.fac-card.fac-hidden').forEach(c => { c.style.display = facMoreExpanded ? '' : 'none'; });
-  document.getElementById('facMoreBtn').textContent = facMoreExpanded ? 'Zobraziť menej ↑' : 'Zobraziť viac športovísk ↓';
+  document.getElementById('facMoreLink').textContent = facMoreExpanded ? 'Zobraziť menej ↑' : 'Zobraziť viac športovísk';
 }
 
 function toggleSports() {
