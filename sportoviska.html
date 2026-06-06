@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Všetky športoviská – Petržalka športuje</title>
+<style>
+  :root{--green:#2d7a4f;--green-light:#e8f5ee;--border:#e5e9e5;--muted:#7a8a7a;--bg:#f7faf8;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:#1a2a1a;min-height:100vh;}
+
+  /* NAV */
+  .nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+  .nav-back{display:flex;align-items:center;gap:8px;color:var(--green);font-weight:700;font-size:14px;text-decoration:none;}
+  .nav-back svg{flex-shrink:0;}
+  .nav-title{font-size:16px;font-weight:800;color:#1a2a1a;}
+
+  /* HERO */
+  .page-hero{background:var(--green);color:#fff;padding:48px 24px 40px;text-align:center;}
+  .page-hero h1{font-size:clamp(24px,5vw,36px);font-weight:900;letter-spacing:-.02em;margin-bottom:8px;}
+  .page-hero p{font-size:15px;opacity:.85;max-width:520px;margin:0 auto;}
+
+  /* SEARCH + FILTERS */
+  .controls{max-width:900px;margin:0 auto;padding:28px 20px 0;}
+  .search-wrap{position:relative;margin-bottom:16px;}
+  .search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);}
+  .search-input{width:100%;padding:13px 14px 13px 42px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;background:#fff;outline:none;transition:border .15s;}
+  .search-input:focus{border-color:var(--green);}
+  .filter-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .f-btn{padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;color:#1a2a1a;}
+  .f-btn.active,.f-btn:hover{background:var(--green);color:#fff;border-color:var(--green);}
+
+  /* LIST */
+  .list-wrap{max-width:900px;margin:0 auto;padding:20px 20px 60px;}
+  .count-line{font-size:13px;color:var(--muted);margin-bottom:14px;}
+  .fac-row{background:#fff;border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;gap:16px;padding:16px;margin-bottom:10px;transition:box-shadow .2s;text-decoration:none;color:inherit;}
+  .fac-row:hover{box-shadow:0 4px 18px rgba(0,0,0,.08);}
+  .fac-row-img{width:80px;height:70px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+  .fac-row-body{flex:1;min-width:0;}
+  .fac-row-name{font-size:15px;font-weight:700;margin-bottom:4px;}
+  .fac-row-meta{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:12px;}
+  .fac-row-meta span{display:flex;align-items:center;gap:4px;}
+  .fac-row-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--green-light);color:var(--green);padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+  .fac-row-price{font-size:13px;font-weight:700;color:var(--green);flex-shrink:0;}
+  .empty{text-align:center;padding:60px 20px;color:var(--muted);}
+  .empty svg{margin-bottom:12px;opacity:.4;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-back">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Späť
+  </a>
+  <span class="nav-title">Všetky športoviská</span>
+</nav>
+
+<div class="page-hero">
+  <h1>Všetky športoviská v Petržalke</h1>
+  <p>Prehľadávaj bazény, haly, ihriská, klzisko a ďalšie športové zariadenia v tvojej mestskej časti.</p>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M10 10l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <input class="search-input" id="searchInput" type="search" placeholder="Hľadaj športovisko, adresu…" oninput="renderList()"/>
+  </div>
+  <div class="filter-row" id="filterRow">
+    <button class="f-btn active" data-type="all" onclick="setFilter(this)">Všetky</button>
+    <button class="f-btn" data-type="bazen" onclick="setFilter(this)">Bazény</button>
+    <button class="f-btn" data-type="hala" onclick="setFilter(this)">Haly</button>
+    <button class="f-btn" data-type="ihrisko" onclick="setFilter(this)">Ihriská</button>
+    <button class="f-btn" data-type="klzisko" onclick="setFilter(this)">Klzisko</button>
+    <button class="f-btn" data-type="lezenie" onclick="setFilter(this)">Lezenie</button>
+    <button class="f-btn" data-type="deti" onclick="setFilter(this)">Pre deti</button>
+  </div>
+</div>
+
+<div class="list-wrap">
+  <div class="count-line" id="countLine"></div>
+  <div id="facList"></div>
+</div>
+
+<script>
+const SPORTOVISKA = [
+  {
+    name: "Petržalská plaváreň",
+    tag: "Plaváreň",
+    types: ["bazen"],
+    img: "assets/bazen_petrzalka.jpg",
+    adresa: "Kutlíkova 2, Petržalka",
+    hodiny: "Po–Ne 6:00–22:00",
+    cena: "od 4 €",
+    link: "sporty/plavanie.html"
+  },
+  {
+    name: "Bazén Holíčska",
+    tag: "Bazén",
+    types: ["bazen","deti"],
+    img: "assets/bazen_petrzalka.jpg",
+    adresa: "Holíčska, Petržalka",
+    hodiny: "Otvorené do 30. 6. 2026",
+    cena: "od 4 €",
+    link: "sporty/plavanie.html"
+  },
+  {
+    name: "Bazén Pankúchova",
+    tag: "Bazén",
+    types: ["bazen"],
+    img: "assets/bazen_petrzalka.jpg",
+    adresa: "Pankúchova, Petržalka",
+    hodiny: "Sezónne otváracie hodiny",
+    cena: "od 4 €",
+    link: "sporty/plavanie.html"
+  },
+  {
+    name: "Športová hala Prokofievova",
+    tag: "Hala",
+    types: ["hala"],
+    img: "assets/b1.jpg",
+    adresa: "Prokofievova, Petržalka",
+    hodiny: "Po–Pi 7:00–22:00, So–Ne 8:00–20:00",
+    cena: "od 5 €",
+    link: "sporty/fitness.html"
+  },
+  {
+    name: "Aréna Draždiak",
+    tag: "Zimný štadión",
+    types: ["hala","klzisko"],
+    img: "assets/cat-korculovanie.jpg",
+    adresa: "Draždiak, Petržalka",
+    hodiny: "Október–Marec 8:00–21:00",
+    cena: "od 6 €",
+    link: "sporty/zimne.html"
+  },
+  {
+    name: "Verejné ihriská & parky",
+    tag: "Ihrisko",
+    types: ["ihrisko","deti"],
+    img: "assets/cat-loptove.jpg",
+    adresa: "Celá Petržalka",
+    hodiny: "Voľný prístup, 24 hodín",
+    cena: "Zadarmo",
+    link: "#"
+  },
+  {
+    name: "Telocvične základných škôl",
+    tag: "Telocvičňa",
+    types: ["hala","deti"],
+    img: "assets/skola.jpg",
+    adresa: "Rôzne lokality, Petržalka",
+    hodiny: "Po–Pi 16:00–21:00",
+    cena: "od 3 €",
+    link: "#"
+  },
+  {
+    name: "Lezecká stena Petržalka",
+    tag: "Lezenie",
+    types: ["ihrisko","lezenie"],
+    img: "assets/lozenie.jpg",
+    adresa: "Petržalka",
+    hodiny: "Po–Ne 10:00–22:00",
+    cena: "od 8 €",
+    link: "sporty/lezenie.html"
+  },
+  {
+    name: "Cyklotrasy Petržalka",
+    tag: "Cyklotrasa",
+    types: ["ihrisko"],
+    img: "assets/bajk.jpg",
+    adresa: "Celá Petržalka",
+    hodiny: "Voľný prístup",
+    cena: "Zadarmo",
+    link: "sporty/bicyklovanie.html"
+  },
+  {
+    name: "Bežecké trasy – Sad Janka Kráľa",
+    tag: "Beh",
+    types: ["ihrisko"],
+    img: "assets/bezkanie.png",
+    adresa: "Sad Janka Kráľa, Petržalka",
+    hodiny: "Voľný prístup",
+    cena: "Zadarmo",
+    link: "sporty/beh.html"
+  }
+];
+
+let activeFilter = "all";
+
+function setFilter(btn) {
+  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = btn.dataset.type;
+  renderList();
+}
+
+function renderList() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const list = SPORTOVISKA.filter(s => {
+    const matchType = activeFilter === 'all' || s.types.includes(activeFilter);
+    const matchQ = !q || s.name.toLowerCase().includes(q) || s.adresa.toLowerCase().includes(q) || s.tag.toLowerCase().includes(q);
+    return matchType && matchQ;
+  });
+
+  const container = document.getElementById('facList');
+  document.getElementById('countLine').textContent = `Nájdených: ${list.length} športovísk`;
+
+  if (list.length === 0) {
+    container.innerHTML = `<div class="empty">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="18" cy="18" r="12" stroke="currentColor" stroke-width="2"/><path d="M28 28l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <p>Žiadne športovisko nevyhovuje filtru.</p>
+    </div>`;
+    return;
+  }
+
+  container.innerHTML = list.map(s => `
+    <a href="${s.link}" class="fac-row">
+      <img class="fac-row-img" src="${s.img}" alt="${s.name}"/>
+      <div class="fac-row-body">
+        <div class="fac-row-name">${s.name}</div>
+        <div class="fac-row-meta">
+          <span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>
+            ${s.adresa}
+          </span>
+          <span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5v2.5l1.5 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            ${s.hodiny}
+          </span>
+        </div>
+      </div>
+      <span class="fac-row-tag">${s.tag}</span>
+      <span class="fac-row-price">${s.cena}</span>
+    </a>
+  `).join('');
+}
+
+renderList();
+</script>
+</body>
+</html>

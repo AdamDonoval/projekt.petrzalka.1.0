@@ -296,6 +296,13 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 }
 .show-sports-btn:hover{text-decoration:underline}
 
+.fac-card.fac-hidden{display:none}
+.fac-more-wrap{display:flex;align-items:center;justify-content:space-between;margin-top:28px;flex-wrap:wrap;gap:12px;}
+.fac-more-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid var(--green);color:var(--green);font-weight:700;font-size:14px;cursor:pointer;padding:10px 22px;border-radius:8px;transition:all .15s;}
+.fac-more-btn:hover{background:var(--green);color:#fff;}
+.fac-all-link{font-size:14px;font-weight:700;color:var(--green);text-decoration:none;}
+.fac-all-link:hover{text-decoration:underline;}
+
 /* ─── COMMUNITY ─── */
 .community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 .community-card{
@@ -721,8 +728,7 @@ footer ul a:hover{color:#fff}
 <!-- ── FACILITIES ── -->
 <section class="section" id="zariadenia">
   <div class="section-row">
-    <h2>Zariadenia v Petržalke</h2>
-    <a href="#" class="link-all">Všetky zariadenia →</a>
+    <h2>Obľúbené športoviská</h2>
   </div>
   <div class="filters">
     <button class="filter-btn active" onclick="filterFac(this,'all')">Všetky</button>
@@ -806,6 +812,36 @@ footer ul a:hover{color:#fff}
       </div>
     </div>
 
+    <!-- skryté karty – zobrazia sa po kliknutí na "Zobraziť viac" -->
+    <div class="fac-card fac-hidden" data-type="hala deti">
+      <div class="fac-img"><img src="assets/skola.jpg" alt="Telocvične škôl"/><span class="fac-tag">Telocvičňa</span></div>
+      <div class="fac-body">
+        <div class="fac-name">Telocvične základných škôl</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Rôzne lokality, Petržalka</div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Pi 16:00–21:00</div>
+        </div>
+        <div class="fac-footer"><div class="fac-price">od 3 € <span>/ vstup</span></div><a href="sportoviska.html" class="fac-book">Detail</a></div>
+      </div>
+    </div>
+
+    <div class="fac-card fac-hidden" data-type="ihrisko">
+      <div class="fac-img"><img src="assets/lozenie.jpg" alt="Lezecká stena"/><span class="fac-tag">Lezenie</span></div>
+      <div class="fac-body">
+        <div class="fac-name">Lezecká stena Petržalka</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Petržalka</div>
+          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Ne 10:00–22:00</div>
+        </div>
+        <div class="fac-footer"><div class="fac-price">od 8 € <span>/ vstup</span></div><a href="sporty/lezenie.html" class="fac-book">Rezervovať</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="fac-more-wrap">
+    <button class="fac-more-btn" id="facMoreBtn" onclick="toggleFacMore()">Zobraziť viac športovísk ↓</button>
+    <a href="sportoviska.html" class="fac-all-link">→ Zobraziť zoznam všetkých športovísk</a>
   </div>
 </section>
 
@@ -948,6 +984,13 @@ footer ul a:hover{color:#fff}
 
 // SPORTS TOGGLE
 let sportsExpanded = false;
+let facMoreExpanded = false;
+function toggleFacMore() {
+  facMoreExpanded = !facMoreExpanded;
+  document.querySelectorAll('.fac-card.fac-hidden').forEach(c => { c.style.display = facMoreExpanded ? '' : 'none'; });
+  document.getElementById('facMoreBtn').textContent = facMoreExpanded ? 'Zobraziť menej ↑' : 'Zobraziť viac športovísk ↓';
+}
+
 function toggleSports() {
   sportsExpanded = !sportsExpanded;
   document.querySelectorAll('.sport-hidden').forEach(c => { c.style.display = sportsExpanded ? 'flex' : 'none'; });
