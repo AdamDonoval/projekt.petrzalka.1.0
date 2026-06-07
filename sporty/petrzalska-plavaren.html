@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Petržalská plaváreň – Petržalka športuje</title>
+<link rel="stylesheet" href="sport.css"/>
+<style>
+  /* ── HERO PHOTO ── */
+  .fac-hero{position:relative;height:340px;overflow:hidden;background:#c8ddd0;}
+  .fac-hero img{width:100%;height:100%;object-fit:cover;display:block;}
+  .fac-hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,.1) 60%);
+  }
+  .fac-hero-content{
+    position:absolute;bottom:0;left:0;right:0;
+    padding:32px 40px;color:#fff;
+  }
+  .fac-hero-tag{
+    display:inline-block;background:var(--green);color:#fff;
+    font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:4px 12px;border-radius:4px;margin-bottom:12px;
+  }
+  .fac-hero-content h1{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.03em;margin-bottom:6px;}
+  .fac-hero-content p{font-size:14px;opacity:.85;}
+
+  /* ── INFO BAR ── */
+  .info-bar{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--border);background:#fff;
+  }
+  .info-bar-item{
+    padding:20px 24px;border-right:1px solid var(--border);
+  }
+  .info-bar-item:last-child{border-right:none;}
+  .info-bar-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px;}
+  .info-bar-value{font-size:14px;font-weight:600;color:var(--text);}
+
+  /* ── BODY LAYOUT ── */
+  .fac-page{display:grid;grid-template-columns:1fr 320px;gap:32px;padding:48px 40px;max-width:1200px;margin:0 auto;}
+
+  /* ── CONTENT ── */
+  .content-block{margin-bottom:36px;}
+  .content-block h2{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+  .content-block p{font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:10px;}
+  .content-block ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .content-block ul li{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+  .content-block ul li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
+
+  /* ── GALLERY ── */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:36px;}
+  .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px;display:block;cursor:pointer;transition:opacity .2s;}
+  .gallery img:hover{opacity:.85;}
+
+  /* ── CENNIK ── */
+  .price-table{width:100%;border-collapse:collapse;font-size:14px;}
+  .price-table th{text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:10px 14px;border-bottom:2px solid var(--border);}
+  .price-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text);}
+  .price-table tr:last-child td{border-bottom:none;}
+  .price-table td:last-child{font-weight:700;color:var(--green);text-align:right;}
+
+  /* ── SIDEBAR ── */
+  .sidebar{}
+  .sidebar-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px;}
+  .sidebar-card h3{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:16px;}
+  .sidebar-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;font-size:14px;}
+  .sidebar-row:last-child{margin-bottom:0;}
+  .sidebar-row svg{flex-shrink:0;color:var(--green);margin-top:2px;}
+  .sidebar-row-text{}
+  .sidebar-row-label{font-weight:600;color:var(--text);margin-bottom:2px;}
+  .sidebar-row-val{color:var(--muted);line-height:1.5;}
+  .btn-rezervovat{
+    display:block;width:100%;text-align:center;
+    background:var(--green);color:#fff;font-weight:700;font-size:15px;
+    padding:14px;border-radius:10px;text-decoration:none;
+    transition:background .15s;margin-bottom:10px;
+  }
+  .btn-rezervovat:hover{background:var(--green2);}
+  .btn-obsadenost{
+    display:block;width:100%;text-align:center;
+    background:none;color:var(--green);font-weight:600;font-size:14px;
+    padding:11px;border-radius:10px;text-decoration:none;
+    border:1.5px solid var(--green);transition:all .15s;
+  }
+  .btn-obsadenost:hover{background:var(--green);color:#fff;}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .info-bar{grid-template-columns:repeat(2,1fr);}
+    .fac-page{grid-template-columns:1fr;padding:32px 20px;}
+    .fac-hero-content{padding:24px 20px;}
+    .gallery{grid-template-columns:repeat(2,1fr);}
+    .info-bar-item{padding:16px 20px;}
+  }
+  @media(max-width:600px){
+    .fac-hero{height:240px;}
+    .info-bar{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="nav-logo">
+    <img src="../assets/uvodna.png" alt="" style="width:34px;height:34px;object-fit:cover;border-radius:8px;flex-shrink:0;"/>
+    <span>Petržalka športuje</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#sporty">Športy</a></li>
+    <li><a href="../index.html#zariadenia">Zariadenia</a></li>
+    <li><a href="../index.html#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn btn-ghost">Prihlásiť sa</button>
+    <button class="btn btn-primary">Rezervovať</button>
+  </div>
+</nav>
+
+<!-- BREADCRUMB + HERO -->
+<div class="sport-hero" style="padding-bottom:0;background:#fff;">
+  <div class="breadcrumb"><a href="../index.html">Domov</a><span class="sep">›</span><a href="plavanie.html">Plávanie</a><span class="sep">›</span><span>Petržalská plaváreň</span></div>
+</div>
+
+<div class="fac-hero">
+  <img src="../assets/bazen_petrzalka.jpg" alt="Petržalská plaváreň"/>
+  <div class="fac-hero-overlay"></div>
+  <div class="fac-hero-content">
+    <div class="fac-hero-tag">Plaváreň</div>
+    <h1>Petržalská plaváreň</h1>
+    <p>25-metrový bazén s 5 plaveckými dráhami · Tupolevova 3957/7b, Petržalka</p>
+  </div>
+</div>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-bar-item">
+    <div class="info-bar-label">Otváracie hodiny</div>
+    <div class="info-bar-value">Po–Ne 6:00–22:00</div>
+  </div>
+  <div class="info-bar-item">
+    <div class="info-bar-label">Vstupné</div>
+    <div class="info-bar-value">od 4 € / vstup</div>
+  </div>
+  <div class="info-bar-item">
+    <div class="info-bar-label">Teplota vody</div>
+    <div class="info-bar-value">26–27 °C</div>
+  </div>
+  <div class="info-bar-item">
+    <div class="info-bar-label">Dráhy</div>
+    <div class="info-bar-value">5 dráh · 25 metrov</div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="fac-page">
+
+  <!-- LEFT CONTENT -->
+  <div>
+
+    <!-- GALLERY -->
+    <div class="gallery">
+      <img src="../assets/bazen_petrzalka.jpg" alt="Petržalská plaváreň"/>
+      <img src="https://petrzalkasportuje.sk/wp-content/uploads/2024/02/petrzalska-plavaren-2.jpg" alt="Petržalská plaváreň interiér"/>
+      <img src="https://petrzalkasportuje.sk/wp-content/uploads/2024/02/petrzalska-plavaren-3.jpg" alt="Petržalská plaváreň dráhy"/>
+    </div>
+
+    <!-- O PLAVARNI -->
+    <div class="content-block">
+      <h2>O plavárani</h2>
+      <p>Petržalská plaváreň sa nachádza na Tupolevovej ulici v Petržalke a ponúka 25-metrový bazén s 5 plaveckými dráhami. Voda je udržiavaná na teplote 26–27 °C, čo zaručuje príjemné podmienky pre rekreačné aj výkonnostné plávanie.</p>
+      <p>Na prenájom sú k dispozícii 3 dráhy, pričom 2 dráhy sú vždy vyhradené pre verejné plávanie. Obsadenosť dráh je možné sledovať online pred návštevou.</p>
+    </div>
+
+    <!-- SLUZBY -->
+    <div class="content-block">
+      <h2>Služby a vybavenie</h2>
+      <ul>
+        <li>25-metrový bazén s 5 plaveckými dráhami</li>
+        <li>Prenájom dráh pre individuálnych plavcov a skupiny</li>
+        <li>Individuálne kurzy plávania pre deti</li>
+        <li>Teplota vody 26–27 °C</li>
+        <li>Šatne s uzamykateľnými skrinkami</li>
+        <li>Online rezervácia a kontrola obsadenosti</li>
+        <li>Samoobslužný vstup na QR kód</li>
+      </ul>
+    </div>
+
+    <!-- CENNIK -->
+    <div class="content-block">
+      <h2>Cenník – prenájom dráhy (60 min)</h2>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Čas prenájmu</th>
+            <th>Cena</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>6:00 – 11:00</td>
+            <td>30 € / hod</td>
+          </tr>
+          <tr>
+            <td>11:00 – 13:00</td>
+            <td>20 € / hod</td>
+          </tr>
+          <tr>
+            <td>13:00 – 17:00</td>
+            <td>30 € / hod</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;">* K prenájmu dráhy sa platí vstupné za každú osobu podľa platného cenníka. Doplatok 1,50 € za každých začatých 15 minút po skončení prenájmu.</p>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <a href="https://petrzalkasportuje.sk/zariadenia/petrzalska-plavaren/" target="_blank" class="btn-rezervovat">Rezervovať online →</a>
+    <a href="https://petrzalkasportuje.sk/zariadenia/petrzalska-plavaren/" target="_blank" class="btn-obsadenost">Skontrolovať obsadenosť</a>
+
+    <div class="sidebar-card" style="margin-top:20px;">
+      <h3>Informácie</h3>
+
+      <div class="sidebar-row">
+        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+        <div class="sidebar-row-text">
+          <div class="sidebar-row-label">Adresa</div>
+          <div class="sidebar-row-val">Tupolevova 3957/7b<br/>851 01 Bratislava – Petržalka</div>
+        </div>
+      </div>
+
+      <div class="sidebar-row">
+        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <div class="sidebar-row-text">
+          <div class="sidebar-row-label">Otváracie hodiny</div>
+          <div class="sidebar-row-val">Pondelok – Nedeľa<br/>6:00 – 22:00</div>
+        </div>
+      </div>
+
+      <div class="sidebar-row">
+        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <div class="sidebar-row-text">
+          <div class="sidebar-row-label">Kontakt</div>
+          <div class="sidebar-row-val"><a href="mailto:info@petrzalkasportuje.sk" style="color:var(--green);">info@petrzalkasportuje.sk</a></div>
+        </div>
+      </div>
+
+      <div class="sidebar-row">
+        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M5 7l1.5 1.5L9 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="sidebar-row-text">
+          <div class="sidebar-row-label">Prenájom dráh</div>
+          <div class="sidebar-row-val">Po–Pi 6:00–17:00<br/>So–Ne 6:00–17:00</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="back-section"><a href="plavanie.html" class="back-link">← Späť na Plávanie</a></div>
+<footer><div class="footer-brand">Petržalka športuje</div><div class="footer-copy">© 2026 Petržalka športuje. Všetky práva vyhradené.</div></footer>
+<script src="sport.js"></script>
+</body>
+</html>
