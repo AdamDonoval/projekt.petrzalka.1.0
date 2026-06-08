@@ -49,11 +49,26 @@
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="nav-back">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Späť
+  <a href="index.html" style="display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;letter-spacing:-.02em;color:#1a2a1a;text-decoration:none;">
+    <div style="width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;">
+      <img src="assets/uvodna.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+    </div>
+    Petržalka športuje
   </a>
-  <span class="nav-title">Všetky športoviská</span>
+  <ul style="display:flex;gap:4px;list-style:none;margin-left:8px;">
+    <li><a href="index.html" style="font-size:14px;font-weight:500;color:var(--muted);padding:6px 12px;border-radius:6px;text-decoration:none;">Domov</a></li>
+    <li><a href="index.html#sporty" style="font-size:14px;font-weight:500;color:var(--muted);padding:6px 12px;border-radius:6px;text-decoration:none;">Športy</a></li>
+    <li><a href="index.html#zariadenia" style="font-size:14px;font-weight:500;color:var(--muted);padding:6px 12px;border-radius:6px;text-decoration:none;">Zariadenia</a></li>
+    <li><a href="index.html#faq" style="font-size:14px;font-weight:500;color:var(--muted);padding:6px 12px;border-radius:6px;text-decoration:none;">FAQ</a></li>
+  </ul>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+    <a href="auth.html" style="display:inline-flex;align-items:center;gap:6px;border-radius:8px;font-size:14px;font-weight:600;padding:9px 18px;border:1.5px solid var(--border);background:none;color:#1a2a1a;text-decoration:none;">Prihlásiť sa</a>
+    <a href="kosik.html" id="navCartBtn" style="position:relative;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--border);font-size:14px;font-weight:600;color:#1a2a1a;text-decoration:none;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Košík<span id="navCartBadge" style="display:none;position:absolute;top:-6px;right:-6px;background:#2d7a4f;color:#fff;border-radius:99px;font-size:10px;font-weight:700;min-width:18px;height:18px;align-items:center;justify-content:center;padding:0 4px;"></span>
+    </a>
+    <a href="auth.html?tab=register" style="display:inline-flex;align-items:center;gap:6px;border-radius:8px;font-size:14px;font-weight:600;padding:9px 18px;border:none;background:#2d7a4f;color:#fff;text-decoration:none;">Rezervovať</a>
+  </div>
 </nav>
 
 <div class="page-hero">
@@ -238,5 +253,6 @@ function renderList() {
 
 renderList();
 </script>
+<script>(function(){try{var c=JSON.parse(localStorage.getItem("ps_cart")||"[]");var b=document.getElementById("navCartBadge");if(b&&c.length>0){b.style.display="inline-flex";b.textContent=c.length;}}catch(e){}})();</script>
 </body>
 </html>
