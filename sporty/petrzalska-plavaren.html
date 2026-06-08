@@ -285,7 +285,7 @@
       <tbody id="calBody"></tbody>
     </table>
   </div>
-  <p style="font-size:12px;color:var(--muted);margin-top:12px;">* Skutočná dostupnosť termínov sa môže líšiť. Pre záväznú rezerváciu použite <a href="https://petrzalkasportuje.sk/zariadenia/petrzalska-plavaren/?service=1" target="_blank" style="color:var(--green);font-weight:600;">petrzalkasportuje.sk</a>.</p>
+  <p style="font-size:12px;color:var(--muted);margin-top:12px;">* Rezervačný systém bude čoskoro dostupný. Funkcia prihlásenia a platby sa pripravuje.</p>
 </section>
 
 <style>
@@ -350,7 +350,7 @@ function buildCalendar() {
         const avail = isAvail(di, ti, li);
         const borderR = li===2 ? ' border-r' : '';
         if(avail) {
-          return `<td class="cal-cell free${borderR}" title="Rezervovať: ${t} – Dr.${l} – ${fmtDate(d)}" onclick="window.open('https://petrzalkasportuje.sk/zariadenia/petrzalska-plavaren/?service=1','_blank')">+</td>`;
+          return `<td class="cal-cell free${borderR}" title="Rezervovať: ${t} – Dr.${l} – ${fmtDate(d)}">+</td>`;
         }
         return `<td class="cal-cell taken${borderR}" title="Obsadený"></td>`;
       }).join('')).join('')}
