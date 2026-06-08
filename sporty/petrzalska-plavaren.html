@@ -260,6 +260,109 @@
   </div>
 </div>
 
+<!-- ── REZERVÁCIA ── -->
+<section style="padding:48px 40px;max-width:1200px;margin:0 auto;" id="rezervacia">
+  <h2 style="font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px;padding-bottom:12px;border-bottom:1px solid var(--border);">Rezervácia termínu</h2>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:24px;">Prenájom dráhy · 60 min · Po–Pi 6:00–17:00, So–Ne 6:00–17:00. Kliknutím na voľný termín prejdete na rezerváciu.</p>
+
+  <!-- LEGENDA + NAVIGÁCIA -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+    <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);align-items:center;">
+      <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#e8f5ee;border:1px solid var(--green);display:inline-block;"></span>Voľný termín</span>
+      <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#f0f0f0;border:1px solid #ccc;display:inline-block;"></span>Obsadený</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button id="prevWeek" onclick="changeWeek(-1)" style="padding:6px 14px;border:1.5px solid var(--border);border-radius:6px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;">← Predchádzajúci</button>
+      <button id="thisWeek" onclick="goThisWeek()" style="padding:6px 14px;border:1.5px solid var(--green);border-radius:6px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:var(--green);">Tento týždeň</button>
+      <button id="nextWeek" onclick="changeWeek(1)" style="padding:6px 14px;border:1.5px solid var(--border);border-radius:6px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;">Nasledujúci →</button>
+    </div>
+  </div>
+
+  <!-- TABUĽKA -->
+  <div style="overflow-x:auto;border:1px solid var(--border);border-radius:10px;">
+    <table id="calTable" style="width:100%;border-collapse:collapse;font-size:12px;min-width:700px;">
+      <thead id="calHead"></thead>
+      <tbody id="calBody"></tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:12px;">* Skutočná dostupnosť termínov sa môže líšiť. Pre záväznú rezerváciu použite <a href="https://petrzalkasportuje.sk/zariadenia/petrzalska-plavaren/?service=1" target="_blank" style="color:var(--green);font-weight:600;">petrzalkasportuje.sk</a>.</p>
+</section>
+
+<style>
+  .cal-th-day{background:#f7faf8;font-weight:700;font-size:12px;padding:8px 4px;text-align:center;border-bottom:2px solid var(--border);}
+  .cal-th-lane{background:#f7faf8;font-size:11px;color:var(--muted);padding:4px 6px;text-align:center;border-bottom:1px solid var(--border);}
+  .cal-time{padding:6px 10px;font-size:12px;font-weight:600;color:var(--muted);background:#fafafa;border-right:1px solid var(--border);white-space:nowrap;}
+  .cal-cell{width:36px;text-align:center;border:1px solid #eef0ee;padding:4px 2px;cursor:default;}
+  .cal-cell.free{background:#e8f5ee;cursor:pointer;transition:background .15s;}
+  .cal-cell.free:hover{background:#c8ecd8;}
+  .cal-cell.taken{background:#f4f4f4;}
+  .cal-cell.border-r{border-right:2px solid var(--border);}
+  .cal-th-time{background:#f7faf8;border-bottom:2px solid var(--border);border-right:1px solid var(--border);padding:8px 10px;}
+</style>
+
+<script>
+const DAYS_SK = ['Pondelok','Utorok','Streda','Štvrtok','Piatok','Sobota','Nedeľa'];
+const TIMES = ['06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'];
+const LANES = [3,4,5];
+let weekOffset = 0;
+
+function getMonday(d) {
+  d = new Date(d);
+  const day = d.getDay(), diff = d.getDate() - day + (day===0?-6:1);
+  return new Date(d.setDate(diff));
+}
+function fmtDate(d) {
+  return d.getDate().toString().padStart(2,'0')+'.'+(d.getMonth()+1).toString().padStart(2,'0')+'.'+d.getFullYear();
+}
+// deterministic pseudo-random availability
+function isAvail(dayIdx, timeIdx, laneIdx) {
+  const seed = (dayIdx*7 + timeIdx*3 + laneIdx*11) % 10;
+  if(timeIdx < 2) return false; // 06:00-06:30 mostly taken
+  if(dayIdx < 5 && timeIdx < 6) return false; // weekday mornings mostly taken
+  return seed > 3;
+}
+
+function buildCalendar() {
+  const monday = getMonday(new Date());
+  monday.setDate(monday.getDate() + weekOffset * 7);
+
+  const days = Array.from({length:7}, (_,i) => {
+    const d = new Date(monday); d.setDate(monday.getDate()+i); return d;
+  });
+
+  // HEAD
+  const head = document.getElementById('calHead');
+  head.innerHTML = `
+    <tr>
+      <th class="cal-th-time" rowspan="2">Čas</th>
+      ${days.map((d,i) => `<th class="cal-th-day" colspan="3">${DAYS_SK[i]}<br><span style="font-weight:400;color:var(--muted)">${fmtDate(d)}</span></th>`).join('')}
+    </tr>
+    <tr>
+      ${days.map(()=>LANES.map((l,li)=>`<th class="cal-th-lane" style="${li===2?'border-right:2px solid var(--border)':''}">Dr. ${l}</th>`).join('')).join('')}
+    </tr>`;
+
+  // BODY
+  const body = document.getElementById('calBody');
+  body.innerHTML = TIMES.map((t, ti) => `
+    <tr>
+      <td class="cal-time">${t}</td>
+      ${days.map((d,di) => LANES.map((l,li) => {
+        const avail = isAvail(di, ti, li);
+        const borderR = li===2 ? ' border-r' : '';
+        if(avail) {
+          return `<td class="cal-cell free${borderR}" title="Rezervovať: ${t} – Dr.${l} – ${fmtDate(d)}" onclick="window.open('https://petrzalkasportuje.sk/zariadenia/petrzalska-plavaren/?service=1','_blank')">+</td>`;
+        }
+        return `<td class="cal-cell taken${borderR}" title="Obsadený"></td>`;
+      }).join('')).join('')}
+    </tr>`).join('');
+}
+
+function changeWeek(dir) { weekOffset += dir; buildCalendar(); }
+function goThisWeek() { weekOffset = 0; buildCalendar(); }
+
+buildCalendar();
+</script>
+
 <div class="back-section"><a href="plavanie.html" class="back-link">← Späť na Plávanie</a></div>
 <footer><div class="footer-brand">Petržalka športuje</div><div class="footer-copy">© 2026 Petržalka športuje. Všetky práva vyhradené.</div></footer>
 <script src="sport.js"></script>
