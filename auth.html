@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Prihlásenie & Registrácia – Petržalka športuje</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{--green:#2d7a4f;--green2:#238a45;--border:#e5e9e5;--muted:#7a8a7a;--dark:#1a2a1a;--bg:#f7faf8;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh;}
+  a{text-decoration:none;color:inherit;}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 clamp(20px,4vw,60px);gap:32px;}
+  .nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;letter-spacing:-.02em;color:var(--dark);}
+  .nav-logo img{width:34px;height:34px;object-fit:cover;border-radius:8px;flex-shrink:0;}
+
+  /* PAGE */
+  .page{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:40px 20px;}
+  .card-wrap{width:100%;max-width:480px;}
+
+  /* TABS */
+  .tabs{display:flex;background:#fff;border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:24px;}
+  .tab{flex:1;padding:10px;text-align:center;font-size:14px;font-weight:600;border-radius:9px;cursor:pointer;color:var(--muted);transition:all .15s;}
+  .tab.active{background:var(--green);color:#fff;}
+
+  /* CARD */
+  .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px;}
+  .card h2{font-size:22px;font-weight:900;letter-spacing:-.02em;margin-bottom:6px;}
+  .card p{font-size:14px;color:var(--muted);margin-bottom:28px;}
+
+  /* FORM */
+  .form-group{margin-bottom:16px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px;}
+  input[type=text],input[type=email],input[type=password]{
+    width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;
+    font-size:15px;font-family:inherit;outline:none;transition:border .15s;background:#fff;
+  }
+  input:focus{border-color:var(--green);}
+  .checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;font-size:13px;color:var(--muted);}
+  .checkbox-row input{margin-top:3px;accent-color:var(--green);flex-shrink:0;}
+  .checkbox-row a{color:var(--green);font-weight:600;}
+  .btn-submit{
+    width:100%;padding:13px;background:var(--green);color:#fff;border:none;
+    border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;
+    transition:background .15s;font-family:inherit;
+  }
+  .btn-submit:hover{background:var(--green2);}
+  .forgot{display:block;text-align:right;font-size:13px;color:var(--green);font-weight:600;margin-top:-8px;margin-bottom:20px;}
+  .forgot:hover{text-decoration:underline;}
+  .divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--muted);font-size:13px;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+  .switch-link{text-align:center;font-size:14px;color:var(--muted);margin-top:20px;}
+  .switch-link a{color:var(--green);font-weight:700;}
+  .switch-link a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/uvodna.png" alt=""/>
+    Petržalka športuje
+  </a>
+</nav>
+
+<div class="page">
+  <div class="card-wrap">
+
+    <div class="tabs">
+      <div class="tab active" id="tab-login" onclick="showTab('login')">Prihlásiť sa</div>
+      <div class="tab" id="tab-register" onclick="showTab('register')">Registrácia</div>
+    </div>
+
+    <!-- PRIHLÁSENIE -->
+    <div class="card" id="panel-login">
+      <h2>Vitajte späť</h2>
+      <p>Prihláste sa do svojho účtu a rezervujte si termín.</p>
+
+      <div class="form-group">
+        <label>E-mailová adresa</label>
+        <input type="email" placeholder="vas@email.sk"/>
+      </div>
+      <div class="form-group">
+        <label>Heslo</label>
+        <input type="password" placeholder="••••••••"/>
+      </div>
+      <a href="#" class="forgot">Nepamätáte si heslo?</a>
+      <button class="btn-submit">Prihlásiť sa</button>
+      <div class="divider">alebo</div>
+      <div class="switch-link">Nemáte účet? <a href="#" onclick="showTab('register');return false;">Zaregistrujte sa</a></div>
+    </div>
+
+    <!-- REGISTRÁCIA -->
+    <div class="card" id="panel-register" style="display:none;">
+      <h2>Vytvorte si účet</h2>
+      <p>Zaregistrujte sa a začnite rezervovať športoviská v Petržalke.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Meno</label>
+          <input type="text" placeholder="Ján"/>
+        </div>
+        <div class="form-group">
+          <label>Priezvisko</label>
+          <input type="text" placeholder="Novák"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>E-mailová adresa</label>
+        <input type="email" placeholder="vas@email.sk"/>
+      </div>
+      <div class="form-group">
+        <label>Heslo</label>
+        <input type="password" placeholder="••••••••"/>
+      </div>
+      <div class="form-group">
+        <label>Zopakujte heslo</label>
+        <input type="password" placeholder="••••••••"/>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="gdpr"/>
+        <label for="gdpr" style="text-transform:none;letter-spacing:0;font-weight:400;">Súhlasím so <a href="https://petrzalkasportuje.sk/gdpr/" target="_blank">spracovaním osobných údajov</a> a <a href="https://petrzalkasportuje.sk/obchodne-podmienky/" target="_blank">obchodnými podmienkami</a>.</label>
+      </div>
+      <button class="btn-submit">Zaregistrovať sa</button>
+      <div class="switch-link" style="margin-top:16px;">Máte už účet? <a href="#" onclick="showTab('login');return false;">Prihláste sa</a></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showTab(tab) {
+  document.getElementById('panel-login').style.display = tab==='login' ? '' : 'none';
+  document.getElementById('panel-register').style.display = tab==='register' ? '' : 'none';
+  document.getElementById('tab-login').className = 'tab' + (tab==='login' ? ' active' : '');
+  document.getElementById('tab-register').className = 'tab' + (tab==='register' ? ' active' : '');
+}
+// Ak príde s ?tab=register, otvor registráciu
+if(new URLSearchParams(location.search).get('tab')==='register') showTab('register');
+</script>
+</body>
+</html>
