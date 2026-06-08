@@ -423,8 +423,19 @@ function openModal(dayName, date, time, lane, laneLabel) {
 function closeModal(e) { if(e.target===document.getElementById('resModal')) closeModalDirect(); }
 function closeModalDirect() { document.getElementById('resModal').classList.remove('open'); }
 function addToCart() {
-  alert('Funkcia košíka bude čoskoro dostupná.');
+  const date = document.getElementById('m-date').textContent;
+  const time = document.getElementById('m-time').textContent;
+  const price = document.getElementById('m-price').textContent.replace(' €','');
+  const lane = document.getElementById('m-lane').textContent;
+  const cart = JSON.parse(localStorage.getItem('ps_cart') || '[]');
+  cart.push({
+    facility: 'Petržalská plaváreň – prenájom dráh',
+    service: 'Prenájom dráhy 60 min.',
+    date, time, price, lane
+  });
+  localStorage.setItem('ps_cart', JSON.stringify(cart));
   closeModalDirect();
+  window.location.href = '../kosik.html';
 }
 
 buildCalendar();

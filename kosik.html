@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Nákupný košík – Petržalka športuje</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{--green:#2d7a4f;--green2:#238a45;--border:#e5e9e5;--muted:#7a8a7a;--dark:#1a2a1a;--bg:#f7faf8;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh;}
+  a{text-decoration:none;color:inherit;}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 clamp(20px,4vw,60px);gap:32px;}
+  .nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;letter-spacing:-.02em;color:var(--dark);}
+  .nav-logo-mark{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;}
+  .nav-logo-mark img{width:100%;height:100%;object-fit:cover;display:block;}
+  .nav-links{display:flex;gap:4px;list-style:none;margin-left:8px;}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--muted);padding:6px 12px;border-radius:6px;transition:all .15s;}
+  .nav-links a:hover{color:var(--dark);background:#f5f5f3;}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+  .btn{display:inline-flex;align-items:center;gap:6px;border-radius:8px;font-size:14px;font-weight:600;padding:9px 18px;border:none;transition:all .15s;cursor:pointer;font-family:inherit;}
+  .btn-primary{background:var(--green);color:#fff;}
+  .btn-primary:hover{background:var(--green2);}
+  .btn-outline{background:none;color:var(--dark);border:1.5px solid var(--border);}
+  .btn-outline:hover{border-color:#999;background:#f9f9f7;}
+  .cart-nav-btn{position:relative;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--border);font-size:14px;font-weight:600;color:var(--dark);transition:all .15s;}
+  .cart-nav-btn:hover{border-color:var(--green);color:var(--green);}
+  .cart-badge{position:absolute;top:-6px;right:-6px;background:var(--green);color:#fff;border-radius:99px;font-size:10px;font-weight:700;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
+
+  /* STEPS */
+  .steps{background:#fff;border-bottom:1px solid var(--border);padding:16px clamp(20px,4vw,60px);}
+  .steps-inner{display:flex;align-items:center;justify-content:center;gap:0;max-width:600px;margin:0 auto;}
+  .step{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted);flex:1;justify-content:center;}
+  .step.active{color:var(--green);}
+  .step-num{width:26px;height:26px;border-radius:50%;border:2px solid var(--muted);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+  .step.active .step-num{border-color:var(--green);background:var(--green);color:#fff;}
+  .step-line{flex:1;height:2px;background:var(--border);max-width:60px;}
+
+  /* MAIN */
+  .page{max-width:1000px;margin:0 auto;padding:40px clamp(20px,4vw,40px) 60px;}
+  .page h1{font-size:24px;font-weight:900;letter-spacing:-.02em;margin-bottom:28px;}
+
+  /* CART TABLE */
+  .cart-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+  .cart-table thead tr{border-bottom:2px solid var(--border);}
+  .cart-table th{padding:14px 18px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;}
+  .cart-table th.right{text-align:right;}
+  .cart-table tbody tr{border-bottom:1px solid var(--border);}
+  .cart-table tbody tr:last-child{border-bottom:none;}
+  .cart-table td{padding:18px;}
+  .item-img{width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+  .item-info{display:flex;align-items:center;gap:14px;}
+  .item-name{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .item-meta{font-size:12px;color:var(--muted);line-height:1.6;}
+  .item-price{font-size:15px;font-weight:700;color:var(--green);text-align:right;}
+  .item-remove{text-align:right;}
+  .remove-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:18px;padding:4px;border-radius:4px;transition:color .15s;}
+  .remove-btn:hover{color:#e53e3e;}
+
+  /* EMPTY STATE */
+  .empty{text-align:center;padding:60px 20px;background:#fff;border-radius:12px;border:1px solid var(--border);}
+  .empty h3{font-size:18px;font-weight:700;margin-bottom:8px;}
+  .empty p{font-size:14px;color:var(--muted);margin-bottom:20px;}
+  .empty a{display:inline-flex;padding:11px 24px;background:var(--green);color:#fff;border-radius:8px;font-weight:700;font-size:14px;}
+
+  /* BOTTOM */
+  .cart-bottom{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-top:24px;}
+  .coupon-section{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;}
+  .coupon-section label{display:block;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--muted);}
+  .coupon-row{display:flex;gap:8px;}
+  .coupon-input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;outline:none;}
+  .coupon-input:focus{border-color:var(--green);}
+  .coupon-btn{padding:10px 18px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;}
+  .summary-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;min-width:260px;}
+  .summary-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:12px;color:var(--muted);}
+  .summary-total{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:2px solid var(--border);margin-top:4px;}
+  .summary-total-label{font-size:16px;font-weight:700;}
+  .summary-total-price{font-size:22px;font-weight:900;color:var(--green);}
+  .checkout-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:16px;padding:13px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
+  .checkout-btn:hover{background:var(--green2);}
+  .clear-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:9px 16px;border:1.5px solid #e53e3e;border-radius:8px;background:none;color:#e53e3e;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+  .clear-btn:hover{background:#e53e3e;color:#fff;}
+
+  /* FOOTER */
+  footer{background:#1a2a1a;color:#fff;padding:64px clamp(20px,4vw,60px) 32px;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1.2fr 1fr 0.8fr;gap:48px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .footer-brand img{max-width:180px;height:auto;display:block;}
+  footer h4{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px;}
+  footer ul{list-style:none;}
+  footer ul li{margin-bottom:10px;}
+  footer ul a{font-size:14px;color:rgba(255,255,255,.6);transition:color .15s;}
+  footer ul a:hover{color:#fff;}
+  .footer-contact-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;}
+  .footer-contact-val{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:14px;}
+  .footer-contact-val a{color:rgba(255,255,255,.6);}
+  .footer-socials{display:flex;gap:10px;flex-wrap:wrap;}
+  .footer-socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.1);display:grid;place-items:center;transition:background .15s;}
+  .footer-socials a:hover{background:rgba(255,255,255,.22);}
+  .footer-socials svg{width:16px;height:16px;fill:#fff;}
+  .footer-reviews img{max-width:130px;height:auto;}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.3);flex-wrap:wrap;gap:8px;}
+
+  @media(max-width:768px){
+    .nav-links{display:none;}
+    .footer-top{grid-template-columns:1fr;gap:28px;}
+    .cart-bottom{grid-template-columns:1fr;}
+    .steps-inner{gap:0;}
+    .step span{display:none;}
+  }
+  @media(max-width:600px){.nav{padding:0 16px;gap:8px;}.btn{font-size:12px;padding:7px 11px;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">
+      <img src="assets/uvodna.png" alt="Petržalka športuje"/>
+    </div>
+    Petržalka športuje
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Domov</a></li>
+    <li><a href="index.html#sporty">Športy</a></li>
+    <li><a href="index.html#zariadenia">Zariadenia</a></li>
+    <li><a href="index.html#komunita">Komunita</a></li>
+    <li><a href="index.html#akcie">Akcie</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="auth.html" class="btn btn-outline">Prihlásiť sa</a>
+    <a href="auth.html?tab=register" class="btn btn-primary">Rezervovať</a>
+  </div>
+</nav>
+
+<!-- KROKY -->
+<div class="steps">
+  <div class="steps-inner">
+    <div class="step active">
+      <div class="step-num">1</div>
+      <span>Nákupný košík</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <span>Doprava a platba</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <span>Dokončená objednávka</span>
+    </div>
+  </div>
+</div>
+
+<!-- OBSAH -->
+<div class="page">
+  <h1>Nákupný košík</h1>
+  <div id="cartContent"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html">
+        <img src="https://petrzalkasportuje.sk/wp-content/uploads/2024/02/petrzalka_sportuje_logo_2024_horizontal_white-small.png" alt="Petržalka športuje logo"/>
+      </a>
+    </div>
+    <div>
+      <h4>Pre zákazníkov</h4>
+      <ul>
+        <li><a href="https://petrzalkasportuje.sk/gdpr/" target="_blank">Spracovanie osobných údajov</a></li>
+        <li><a href="https://petrzalkasportuje.sk/obchodne-podmienky/" target="_blank">Všeobecné obchodné podmienky</a></li>
+        <li><a href="https://petrzalkasportuje.sk/faq/" target="_blank">FAQ – Najčastejšie otázky</a></li>
+        <li><a href="https://petrzalkasportuje.sk/mapa-stranok" target="_blank">Mapa stránok</a></li>
+        <li><a href="https://petrzalkasportuje.sk/kontakty/" target="_blank">Kontakty</a></li>
+        <li><a href="https://petrzalkasportuje.sk/zamestnanecka-zona/" target="_blank">Zamestnanecká zóna</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <div class="footer-contact-label">Adresa</div>
+      <div class="footer-contact-val">Kutlíkova 17, 851 02 Bratislava</div>
+      <div class="footer-contact-label">E-mail</div>
+      <div class="footer-contact-val"><a href="mailto:info@petrzalkasportuje.sk">info@petrzalkasportuje.sk</a></div>
+      <div class="footer-contact-label" style="margin-bottom:10px;">Sledujte nás</div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/petrzalkasportuje" target="_blank" title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/petrzalkasportuje" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="#1a2a1a"/></svg></a>
+        <a href="https://youtube.com/@bratislavapetrzalka" target="_blank" title="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1a2a1a"/></svg></a>
+        <a href="https://www.linkedin.com/company/bratislavapetrzalka/" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4>Ohodnoťte nás</h4>
+      <div class="footer-reviews">
+        <a href="https://g.page/r/Cejl3xKjiNCHEAE/review" target="_blank" rel="nofollow">
+          <img src="https://petrzalkasportuje.sk/wp-content/uploads/2024/04/google-reviews.png" alt="Google reviews"/>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Petržalka športuje. Všetky práva vyhradené.</span>
+    <span>Mestská časť Petržalka</span>
+  </div>
+</footer>
+
+<script>
+function getCart() {
+  try { return JSON.parse(localStorage.getItem('ps_cart') || '[]'); } catch(e) { return []; }
+}
+function saveCart(cart) {
+  localStorage.setItem('ps_cart', JSON.stringify(cart));
+}
+function removeItem(idx) {
+  const cart = getCart();
+  cart.splice(idx, 1);
+  saveCart(cart);
+  renderCart();
+  updateNavBadge();
+}
+function clearCart() {
+  if(confirm('Naozaj chcete vyprázdniť košík?')) {
+    saveCart([]);
+    renderCart();
+    updateNavBadge();
+  }
+}
+function updateNavBadge() {
+  const cart = getCart();
+  const badge = document.getElementById('cartBadge');
+  if(badge) badge.textContent = cart.length;
+}
+function renderCart() {
+  const cart = getCart();
+  const el = document.getElementById('cartContent');
+
+  if(cart.length === 0) {
+    el.innerHTML = `
+      <div class="empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a8a7a" stroke-width="1.5" style="margin-bottom:16px;display:block;margin-left:auto;margin-right:auto;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <h3>Váš košík je prázdny</h3>
+        <p>Vyberte si termín a pridajte ho do košíka.</p>
+        <a href="index.html">Prejsť na hlavnú stránku</a>
+      </div>`;
+    return;
+  }
+
+  const total = cart.reduce((s, i) => s + parseFloat(i.price), 0);
+  const totalNoTax = (total / 1.23).toFixed(2);
+
+  const rows = cart.map((item, idx) => `
+    <tr>
+      <td>
+        <div class="item-info">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="flex-shrink:0;border-radius:8px;background:#e8f5ee;padding:10px;"><path d="M8 32c4-4 8-4 12 0s8 4 12 0 8-4 12 0" stroke="#2d7a4f" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="18" r="6" stroke="#2d7a4f" stroke-width="2.5"/></svg>
+          <div>
+            <div class="item-name">${item.facility}</div>
+            <div class="item-meta">${item.date}<br>${item.time}<br>Dráha č. ${item.lane}</div>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-size:14px;">1</td>
+      <td class="item-price">${item.price} €</td>
+      <td class="item-remove">
+        <button class="remove-btn" onclick="removeItem(${idx})" title="Odstrániť">✕</button>
+      </td>
+    </tr>`).join('');
+
+  el.innerHTML = `
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Položka</th>
+          <th style="text-align:center;">Počet</th>
+          <th class="right">Spolu</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+
+    <div class="cart-bottom">
+      <div>
+        <div class="coupon-section">
+          <label>Máte zľavový kupón?</label>
+          <div class="coupon-row">
+            <input class="coupon-input" type="text" placeholder="Kód kupónu"/>
+            <button class="coupon-btn">Uplatniť</button>
+          </div>
+        </div>
+        <button class="clear-btn" onclick="clearCart()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4V2H17V4H22V6H20V21a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"/></svg>
+          Vyprázdniť košík
+        </button>
+      </div>
+      <div class="summary-box">
+        <div class="summary-row"><span>Medzisúčet</span><span>${total.toFixed(2)} €</span></div>
+        <div class="summary-total">
+          <span class="summary-total-label">Spolu</span>
+          <span class="summary-total-price">${total.toFixed(2)} €</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:6px;text-align:right;">${totalNoTax} € bez DPH</div>
+        <button class="checkout-btn">
+          Pokračovať
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>`;
+}
+
+renderCart();
+</script>
+</body>
+</html>
