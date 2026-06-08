@@ -297,7 +297,49 @@
   .cal-cell.taken{background:#f4f4f4;}
   .cal-cell.border-r{border-right:2px solid var(--border);}
   .cal-th-time{background:#f7faf8;border-bottom:2px solid var(--border);border-right:1px solid var(--border);padding:8px 10px;}
+  .cal-cell.selected{background:var(--green);color:#fff;}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:#fff;border-radius:16px;padding:32px;width:100%;max-width:480px;margin:20px;box-shadow:0 20px 60px rgba(0,0,0,.2);}
+  .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+  .modal-header h3{font-size:18px;font-weight:800;letter-spacing:-.02em;}
+  .modal-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px;line-height:1;padding:4px;}
+  .modal-close:hover{color:var(--dark);}
+  .modal-table{width:100%;border-collapse:collapse;margin-bottom:24px;}
+  .modal-table tr{border-bottom:1px solid var(--border);}
+  .modal-table tr:last-child{border-bottom:none;}
+  .modal-table th{text-align:left;font-size:13px;font-weight:700;color:var(--muted);padding:10px 0;width:120px;}
+  .modal-table td{font-size:14px;font-weight:500;padding:10px 0;}
+  .modal-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .btn-cancel{padding:10px 20px;border:1.5px solid var(--border);border-radius:8px;background:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .btn-cancel:hover{border-color:#999;}
+  .btn-cart{padding:10px 24px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
+  .btn-cart:hover{background:var(--green2);}
 </style>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="resModal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Detaily rezervácie</h3>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <table class="modal-table">
+      <tr><th>Zariadenie:</th><td>Petržalská plaváreň – prenájom dráh</td></tr>
+      <tr><th>Služba:</th><td>Prenájom dráhy 60 min.</td></tr>
+      <tr><th>Dátum:</th><td id="m-date"></td></tr>
+      <tr><th>Čas:</th><td id="m-time"></td></tr>
+      <tr><th>Cena:</th><td id="m-price"></td></tr>
+      <tr><th>Dráha č.:</th><td id="m-lane"></td></tr>
+    </table>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModalDirect()">Zatvoriť</button>
+      <button class="btn-cart" onclick="addToCart()">Pridať do košíka</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const DAYS_SK = ['Pondelok','Utorok','Streda','Štvrtok','Piatok','Sobota','Nedeľa'];
@@ -349,7 +391,8 @@ function buildCalendar() {
         const avail = isAvail(di, ti, li);
         const borderR = li===2 ? ' border-r' : '';
         if(avail) {
-          return `<td class="cal-cell free${borderR}" title="Rezervovať: ${t} – Dr.${l} – ${fmtDate(d)}">+</td>`;
+          const laneLabel = l===5 ? 'Krajná dráha' : 'Stredná dráha';
+          return `<td class="cal-cell free${borderR}" onclick="openModal('${DAYS_SK[di]}','${fmtDate(d)}','${t}',${l},'${laneLabel}')">+</td>`;
         }
         return `<td class="cal-cell taken${borderR}" title="Obsadený"></td>`;
       }).join('')).join('')}
@@ -358,6 +401,31 @@ function buildCalendar() {
 
 function changeWeek(dir) { weekOffset += dir; buildCalendar(); }
 function goThisWeek() { weekOffset = 0; buildCalendar(); }
+
+function getPrice(time) {
+  const h = parseInt(time.split(':')[0]);
+  if(h >= 11 && h < 13) return '20 €';
+  return '30 €';
+}
+function addTime60(time) {
+  const [h,m] = time.split(':').map(Number);
+  const total = h*60 + m + 60;
+  return String(Math.floor(total/60)).padStart(2,'0')+':'+String(total%60).padStart(2,'0');
+}
+
+function openModal(dayName, date, time, lane, laneLabel) {
+  document.getElementById('m-date').textContent = dayName + ' ' + date;
+  document.getElementById('m-time').textContent = time + ' – ' + addTime60(time);
+  document.getElementById('m-price').textContent = getPrice(time);
+  document.getElementById('m-lane').textContent = lane + ' – ' + laneLabel;
+  document.getElementById('resModal').classList.add('open');
+}
+function closeModal(e) { if(e.target===document.getElementById('resModal')) closeModalDirect(); }
+function closeModalDirect() { document.getElementById('resModal').classList.remove('open'); }
+function addToCart() {
+  alert('Funkcia košíka bude čoskoro dostupná.');
+  closeModalDirect();
+}
 
 buildCalendar();
 </script>
