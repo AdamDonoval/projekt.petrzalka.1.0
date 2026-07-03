@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd /Users/adamdanieldonoval/Downloads/projekt.petrzalka.1.0 && if [ -n \"$(git status --porcelain)\" ]; then git add -A && git commit -m \"Auto-update $(date '+%Y-%m-%d %H:%M:%S')\" && git push origin main; fi",
+            "command": "cd /Users/adamdanieldonoval/Downloads/sport-mestska-cast && if [ -n \"$(git status --porcelain)\" ]; then git add -A && git commit -m \"Auto-update $(date '+%Y-%m-%d %H:%M:%S')\" && git push origin main; fi",
             "timeout": 60,
             "statusMessage": "Pushing changes to GitHub..."
           }
