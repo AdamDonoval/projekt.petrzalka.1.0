@@ -3,30 +3,12 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Plávanie – Petržalka športuje</title>
-<link rel="stylesheet" href="sport.css"/>
+<link rel="stylesheet" href="sport.css?v=10"/>
 </head>
 <body>
-<nav class="nav">
-  <a href="../index.html" class="nav-logo">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="currentColor" opacity=".12"/><circle cx="14" cy="10" r="3" fill="currentColor"/><path d="M8 22c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-    Petržalka športuje
-  </a>
-  <ul class="nav-links">
-    <li><a href="../index.html#sporty">Športy</a></li>
-    <li><a href="../index.html#komunita">Komunita</a></li>
-    <li><a href="../index.html#faq">FAQ</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="../auth.html" class="btn btn-ghost">Prihlásiť sa</a>
-    <a href="../kosik.html" id="navCartBtn" style="position:relative;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--border);font-size:14px;font-weight:600;color:var(--text);transition:all .15s;text-decoration:none;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      Košík<span id="navCartBadge" style="display:none;position:absolute;top:-6px;right:-6px;background:#2d7a4f;color:#fff;border-radius:99px;font-size:10px;font-weight:700;min-width:18px;height:18px;align-items:center;justify-content:center;padding:0 4px;"></span>
-    </a>
-    <a href="../auth.html?tab=register" class="btn btn-primary">Rezervovať</a>
-  </div>
-</nav>
+<!-- Navigáciu vkladá zdieľaný site.js -->
 
-<div class="sport-hero">
+<div class="sport-hero hero-photo" style="--hero-img:url('../assets/drazdiak.jpg')">
   <div class="breadcrumb"><a href="../index.html">Domov</a><span class="sep">›</span><a href="../index.html#sporty">Športy</a><span class="sep">›</span><span>Plávanie</span></div>
   <div class="sport-hero-inner">
     <div class="sport-hero-icon">
@@ -36,65 +18,370 @@
   </div>
 </div>
 
+<!-- ── 1. AKTÍVNE PROSTREDIE A ŠPORTOVISKÁ ── -->
+<section class="section" id="prostredie">
+  <h2 class="section-h2">Aktívne prostredie a športoviská</h2>
+  <div class="fac-grid cols-4">
 
-<section class="section">
-  <h2 class="section-h2">Plavárne a bazény</h2>
-  <div class="fac-grid">
-
-    <div class="fac-card" data-type="bazen">
-      <div class="fac-img"><img src="../assets/bazen_petrzalka.jpg" alt="Petržalská plaváreň"><span class="fac-tag">Plaváreň</span></div>
+    <div class="fac-card">
+      <div class="fac-img"><img src="../assets/bazen_petrzalka.jpg" alt="Petržalská plaváreň"/><span class="fac-tag">Plaváreň</span></div>
       <div class="fac-body">
         <div class="fac-name">Petržalská plaváreň</div>
         <div class="fac-meta">
-          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"></path><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"></circle></svg>Kutlíkova 2, Petržalka</div>
-          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"></circle><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>Po–Ne  6:00–22:00</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Kutlíkova 2, Petržalka</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Ne 6:00–22:00</div>
         </div>
         <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="petrzalska-plavaren.html" class="fac-book">Detail →</a></div>
       </div>
     </div>
 
-    <div class="fac-card" data-type="bazen deti">
-      <div class="fac-img"><img src="../assets/holicska.png" alt="Bazén Holíčska"><span class="fac-tag">Bazén</span></div>
+    <div class="fac-card">
+      <div class="fac-img"><img src="../assets/holicska.png" alt="Bazén Holíčska"/><span class="fac-tag">Bazén</span></div>
       <div class="fac-body">
         <div class="fac-name">Bazén Holíčska</div>
         <div class="fac-meta">
-          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"></path><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"></circle></svg>Holíčska, Petržalka</div>
-          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"></circle><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>Otvorené do 30. 6. 2026</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Holíčska, Petržalka</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Otvorené do 30. 6. 2026</div>
         </div>
-        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="sporty/plavanie.html" class="fac-book">Rezervovať</a></div>
+        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="../sportoviska.html" class="fac-book">Detail →</a></div>
       </div>
     </div>
 
-    <div class="fac-card" data-type="bazen">
-      <div class="fac-img"><img src="../assets/pankuchova.jpg" alt="Bazén Pankúchova"><span class="fac-tag">Bazén</span></div>
+    <div class="fac-card">
+      <div class="fac-img"><img src="../assets/pankuchova.jpg" alt="Bazén Pankúchova"/><span class="fac-tag">Bazén</span></div>
       <div class="fac-body">
         <div class="fac-name">Bazén Pankúchova</div>
         <div class="fac-meta">
-          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"></path><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"></circle></svg>Pankúchova, Petržalka</div>
-          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"></circle><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>Sezónne otváracie hodiny</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Pankúchova, Petržalka</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Sezónne otváracie hodiny</div>
         </div>
-        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="sporty/plavanie.html" class="fac-book">Rezervovať</a></div>
+        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="../sportoviska.html" class="fac-book">Detail →</a></div>
       </div>
     </div>
 
-    <div class="fac-card" data-type="bazen deti">
-      <div class="fac-img"><img src="../assets/budatinska.jpg" alt="Bazén Budatínska"><span class="fac-tag">Bazén</span></div>
+    <div class="fac-card">
+      <div class="fac-img"><img src="../assets/budatinska.jpg" alt="Bazén Budatínska"/><span class="fac-tag">Bazén</span></div>
       <div class="fac-body">
         <div class="fac-name">Bazén Budatínska</div>
         <div class="fac-meta">
-          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"></path><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"></circle></svg>Budatínska 61, Petržalka</div>
-          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"></circle><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>Po, Ut, Št, Pi 17:00–21:00 · So 9:00–14:00</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Budatínska 61, Petržalka</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po, Ut, Št, Pi 17:00–21:00 · So 9:00–14:00</div>
         </div>
-        <div class="fac-footer"><div class="fac-price">4,50 € <span>/ hod</span></div><a href="https://petrzalkasportuje.sk/events/verejne-plavanie-bazen-budatinska/" target="_blank" class="fac-book">Rezervovať</a></div>
+        <div class="fac-footer"><div class="fac-price">4,50 € <span>/ hod</span></div><a href="https://petrzalkasportuje.sk/events/verejne-plavanie-bazen-budatinska/" target="_blank" class="fac-book">Detail →</a></div>
+      </div>
+    </div>
+
+    <div class="fac-card">
+      <div class="fac-img"><img src="../assets/drazdiak.jpg" alt="Jazero Veľký Draždiak"/><span class="fac-tag">Prírodné kúpalisko</span></div>
+      <div class="fac-body">
+        <div class="fac-name">Jazero Veľký Draždiak</div>
+        <div class="fac-meta">
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Tematínska, Petržalka</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Voľne prístupné · jún–september</div>
+        </div>
+        <div class="fac-footer"><div class="fac-price">zadarmo <span>/ vstup</span></div><a href="../sportoviska.html" class="fac-book">Detail →</a></div>
+      </div>
+    </div>
+
+    <div class="fac-deco" aria-hidden="true">
+      <svg viewBox="0 0 640 220" fill="none" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+        <line x1="10" y1="170" x2="630" y2="170" stroke="currentColor" stroke-width="2.5"/>
+
+        <rect x="28" y="120" width="32" height="50" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="34" y="128" width="20" height="5" fill="currentColor"/>
+        <rect x="34" y="140" width="20" height="5" fill="currentColor"/>
+        <rect x="34" y="152" width="20" height="5" fill="currentColor"/>
+        <rect x="60" y="70" width="50" height="100" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="68" y="80" width="8" height="10" fill="currentColor"/>
+        <rect x="81" y="80" width="8" height="10" fill="currentColor"/>
+        <rect x="94" y="80" width="8" height="10" fill="currentColor"/>
+        <rect x="68" y="100" width="8" height="10" fill="currentColor"/>
+        <rect x="94" y="100" width="8" height="10" fill="currentColor"/>
+        <rect x="68" y="120" width="8" height="10" fill="currentColor"/>
+        <rect x="81" y="120" width="8" height="10" fill="currentColor"/>
+        <rect x="68" y="140" width="8" height="10" fill="currentColor"/>
+        <rect x="94" y="140" width="8" height="10" fill="currentColor"/>
+        <rect x="110" y="130" width="22" height="40" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="116" y="138" width="10" height="4" fill="currentColor"/>
+        <rect x="116" y="148" width="10" height="4" fill="currentColor"/>
+
+        <rect x="148" y="52" width="36" height="7" fill="currentColor"/>
+        <path d="M150 98 q10 -12 20 0 q10 12 20 0 q10 -12 20 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="162" y="130" width="24" height="7" fill="currentColor"/>
+        <rect x="140" y="183" width="24" height="11" stroke="currentColor" stroke-width="2.5"/>
+
+        <rect x="250" y="95" width="40" height="75" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="257" y="104" width="8" height="9" fill="currentColor"/>
+        <rect x="271" y="104" width="8" height="9" fill="currentColor"/>
+        <rect x="257" y="122" width="8" height="9" fill="currentColor"/>
+        <rect x="271" y="140" width="8" height="9" fill="currentColor"/>
+        <rect x="257" y="152" width="8" height="9" fill="currentColor"/>
+        <rect x="290" y="135" width="36" height="35" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="297" y="143" width="22" height="5" fill="currentColor"/>
+        <rect x="297" y="155" width="22" height="5" fill="currentColor"/>
+        <rect x="226" y="60" width="44" height="7" fill="currentColor"/>
+        <rect x="300" y="75" width="26" height="12" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M222 132 q9 -11 18 0 q9 11 18 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="244" y="183" width="26" height="12" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="340" y="189" width="14" height="8" stroke="currentColor" stroke-width="2.5"/>
+
+        <rect x="360" y="115" width="26" height="55" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="366" y="123" width="14" height="5" fill="currentColor"/>
+        <rect x="366" y="135" width="14" height="5" fill="currentColor"/>
+        <rect x="366" y="147" width="14" height="5" fill="currentColor"/>
+        <rect x="352" y="60" width="40" height="7" fill="currentColor"/>
+        <path d="M400 95 q10 -12 20 0 q10 12 20 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="414" y="140" width="28" height="7" fill="currentColor"/>
+
+        <rect x="452" y="140" width="24" height="30" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="480" y="90" width="44" height="80" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="488" y="100" width="8" height="9" fill="currentColor"/>
+        <rect x="502" y="100" width="8" height="9" fill="currentColor"/>
+        <rect x="488" y="118" width="8" height="9" fill="currentColor"/>
+        <rect x="502" y="136" width="8" height="9" fill="currentColor"/>
+        <rect x="488" y="154" width="8" height="9" fill="currentColor"/>
+        <rect x="524" y="125" width="26" height="45" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="530" y="133" width="14" height="5" fill="currentColor"/>
+        <rect x="530" y="145" width="14" height="5" fill="currentColor"/>
+        <rect x="430" y="75" width="28" height="7" fill="currentColor"/>
+        <rect x="560" y="60" width="30" height="13" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="596" y="120" width="24" height="7" fill="currentColor"/>
+        <rect x="566" y="95" width="20" height="7" fill="currentColor"/>
+        <rect x="580" y="140" width="34" height="30" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="587" y="148" width="20" height="5" fill="currentColor"/>
+        <rect x="520" y="188" width="20" height="10" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M560 195 q8 -10 16 0 q8 10 16 0 q8 -10 16 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M40 192 q8 -10 16 0 q8 10 16 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 2. AKTÍVNE ŠKOLY ── -->
+<section class="section section-alt" id="skoly">
+  <h2 class="section-h2">Aktívne školy</h2>
+  <div class="school-tiles">
+
+    <div class="school-tile tile-green">
+      <div class="tile-head"><div class="tile-icon"><svg width="24" height="24" viewBox="0 0 40 40" fill="none"><path d="M6 28c3.5-3.5 7-3.5 10.5 0s7 3.5 10.5 0 7-3.5 10.5 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="20" cy="13" r="5" stroke="currentColor" stroke-width="2.5"/></svg></div></div>
+      <h3>Plavecký výcvik ZŠ</h3>
+      <div class="tile-meta">
+        <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>základné školy v Petržalke</div>
+        <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>počas školského roka</div>
+        <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 12c0-2 1.6-3.5 3.5-3.5S8.5 10 8.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="5" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 8.7c1.8.2 3 1.6 3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>žiaci ZŠ · v rámci vyučovania</div>
+      </div>
+      <div class="tile-foot">
+        <div class="tile-price">bezplatne <span>/ žiaci</span></div>
+        <a href="https://petrzalkasportuje.sk/" target="_blank" class="tile-link">Viac info →</a>
+      </div>
+      <svg class="tile-wave" width="200" height="40" viewBox="0 0 200 40" fill="none" aria-hidden="true"><path d="M0 20 q12 -16 25 0 q12 16 25 0 q12 -16 25 0 q12 16 25 0 q12 -16 25 0 q12 16 25 0 q12 -16 25 0" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="school-tile tile-blue">
+      <div class="tile-head"><div class="tile-icon"><svg width="24" height="24" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="2.5"/><path d="M20 12v8l6 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <h3>Plavecký krúžok – ZŠ Pankúchova</h3>
+      <div class="tile-meta">
+        <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Pankúchova 4, Petržalka</div>
+        <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Pi 14:00–16:00</div>
+        <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 12c0-2 1.6-3.5 3.5-3.5S8.5 10 8.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="5" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 8.7c1.8.2 3 1.6 3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>žiaci ZŠ</div>
+      </div>
+      <div class="tile-foot">
+        <div class="tile-price">od 15 € <span>/ polrok</span></div>
+        <a href="https://petrzalkasportuje.sk/" target="_blank" class="tile-link">Viac info →</a>
+      </div>
+      <svg class="tile-wave" width="200" height="40" viewBox="0 0 200 40" fill="none" aria-hidden="true"><path d="M0 20 q12 -16 25 0 q12 16 25 0 q12 -16 25 0 q12 16 25 0 q12 -16 25 0 q12 16 25 0 q12 -16 25 0" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="school-tile tile-amber">
+      <div class="tile-head"><div class="tile-icon"><svg width="24" height="24" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="2.5"/><circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="2.5"/><path d="M20 7v7M20 26v7M7 20h7M26 20h7" stroke="currentColor" stroke-width="2.5"/></svg></div></div>
+      <h3>Kurzy plávania pre MŠ</h3>
+      <div class="tile-meta">
+        <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Petržalská plaváreň, Kutlíkova 2</div>
+        <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Ut a Št dopoludnia</div>
+        <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 12c0-2 1.6-3.5 3.5-3.5S8.5 10 8.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="5" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 8.7c1.8.2 3 1.6 3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>škôlkari 3–6 rokov</div>
+      </div>
+      <div class="tile-foot">
+        <div class="tile-price">od 3 € <span>/ lekcia</span></div>
+        <a href="https://petrzalkasportuje.sk/" target="_blank" class="tile-link">Viac info →</a>
+      </div>
+      <svg class="tile-wave" width="200" height="40" viewBox="0 0 200 40" fill="none" aria-hidden="true"><path d="M0 20 q12 -16 25 0 q12 16 25 0 q12 -16 25 0 q12 16 25 0 q12 -16 25 0 q12 16 25 0 q12 -16 25 0" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 3. AKTÍVNE KOMUNITY ── -->
+<section class="section" id="komunity">
+  <h2 class="section-h2">Aktívne komunity</h2>
+  <div class="club-list">
+
+    <div class="club-row">
+      <div class="club-img"><img src="../assets/akademia.jpg" alt="Plavecká Akadémia"/></div>
+      <div class="club-body">
+        <div class="club-head"><span class="club-tag">Klub</span></div>
+        <div class="club-name">Plavecká Akadémia</div>
+        <div class="club-info">
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg><span><a href="https://www.google.com/maps/search/?api=1&query=Plav%C3%A1re%C5%88%20%C5%A0ustekova%203%2C%20Petr%C5%BEalka%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">Plaváreň Šustekova 3</a> · <a href="https://www.google.com/maps/search/?api=1&query=Petr%C5%BEalsk%C3%A1%20plav%C3%A1re%C5%88%2C%20Kutl%C3%ADkova%202%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">Petržalská plaváreň</a></span></div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 12c0-2 1.6-3.5 3.5-3.5S8.5 10 8.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="5" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 8.7c1.8.2 3 1.6 3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>od 3 mesiacov po dospelých</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="2.4" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/></svg>kurzy plávania · baby plávanie · letné tábory</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>rozvrh na webe klubu</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M10.5 3.6A4.4 4.4 0 0 0 3.4 7a4.4 4.4 0 0 0 7.1 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2 5.8h5M2 8.2h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>cena podľa cenníka na webe klubu</div>
+        </div>
+        <div class="club-foot">
+          <div class="club-ages"><span>baby</span><span>deti</span><span>mládež</span><span>dospelí</span></div>
+          <a href="https://plaveckaakademia.sk/" target="_blank" class="fac-book">Web klubu</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="club-row">
+      <div class="club-img"><img src="../assets/fliper.jpg" alt="Plavecká škola Fliper"/></div>
+      <div class="club-body">
+        <div class="club-head"><span class="club-tag">Plavecká škola</span></div>
+        <div class="club-name">Plavecká škola Fliper</div>
+        <div class="club-info">
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg><span><a href="https://www.google.com/maps/search/?api=1&query=Z%C5%A0%20Turnianska%2C%20Petr%C5%BEalka%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">ZŠ Turnianska</a> · <a href="https://www.google.com/maps/search/?api=1&query=Z%C5%A0%20Budat%C3%ADnska%2061%2C%20Petr%C5%BEalka%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">ZŠ Budatínska</a> (od 9/2026)</span></div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 12c0-2 1.6-3.5 3.5-3.5S8.5 10 8.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="5" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 8.7c1.8.2 3 1.6 3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>predškoláci od 4 rokov · deti · dospelí od 15 r.</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="2.4" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/></svg>výuka plávania od začiatočníkov po plavcov</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Pi popoludní a večer, počas školského roka</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M10.5 3.6A4.4 4.4 0 0 0 3.4 7a4.4 4.4 0 0 0 7.1 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2 5.8h5M2 8.2h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>cena podľa cenníka na webe klubu</div>
+        </div>
+        <div class="club-foot">
+          <div class="club-ages"><span>deti</span><span>mládež</span><span>dospelí</span></div>
+          <a href="https://www.plavaniefliper.sk/" target="_blank" class="fac-book">Web klubu</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="club-row">
+      <div class="club-img"><img src="../assets/nemo.png" alt="Plávanie Nemo"/></div>
+      <div class="club-body">
+        <div class="club-head"><span class="club-tag">Plavecká škola</span></div>
+        <div class="club-name">Plávanie Nemo</div>
+        <div class="club-info">
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg><span><a href="https://www.google.com/maps/search/?api=1&query=Z%C5%A0%20Hol%C3%AD%C4%8Dska%2C%20Petr%C5%BEalka%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">ZŠ Holíčska</a> · <a href="https://www.google.com/maps/search/?api=1&query=Z%C5%A0%20Budat%C3%ADnska%2061%2C%20Petr%C5%BEalka%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">ZŠ Budatínska</a> · <a href="https://www.google.com/maps/search/?api=1&query=Petr%C5%BEalsk%C3%A1%20plav%C3%A1re%C5%88%2C%20Kutl%C3%ADkova%202%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">Petržalská plaváreň</a></span></div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 12c0-2 1.6-3.5 3.5-3.5S8.5 10 8.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="5" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 8.7c1.8.2 3 1.6 3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>deti od 4 rokov · dospelí · skupiny 3–6 detí na trénera</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="2.4" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/></svg>kurzy pre začiatočníkov aj pokročilých · individuálne lekcie</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–So, podľa miesta · kurzy na 3 mesiace</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M10.5 3.6A4.4 4.4 0 0 0 3.4 7a4.4 4.4 0 0 0 7.1 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2 5.8h5M2 8.2h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>od 12 € / lekcia (+ vstup na plavárni)</div>
+        </div>
+        <div class="club-foot">
+          <div class="club-ages"><span>deti</span><span>mládež</span><span>dospelí</span></div>
+          <a href="https://www.plavanienemo.sk/" target="_blank" class="fac-book">Web klubu</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="club-row">
+      <div class="club-img"><img src="../assets/royal.jpeg" alt="ROYAL swimming club"/></div>
+      <div class="club-body">
+        <div class="club-head"><span class="club-tag">Klub</span></div>
+        <div class="club-name">ROYAL swimming club</div>
+        <div class="club-info">
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg><span><a href="https://www.google.com/maps/search/?api=1&query=I%C4%BEju%C5%A1inova%2C%20Petr%C5%BEalka%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">Iľjušinova, Petržalka</a> (sídlo klubu)</span></div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 12c0-2 1.6-3.5 3.5-3.5S8.5 10 8.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="5" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 8.7c1.8.2 3 1.6 3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>kurzy pre deti 5–13 r. · výkonnostné skupiny · Masters</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="2.4" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/></svg>certifikovaná výuka · kondičné a výkonnostné plávanie · tábory</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>rozvrh na webe klubu</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M10.5 3.6A4.4 4.4 0 0 0 3.4 7a4.4 4.4 0 0 0 7.1 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2 5.8h5M2 8.2h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>letné tábory od 132 € · kurzy podľa cenníka</div>
+        </div>
+        <div class="club-foot">
+          <div class="club-ages"><span>deti</span><span>mládež</span><span>dospelí</span></div>
+          <a href="http://royalclub.sk/" target="_blank" class="fac-book">Web klubu</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="club-row">
+      <div class="club-img"><img src="../assets/sharks.jpeg" alt="Plavecký klub Sharks Bratislava"/></div>
+      <div class="club-body">
+        <div class="club-head"><span class="club-tag">Klub</span></div>
+        <div class="club-name">Plavecký klub Sharks Bratislava</div>
+        <div class="club-info">
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg><span><a href="https://www.google.com/maps/search/?api=1&query=Tupolevova%2C%20Petr%C5%BEalka%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">Tupolevova, Petržalka</a></span></div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 12c0-2 1.6-3.5 3.5-3.5S8.5 10 8.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="5" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 8.7c1.8.2 3 1.6 3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>deti aj dospelí</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="2.4" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/></svg>výuka plávania · kondičné plávanie</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>rozvrh a ceny priamo u klubu</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M10.5 3.6A4.4 4.4 0 0 0 3.4 7a4.4 4.4 0 0 0 7.1 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2 5.8h5M2 8.2h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>cena priamo u klubu</div>
+        </div>
+        <div class="club-foot">
+          <div class="club-ages"><span>deti</span><span>dospelí</span></div>
+          <a href="#" class="fac-book">Web klubu</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="club-row">
+      <div class="club-img"><img src="../assets/certi.jpeg" alt="Aqua Baby Club Vodní Čerti"/></div>
+      <div class="club-body">
+        <div class="club-head"><span class="club-tag">Baby plávanie</span></div>
+        <div class="club-name">Aqua Baby Club Vodní Čerti</div>
+        <div class="club-info">
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg><span><a href="https://www.google.com/maps/search/?api=1&query=%C4%8Cerny%C5%A1evsk%C3%A9ho%2012%2C%20Petr%C5%BEalka%2C%20Bratislava" target="_blank" rel="noopener" class="map-link">Černyševského 12, Petržalka</a></span></div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 12c0-2 1.6-3.5 3.5-3.5S8.5 10 8.5 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="5" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 8.7c1.8.2 3 1.6 3 3.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>bábätká a batoľatá 4 mesiace – 3 roky</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="2.4" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/></svg>hravé lekcie s pesničkami · detské saunovanie</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po a Pi 8:00–14:00</div>
+          <div class="fac-meta-row"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M10.5 3.6A4.4 4.4 0 0 0 3.4 7a4.4 4.4 0 0 0 7.1 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M2 5.8h5M2 8.2h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>od 80 € / kurz · skúšobná lekcia 25 €</div>
+        </div>
+        <div class="club-foot">
+          <div class="club-ages"><span>baby</span></div>
+          <a href="https://www.detskeplavanie.sk/bratislava" target="_blank" class="fac-book">Web klubu</a>
+        </div>
       </div>
     </div>
 
   </div>
 </section>
 
-<div class="back-section"><a href="../index.html#sporty" class="back-link">← Späť na všetky športy</a></div>
-<footer><div class="footer-brand">Petržalka športuje</div><div class="footer-copy">© 2026 Petržalka športuje. Všetky práva vyhradené.</div></footer>
-<script src="sport.js"></script>
-<script>(function(){try{var c=JSON.parse(localStorage.getItem("ps_cart")||"[]");var b=document.getElementById("navCartBadge");if(b&&c.length>0){b.style.display="inline-flex";b.textContent=c.length;}}catch(e){}})();</script>
+
+<section class="section section-gray" id="faq">
+  <div class="faq-wrap">
+    <div class="faq-aside">
+      <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px;">Pomoc</p>
+      <h2>Najčastejšie otázky</h2>
+      <p>Nenašiel si odpoveď? Kontaktuj nás na <strong>sportuje@petrzalka.sk</strong> alebo zavolaj na recepciu zariadenia.</p>
+      <a href="#" class="btn btn-primary" style="margin-top:16px;display:inline-flex;">Kontaktovať nás</a>
+    </div>
+    <div id="faqList"><div class="faq-item"><button class="faq-q" onclick="toggleFaq(0,this)">Aké sú možnosti platby?<span class="faq-icon">+</span></button><div class="faq-a" id="fa0">Akceptujeme platbu kartou online pri rezervácii aj hotovosť priamo v zariadení.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(1,this)">Ako sa môžem prihlásiť na aktivitu alebo kemp?<span class="faq-icon">+</span></button><div class="faq-a" id="fa1">Klikni Rezervovať pri vybranom zariadení, vyber termín a dokonči registráciu. Potvrdenie príde emailom.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(2,this)">Musím byť z Petržalky?<span class="faq-icon">+</span></button><div class="faq-a" id="fa2">Nie, aktivity sú otvorené pre všetkých. Obyvatelia Petržalky majú nárok na zľavnené vstupné — stačí preukázať trvalý pobyt.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(3,this)">Ako zrušiť rezerváciu?<span class="faq-icon">+</span></button><div class="faq-a" id="fa3">Rezerváciu zrušíš najneskôr 24 hodín pred termínom v používateľskom účte. Vrátenie platby prebehne do 5 pracovných dní.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(4,this)">Fungujú zariadenia aj cez sviatky?<span class="faq-icon">+</span></button><div class="faq-a" id="fa4">Otváracie hodiny počas sviatkov nájdeš pri konkrétnom zariadení — môžu sa líšiť od bežných.</div></div></div>
+  </div>
+</section>
+
+<!-- Footer vkladá zdieľaný site.js -->
+<script>
+/* Hero: rotacia fotiek zo sekcie Aktivne prostredie (fade every 3 s) */
+(function(){
+  var hero = document.querySelector('.sport-hero.hero-photo');
+  var imgs = Array.from(document.querySelectorAll('#prostredie .fac-img img'))
+    .map(function(i){ return i.getAttribute('src'); })
+    .filter(function(src, i, arr){ return arr.indexOf(src) === i; });
+  if (!hero || imgs.length < 2) return;
+  hero.classList.add('hero-rotate');
+  var slides = imgs.slice(0, 2).map(function(){
+    var d = document.createElement('div');
+    d.className = 'hero-slide';
+    hero.prepend(d);
+    return d;
+  });
+  imgs.forEach(function(src){ new Image().src = src; });
+  var idx = 0, cur = slides[0], next = slides[1];
+  cur.style.backgroundImage = 'url("' + imgs[0] + '")';
+  cur.classList.add('active');
+  setInterval(function(){
+    idx = (idx + 1) % imgs.length;
+    next.style.backgroundImage = 'url("' + imgs[idx] + '")';
+    next.classList.add('active');
+    cur.classList.remove('active');
+    var t = cur; cur = next; next = t;
+  }, 3000);
+})();
+</script>
+<script>
+function toggleFaq(i, btn) {
+  const a = document.getElementById('fa'+i);
+  const open = a.classList.toggle('open');
+  btn.classList.toggle('open', open);
+}
+</script>
+<script src="../site.js?v=2" defer></script>
 </body>
 </html>

@@ -32,9 +32,34 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .sport-hero h1{font-size:clamp(26px,3vw,38px);font-weight:900;letter-spacing:-.03em;}
 .sport-hero p{font-size:15px;color:var(--muted);margin-top:6px;}
 
+/* SPORT HERO – foto variant (fotka sa nastavuje inline cez --hero-img) */
+.sport-hero.hero-photo{
+  border-bottom:none;
+  padding:56px 40px 56px;
+  background:
+    linear-gradient(100deg,rgba(13,38,24,.92) 0%,rgba(13,38,24,.72) 45%,rgba(13,38,24,.38) 100%),
+    var(--hero-img,linear-gradient(120deg,#0d2618,var(--green))) center/cover no-repeat,
+    #0d2618;
+}
+.hero-photo{position:relative;overflow:hidden;}
+.hero-photo .breadcrumb,.hero-photo .sport-hero-inner{position:relative;z-index:2;}
+/* Rotujuce pozadie: .hero-slide vrstvy vklada JS, gradient drzi ::after nad nimi */
+.hero-rotate .hero-slide{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transition:opacity 1.4s ease;z-index:0;}
+.hero-rotate .hero-slide.active{opacity:1;}
+.hero-rotate::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(100deg,rgba(13,38,24,.92) 0%,rgba(13,38,24,.72) 45%,rgba(13,38,24,.38) 100%);}
+.hero-photo .breadcrumb{color:rgba(255,255,255,.65)}
+.hero-photo .breadcrumb a{color:rgba(255,255,255,.9)}
+.hero-photo .sep{opacity:.5}
+.hero-photo .sport-hero-icon{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;backdrop-filter:blur(4px);}
+.hero-photo h1{color:#fff}
+.hero-photo p{color:rgba(255,255,255,.82)}
+
 /* SECTION */
 .section{padding:60px 40px;}
 .section-h2{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:32px;}
+.section-h2:has(+ .section-sub){margin-bottom:6px;}
+.section-sub{font-size:14px;color:var(--muted);margin-bottom:32px;max-width:640px;}
+.section-alt{background:var(--light);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 
 /* FAC GRID */
 .fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
@@ -55,6 +80,85 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .fac-book{font-size:12px;font-weight:700;color:var(--green);border:1.5px solid var(--green);border-radius:6px;padding:6px 14px;transition:all .15s;text-decoration:none;}
 .fac-card:hover .fac-book{background:var(--green);color:#fff;}
 
+/* FAC GRID – kompaktný 4-stĺpcový variant */
+.fac-grid.cols-4{grid-template-columns:repeat(4,1fr);gap:16px;}
+.cols-4 .fac-img{height:140px;}
+.cols-4 .fac-body{padding:14px 16px 16px;}
+.cols-4 .fac-name{font-size:15px;}
+.cols-4 .fac-meta{font-size:12px;}
+.cols-4 .fac-footer{margin-top:12px;padding-top:12px;}
+.cols-4 .fac-price{font-size:13px;}
+.cols-4 .fac-price span{font-size:12px;}
+.cols-4 .fac-book{font-size:11px;padding:5px 11px;}
+
+/* Dekorativna vypln (petrzalske motivy z dizajn manualu) v poslednom riadku
+   gridu sportovisk — zelene linky na bielom, roztiahne sa cez vsetky volne
+   stlpce. Ked by ostala sama v riadku, media pravidla nizsie ju skryju. */
+.fac-deco{display:flex;align-items:flex-end;justify-content:center;padding:12px 16px 4px;}
+.fac-deco svg{width:100%;height:100%;max-height:250px;color:var(--green);}
+/* Roztiahnutie cez vsetky volne stlpce podla pozicie v riadku;
+   ked by bola deco sama v riadku, skryje sa. */
+@media(min-width:901px){
+  .fac-grid:not(.cols-4)>.fac-deco:nth-child(3n+2){grid-column:-3/-1}
+  .fac-grid:not(.cols-4)>.fac-deco:nth-child(3n+1):last-child{display:none}
+}
+@media(min-width:1101px){
+  .fac-grid.cols-4>.fac-deco:nth-child(4n+2){grid-column:-4/-1}
+  .fac-grid.cols-4>.fac-deco:nth-child(4n+3){grid-column:-3/-1}
+  .fac-grid.cols-4>.fac-deco:nth-child(4n+1):last-child{display:none}
+}
+@media(min-width:901px) and (max-width:1100px){
+  .fac-grid.cols-4>.fac-deco:nth-child(3n+2){grid-column:-3/-1}
+  .fac-grid.cols-4>.fac-deco:nth-child(3n+1):last-child{display:none}
+}
+@media(min-width:601px) and (max-width:900px){
+  .fac-grid>.fac-deco:nth-child(2n+1):last-child{display:none}
+}
+
+/* AKTÍVNE ŠKOLY – farebné dlaždice */
+.school-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.school-tile{position:relative;overflow:hidden;border-radius:14px;padding:24px 24px 20px;display:flex;flex-direction:column;gap:10px;color:var(--text);transition:transform .2s,box-shadow .2s;}
+.school-tile:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.1);}
+.tile-head{display:flex;align-items:flex-start;justify-content:flex-end;gap:10px;min-height:42px;}
+.tile-icon{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.5);display:grid;place-items:center;flex-shrink:0;}
+.tile-icon svg{width:24px;height:24px;}
+.school-tile h3{font-size:19px;font-weight:800;letter-spacing:-.01em;line-height:1.25;position:relative;z-index:1;}
+.tile-meta{display:flex;flex-direction:column;gap:6px;flex:1;font-size:13px;color:rgba(26,42,26,.78);position:relative;z-index:1;}
+.tile-meta .fac-meta-row svg{color:rgba(26,42,26,.55);}
+.tile-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:14px;border-top:1px solid rgba(26,42,26,.14);position:relative;z-index:1;}
+.tile-price{font-size:14px;font-weight:800;}
+.tile-price span{font-weight:400;font-size:12.5px;color:rgba(26,42,26,.6);}
+.tile-link{font-size:12px;font-weight:700;white-space:nowrap;border:1.5px solid rgba(26,42,26,.35);border-radius:6px;padding:6px 13px;transition:all .15s;}
+.tile-link:hover{background:rgba(26,42,26,.85);border-color:transparent;color:#fff;}
+.tile-wave{position:absolute;right:-20px;bottom:34px;width:200px;height:auto;opacity:.14;pointer-events:none;}
+.tile-green{background:#cde9d6;}
+.tile-green .tile-icon svg,.tile-green .tile-wave{color:#1e5e3a;}
+.tile-blue{background:#cfe0f0;}
+.tile-blue .tile-icon svg,.tile-blue .tile-wave{color:#26517c;}
+.tile-amber{background:#f6e7c6;}
+.tile-amber .tile-icon svg,.tile-amber .tile-wave{color:#8a6416;}
+
+/* AKTÍVNE KOMUNITY – horizontálne karty */
+.club-list{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.club-row{display:flex;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:box-shadow .2s;}
+.club-row:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);}
+.club-img{width:180px;flex-shrink:0;background:#d0ddd0;position:relative;}
+.club-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.club-body{padding:18px 22px 16px;display:flex;flex-direction:column;gap:5px;flex:1;min-width:0;}
+.club-tag{align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--light);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--green);}
+.club-name{font-size:17px;font-weight:800;letter-spacing:-.01em;margin-top:2px;}
+.club-meta{font-size:13px;color:var(--muted);line-height:1.5;}
+.club-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:12px;}
+.club-price{font-size:14px;font-weight:700;}
+.club-price span{font-weight:400;font-size:13px;color:var(--muted);}
+.club-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.club-head .club-tag{align-self:auto;}
+.club-status{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--green);background:#e8f3ec;border-radius:20px;padding:3px 10px;}
+.club-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);}
+.club-info{display:flex;flex-direction:column;gap:6px;margin:6px 0 4px;font-size:13px;color:var(--muted);}
+.club-ages{display:flex;gap:6px;flex-wrap:wrap;}
+.club-ages span{font-size:11px;font-weight:600;background:var(--light);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--text);}
+
 /* EMPTY */
 .empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);}
 .empty-state h3{font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;}
@@ -69,16 +173,31 @@ footer{background:#111;color:#fff;padding:40px 40px 24px;}
 .footer-brand{font-weight:800;font-size:15px;margin-bottom:6px;}
 .footer-copy{font-size:13px;color:rgba(255,255,255,.35);margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);}
 
-@media(max-width:900px){.fac-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1100px){.fac-grid.cols-4{grid-template-columns:repeat(3,1fr)}.club-list{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .fac-grid{grid-template-columns:repeat(2,1fr)}
+  .fac-grid.cols-4{grid-template-columns:repeat(2,1fr)}
+  .school-tiles{grid-template-columns:1fr;gap:14px;}
+  .club-img{width:170px;}
+}
+@media(max-width:800px){.nav-links{display:none}}
 @media(max-width:600px){
   .fac-grid{grid-template-columns:1fr}
-  .nav-links{display:none}
+  .fac-grid.cols-4{grid-template-columns:1fr}
+  .school-tile{padding:20px 18px 16px;}
+  .club-row{flex-direction:column;}
+  .club-img{width:100%;height:170px;}
+  .club-body{padding:14px 16px 14px;}
   .nav{padding:0 16px;gap:8px;}
   .nav-logo{font-size:13px;}
+  .nav-right{gap:6px}
+  .nav-cart-text{display:none}
+  #navCartBtn{padding:7px 10px !important;font-size:12px !important;}
   .btn{font-size:12px;padding:7px 11px;}
   .section{padding:32px 16px}
   .section-h2{font-size:18px;margin-bottom:20px;}
   .sport-hero{padding:24px 16px}
+  .sport-hero.hero-photo{padding:28px 16px 32px}
   .sport-hero h1{font-size:24px;}
   .sport-hero p{font-size:14px;}
   .fac-card{border-radius:10px;}
@@ -86,3 +205,41 @@ footer{background:#111;color:#fff;padding:40px 40px 24px;}
   .back-section{padding:16px}
   .footer{padding:32px 16px 20px}
 }
+@media(max-width:430px){
+  .nav-logo span,.nav-logo-text{display:none}
+}
+
+/* SECTION VARIANTY + AKO TO FUNGUJE + FAQ (prevzate z index.html) */
+.section-gray{background:#fafaf8;}
+.section-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px;}
+.section-row h2{font-size:22px;font-weight:800;letter-spacing:-.02em;}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);overflow:hidden;}
+.how-step{padding:36px 32px;border-right:1px solid var(--border);background:#fff;}
+.how-step:last-child{border-right:none}
+.how-num{width:40px;height:40px;background:var(--green);color:#fff;border-radius:10px;display:grid;place-items:center;font-size:16px;font-weight:900;margin-bottom:20px;}
+.how-step h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em;}
+.how-step p{font-size:13px;color:var(--muted);line-height:1.65;}
+.faq-wrap{display:grid;grid-template-columns:360px 1fr;gap:80px;align-items:start;}
+.faq-aside h2{font-size:clamp(22px,2.5vw,30px);font-weight:900;letter-spacing:-.03em;margin-bottom:12px;}
+.faq-aside p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:18px 0;font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:inherit;cursor:pointer;letter-spacing:-.01em;}
+.faq-icon{width:22px;height:22px;border:1.5px solid var(--border);border-radius:50%;display:grid;place-items:center;font-size:14px;color:var(--muted);transition:all .2s;flex-shrink:0;}
+.faq-q.open .faq-icon{background:var(--green);border-color:var(--green);color:#fff;transform:rotate(45deg);}
+.faq-a{font-size:14px;color:var(--muted);line-height:1.75;padding-bottom:18px;display:none;}
+.faq-a.open{display:block}
+@media(max-width:1100px){
+  .how-grid{grid-template-columns:repeat(2,1fr)}
+  .how-step:nth-child(2){border-right:none}
+  .how-step:nth-child(-n+2){border-bottom:1px solid var(--border)}
+  .faq-wrap{grid-template-columns:1fr;gap:40px}
+}
+@media(max-width:720px){
+  .how-grid{grid-template-columns:1fr}
+  .how-step{border-right:none;border-bottom:1px solid var(--border)}
+  .how-step:last-child{border-bottom:none}
+}
+
+/* Klikatelne adresy klubov -> Google Mapy */
+.club-info a.map-link{color:inherit;transition:color .15s;}
+.club-info a.map-link:hover{color:var(--green);text-decoration:underline;}

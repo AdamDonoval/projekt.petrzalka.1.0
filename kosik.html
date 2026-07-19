@@ -107,36 +107,21 @@
     .steps-inner{gap:0;}
     .step span{display:none;}
   }
-  @media(max-width:600px){.nav{padding:0 16px;gap:8px;}.btn{font-size:12px;padding:7px 11px;}}
+  @media(max-width:600px){
+    .nav{padding:0 16px;gap:8px;}.btn{font-size:12px;padding:7px 11px;}.nav-right{gap:6px;}.nav-cart-text{display:none;}#navCartBtn{padding:7px 10px !important;font-size:12px !important;}
+    .cart-table th,.cart-table td{padding:10px 8px;}
+    .item-info svg{display:none;}
+    .item-info{gap:0;}
+    .item-name{font-size:13px;}
+    .item-price{font-size:13px;white-space:nowrap;}
+  }
+  @media(max-width:430px){.nav-logo-text{display:none;}}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-mark">
-      <img src="assets/uvodna.png" alt="Petržalka športuje"/>
-    </div>
-    Petržalka športuje
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">Domov</a></li>
-    <li><a href="index.html#sporty">Športy</a></li>
-    <li><a href="index.html#zariadenia">Zariadenia</a></li>
-    <li><a href="index.html#komunita">Komunita</a></li>
-    <li><a href="index.html#akcie">Akcie</a></li>
-    <li><a href="index.html#faq">FAQ</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="auth.html" class="btn btn-outline">Prihlásiť sa</a>
-    <a href="kosik.html" id="navCartBtn" style="position:relative;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1.5px solid #2d7a4f;font-size:14px;font-weight:600;color:#2d7a4f;transition:all .15s;text-decoration:none;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      Košík<span id="navCartBadge" style="display:none;position:absolute;top:-6px;right:-6px;background:#2d7a4f;color:#fff;border-radius:99px;font-size:10px;font-weight:700;min-width:18px;height:18px;align-items:center;justify-content:center;padding:0 4px;"></span>
-    </a>
-    <a href="auth.html?tab=register" class="btn btn-primary">Rezervovať</a>
-  </div>
-</nav>
+<!-- Navigáciu vkladá zdieľaný site.js -->
 
 <!-- KROKY -->
 <div class="steps">
@@ -165,52 +150,7 @@
 </div>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a href="index.html">
-        <img src="https://petrzalkasportuje.sk/wp-content/uploads/2024/02/petrzalka_sportuje_logo_2024_horizontal_white-small.png" alt="Petržalka športuje logo"/>
-      </a>
-    </div>
-    <div>
-      <h4>Pre zákazníkov</h4>
-      <ul>
-        <li><a href="https://petrzalkasportuje.sk/gdpr/" target="_blank">Spracovanie osobných údajov</a></li>
-        <li><a href="https://petrzalkasportuje.sk/obchodne-podmienky/" target="_blank">Všeobecné obchodné podmienky</a></li>
-        <li><a href="https://petrzalkasportuje.sk/faq/" target="_blank">FAQ – Najčastejšie otázky</a></li>
-        <li><a href="https://petrzalkasportuje.sk/mapa-stranok" target="_blank">Mapa stránok</a></li>
-        <li><a href="https://petrzalkasportuje.sk/kontakty/" target="_blank">Kontakty</a></li>
-        <li><a href="https://petrzalkasportuje.sk/zamestnanecka-zona/" target="_blank">Zamestnanecká zóna</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Kontakt</h4>
-      <div class="footer-contact-label">Adresa</div>
-      <div class="footer-contact-val">Kutlíkova 17, 851 02 Bratislava</div>
-      <div class="footer-contact-label">E-mail</div>
-      <div class="footer-contact-val"><a href="mailto:info@petrzalkasportuje.sk">info@petrzalkasportuje.sk</a></div>
-      <div class="footer-contact-label" style="margin-bottom:10px;">Sledujte nás</div>
-      <div class="footer-socials">
-        <a href="https://www.facebook.com/petrzalkasportuje" target="_blank" title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="https://www.instagram.com/petrzalkasportuje" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="#1a2a1a"/></svg></a>
-        <a href="https://youtube.com/@bratislavapetrzalka" target="_blank" title="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1a2a1a"/></svg></a>
-        <a href="https://www.linkedin.com/company/bratislavapetrzalka/" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-      </div>
-    </div>
-    <div>
-      <h4>Ohodnoťte nás</h4>
-      <div class="footer-reviews">
-        <a href="https://g.page/r/Cejl3xKjiNCHEAE/review" target="_blank" rel="nofollow">
-          <img src="https://petrzalkasportuje.sk/wp-content/uploads/2024/04/google-reviews.png" alt="Google reviews"/>
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Petržalka športuje. Všetky práva vyhradené.</span>
-    <span>Mestská časť Petržalka</span>
-  </div>
-</footer>
+<!-- Footer vkladá zdieľaný site.js -->
 
 <script>
 function getCart() {
@@ -318,5 +258,6 @@ function renderCart() {
 
 renderCart();
 </script>
+<script src="site.js?v=2" defer></script>
 </body>
 </html>

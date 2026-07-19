@@ -68,8 +68,14 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   min-height:560px;
   overflow:hidden;
 }
+@media(min-width:769px){
+  .hero{
+    height:calc(100vh - 64px);
+    height:calc(100dvh - 64px);
+  }
+}
 .hero-left{
-  padding:72px clamp(20px,4vw,60px);
+  padding:clamp(24px,6vh,72px) clamp(20px,4vw,60px);
   display:flex;flex-direction:column;justify-content:center;
 }
 .hero-eyebrow{
@@ -132,68 +138,50 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .search-result-name{font-weight:600;color:var(--dark)}
 .search-result-cat{font-size:12px;color:var(--muted)}
 
-/* ─── HERO RIGHT (decorative card) ─── */
+/* ─── HERO RIGHT (obľúbené športoviská) ─── */
 .hero-right{
   background:var(--green-light);
-  display:flex;align-items:center;justify-content:center;
-  padding:32px;
+  padding:28px;
   position:relative;
 }
 .hero-card{
-  background:#fff;
-  border-radius:24px;
-  box-shadow:0 8px 40px rgba(26,107,53,.1);
-  width:100%;max-width:420px;
-  padding:20px;
-  position:relative;
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+}
+.hero-fac-header{margin-bottom:16px;}
+.hero-fac-title{font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--dark);line-height:1.2;}
+.hero-fac-sub{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.35;}
+.hero-fac-grid{
   display:grid;
-  grid-template-rows:1fr 1fr;
-  gap:10px;
-  height:100%;max-height:420px;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-rows:minmax(0,1fr) minmax(0,1fr);
+  gap:10px;flex:1;min-height:0;
 }
-/* dotted pattern */
-.hero-card::before{
-  content:'';position:absolute;
-  top:12px;right:12px;
-  width:120px;height:120px;
-  background-image:radial-gradient(circle,#a8d8b8 1.5px,transparent 1.5px);
-  background-size:14px 14px;
-  opacity:.6;pointer-events:none;border-radius:8px;
+.hero-fac-item{
+  position:relative;display:block;text-decoration:none;
+  overflow:hidden;background:var(--green);
 }
-.hero-card::after{
-  content:'';position:absolute;
-  bottom:80px;left:12px;
-  width:80px;height:80px;
-  background-image:radial-gradient(circle,#a8d8b8 1.5px,transparent 1.5px);
-  background-size:14px 14px;
-  opacity:.5;pointer-events:none;
+.hero-fac-item img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  opacity:.05;transition:opacity .45s ease;
 }
-.hero-photos-row{display:grid;gap:10px;}
-.hero-photos-row:first-child{grid-template-columns:1fr;}
-.hero-photos-row:last-child{grid-template-columns:1fr 1fr;}
-.hero-photo-slot{
-  background:var(--green-light);
-  border-radius:14px;
-  overflow:hidden;
-  min-height:120px;
+.hero-fac-item::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(10,40,20,.8), rgba(10,40,20,0) 55%);
+  opacity:0;transition:opacity .45s ease;
 }
-.hero-photo-slot img{width:100%;height:100%;object-fit:cover;display:block;}
+@media(hover:hover){
+  .hero-fac-item:hover img{opacity:1;}
+  .hero-fac-item:hover::after{opacity:1;}
+}
+.hero-fac-txt{
+  position:absolute;inset:0;padding:16px;
+  display:flex;flex-direction:column;justify-content:flex-end;gap:4px;z-index:1;
+}
+.hero-fac-name{color:#fff;font-size:14px;font-weight:800;line-height:1.25;}
+.hero-fac-info{color:rgba(255,255,255,.75);font-size:11.5px;font-weight:500;line-height:1.4;}
 
-/* floating icon badges */
-.hero-badge{
-  position:absolute;
-  background:#fff;
-  border-radius:16px;
-  padding:12px 14px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 20px rgba(0,0,0,.1);
-  color:var(--green);
-  z-index:10;
-}
-.hero-badge svg{width:26px;height:26px;}
-.hb-tl{top:-14px;left:-14px;}
-.hb-tr{top:-14px;right:-14px;}
-.hb-br{bottom:-14px;right:-14px;}
 .hero-search{
   display:flex;align-items:center;
   background:#fff;border:1.5px solid var(--border);
@@ -451,14 +439,23 @@ footer ul a:hover{color:#fff}
   .how-grid{grid-template-columns:repeat(2,1fr)}
   .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
   .faq-wrap{grid-template-columns:1fr;gap:40px}
+  .nav-links{display:none}
 }
 @media(max-width:768px){
   .nav{padding:0 12px;gap:6px;}
   .nav-links{display:none}
-  .nav-logo span{display:none}
+  .nav-logo-text{display:none}
+  .nav-right{gap:6px}
+  .nav-cart-text{display:none}
+  #navCartBtn{padding:7px 10px !important;font-size:12px !important;}
   .btn{font-size:12px;padding:7px 11px;}
   .hero{grid-template-columns:1fr}
-  .hero-right{display:none}
+  .hero-right{padding:24px 20px 28px;}
+  .hero-fac-grid{grid-template-rows:auto auto;}
+  .hero-fac-item{aspect-ratio:4/3;}
+  .hero-fac-txt{padding:12px;}
+  .hero-fac-name{font-size:13px;}
+  .hero-fac-info{font-size:11px;}
   .hero-left{padding:40px 20px}
   .hero-search-wrap{max-width:100%;}
   .hero-search input{font-size:14px;}
@@ -477,31 +474,7 @@ footer ul a:hover{color:#fff}
 
 <!-- ── NAV ── -->
 <div class="search-overlay" id="searchOverlay" onclick="closeSearch()"></div>
-<nav class="nav">
-  <a href="#" class="nav-logo">
-    <div class="nav-logo-mark" style="overflow:hidden;padding:0;">
-      <img src="assets/uvodna.png" alt="Petržalka športuje" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:8px;"/>
-    </div>
-    Petržalka športuje
-  </a>
-  <ul class="nav-links">
-    <li><a href="#" class="active">Domov</a></li>
-    <li><a href="#sporty">Športy</a></li>
-    <li><a href="#zariadenia">Zariadenia</a></li>
-    <li><a href="#komunita">Komunita</a></li>
-    <li><a href="#akcie">Akcie</a></li>
-    <li><a href="#faq">FAQ</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="auth.html" class="btn btn-outline">Prihlásiť sa</a>
-    <a href="kosik.html" style="position:relative;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--border);font-size:14px;font-weight:600;color:var(--dark);transition:all .15s;" id="navCartBtn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      Košík
-      <span id="navCartBadge" style="display:none;position:absolute;top:-6px;right:-6px;background:#2d7a4f;color:#fff;border-radius:99px;font-size:10px;font-weight:700;min-width:18px;height:18px;align-items:center;justify-content:center;padding:0 4px;"></span>
-    </a>
-    <a href="auth.html?tab=register" class="btn btn-primary">Rezervovať</a>
-  </div>
-</nav>
+<!-- Navigáciu vkladá zdieľaný site.js -->
 
 <!-- ── HERO ── -->
 <div class="hero">
@@ -527,30 +500,45 @@ footer ul a:hover{color:#fff}
 
     <div class="hero-btns" style="margin-top:24px;">
       <button class="btn btn-primary" onclick="document.getElementById('sporty').scrollIntoView({behavior:'smooth'})">Zobraziť športy →</button>
-      <button class="btn btn-outline" onclick="document.getElementById('ako').scrollIntoView({behavior:'smooth'})">Ako to funguje →</button>
     </div>
   </div>
 
   <div class="hero-right">
     <div class="hero-card">
-      <!-- floating badges -->
-      <div class="hero-badge hb-tl">
-        <svg viewBox="0 0 26 26" fill="none"><path d="M3 17c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0 5-2.5 7.5 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="9" r="4" stroke="currentColor" stroke-width="2"/></svg>
+      <!-- obľúbené športoviská -->
+      <div class="hero-fac-header">
+        <div class="hero-fac-title">Obľúbené športoviská</div>
+        <div class="hero-fac-sub">Miesta, ktoré majú Petržalčania najradšej</div>
       </div>
-      <div class="hero-badge hb-tr">
-        <svg viewBox="0 0 26 26" fill="none"><path d="M7 20l4-12 2 5 2-5 4 12M5 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="hero-badge hb-br">
-        <svg viewBox="0 0 26 26" fill="none"><circle cx="7" cy="18" r="4" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="18" r="4" stroke="currentColor" stroke-width="2"/><path d="M7 18l6-9 6 9M17 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-
-      <!-- foto sloty -->
-      <div class="hero-photos-row">
-        <div class="hero-photo-slot" id="heroSlot1"><img src="assets/b3.jpg" alt=""/></div>
-      </div>
-      <div class="hero-photos-row">
-        <div class="hero-photo-slot" id="heroSlot2"><img src="assets/uvodna2.jpg" alt=""/></div>
-        <div class="hero-photo-slot" id="heroSlot3"><img src="assets/uvodna3.jpg" alt=""/></div>
+      <div class="hero-fac-grid">
+        <a class="hero-fac-item" href="sporty/petrzalska-plavaren.html">
+          <img src="assets/bazen_petrzalka.jpg" alt="Petržalská plaváreň"/>
+          <div class="hero-fac-txt">
+            <span class="hero-fac-name">Petržalská plaváreň</span>
+            <span class="hero-fac-info">25 m bazén · 5 dráh · od 4 €</span>
+          </div>
+        </a>
+        <a class="hero-fac-item" href="sportoviska.html">
+          <img src="assets/holicska.png" alt="Bazén Holíčska"/>
+          <div class="hero-fac-txt">
+            <span class="hero-fac-name">Bazén Holíčska</span>
+            <span class="hero-fac-info">Holíčska · od 4 €</span>
+          </div>
+        </a>
+        <a class="hero-fac-item" href="sportoviska.html">
+          <img src="assets/pankuchova.jpg" alt="Bazén Pankúchova"/>
+          <div class="hero-fac-txt">
+            <span class="hero-fac-name">Bazén Pankúchova</span>
+            <span class="hero-fac-info">Pankúchova · od 4 €</span>
+          </div>
+        </a>
+        <a class="hero-fac-item" href="sportoviska.html">
+          <img src="assets/sporhal.png" alt="Športová hala Pankúchová"/>
+          <div class="hero-fac-txt">
+            <span class="hero-fac-name">Športová hala Pankúchová</span>
+            <span class="hero-fac-info">Viacúčelová hala</span>
+          </div>
+        </a>
       </div>
     </div>
   </div>
@@ -626,7 +614,7 @@ footer ul a:hover{color:#fff}
     </div>
 
     <div class="sport-item sport-hidden">
-      <div class="sport-item-photo"><img src="assets/skola.jpg" alt="Yoga"/></div>
+      <div class="sport-item-photo"><img src="assets/yoga.jpg" alt="Yoga"/></div>
       <div class="sport-item-body">
         <div class="sport-icon-wrap"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="8" r="4" stroke="currentColor" stroke-width="2.5"/><path d="M12 20c4-8 12-8 16 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M8 32c3-6 7-9 12-9s9 3 12 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
         <div class="sport-name">Yoga a pilates</div>
@@ -710,209 +698,8 @@ footer ul a:hover{color:#fff}
 </section>
 
 <!-- ── COMMUNITY ── -->
-<section class="section section-gray" id="komunita">
-  <div class="section-row">
-    <h2>Školy, komunity a kluby</h2>
-  </div>
-  <div class="community-grid">
-    <div class="community-card">
-      <img src="assets/skola.jpg" alt="Aktívne školy"/>
-      <div class="community-overlay">
-        <span class="community-arrow">→</span>
-        <div class="community-tag">Vzdelávanie & šport</div>
-        <h3>Aktívne školy</h3>
-        <p>Športové programy, krúžky a tábory pre deti</p>
-      </div>
-    </div>
-    <div class="community-card">
-      <img src="assets/komunitka.png" alt="Aktívne komunity"/>
-      <div class="community-overlay">
-        <span class="community-arrow">→</span>
-        <div class="community-tag">Skupiny & susedia</div>
-        <h3>Aktívne komunity</h3>
-        <p>Skupinové tréningy, parky a verejné ihriská</p>
-      </div>
-    </div>
-    <div class="community-card">
-      <img src="assets/kluby.jpg" alt="Aktívne kluby"/>
-      <div class="community-overlay">
-        <span class="community-arrow">→</span>
-        <div class="community-tag">Kluby & ligy</div>
-        <h3>Aktívne kluby</h3>
-        <p>Amatérske ligy, turnaje a miestne športové kluby</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FACILITIES ── -->
-<section class="section" id="zariadenia">
-  <div class="section-row">
-    <h2>Obľúbené športoviská</h2>
-  </div>
-  <div style="margin-bottom:20px;">
-    <button class="fac-more-btn" id="facMoreBtn" onclick="window.location.href='sportoviska.html'">Zobraziť všetky športoviská ↓</button>
-  </div>
-  <div class="fac-grid">
-
-    <div class="fac-card" data-type="bazen">
-      <div class="fac-img"><img src="assets/bazen_petrzalka.jpg" alt="Petržalská plaváreň"/><span class="fac-tag">Plaváreň</span></div>
-      <div class="fac-body">
-        <div class="fac-name">Petržalská plaváreň</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Kutlíkova 2, Petržalka</div>
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Ne  6:00–22:00</div>
-        </div>
-        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="sporty/plavanie.html" class="fac-book">Rezervovať</a></div>
-      </div>
-    </div>
-
-    <div class="fac-card" data-type="bazen deti">
-      <div class="fac-img"><img src="assets/holicska.png" alt="Bazén Holíčska"/><span class="fac-tag">Bazén</span></div>
-      <div class="fac-body">
-        <div class="fac-name">Bazén Holíčska</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Holíčska, Petržalka</div>
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Otvorené do 30. 6. 2026</div>
-        </div>
-        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="sporty/plavanie.html" class="fac-book">Rezervovať</a></div>
-      </div>
-    </div>
-
-    <div class="fac-card" data-type="bazen">
-      <div class="fac-img"><img src="assets/pankuchova.jpg" alt="Bazén Pankúchova"/><span class="fac-tag">Bazén</span></div>
-      <div class="fac-body">
-        <div class="fac-name">Bazén Pankúchova</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Pankúchova, Petržalka</div>
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Sezónne otváracie hodiny</div>
-        </div>
-        <div class="fac-footer"><div class="fac-price">od 4 € <span>/ vstup</span></div><a href="sporty/plavanie.html" class="fac-book">Rezervovať</a></div>
-      </div>
-    </div>
-
-    <div class="fac-card fac-hidden" data-type="hala">
-      <div class="fac-img"><img src="assets/sporhal.png" alt="Hala Prokofievova"/><span class="fac-tag">Hala</span></div>
-      <div class="fac-body">
-        <div class="fac-name">Športová hala Pankúchová</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Prokofievova, Petržalka</div>
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Pi 7:00–22:00, So–Ne 8:00–20:00</div>
-        </div>
-        <div class="fac-footer"><div class="fac-price">od 5 € <span>/ vstup</span></div><a href="sporty/fitness.html" class="fac-book">Rezervovať</a></div>
-      </div>
-    </div>
-
-    <div class="fac-card fac-hidden" data-type="hala">
-      <div class="fac-img"><img src="assets/hrobarka.jpg" alt="Tanečné sály Hrobákova"/><span class="fac-tag">Tanečné sály</span></div>
-      <div class="fac-body">
-        <div class="fac-name">Tanečné sály Hrobákova</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Hrobákova, Petržalka</div>
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Pi 8:00–22:00</div>
-        </div>
-        <div class="fac-footer"><div class="fac-price">od 5 € <span>/ vstup</span></div><a href="https://petrzalkasportuje.sk/" target="_blank" class="fac-book">Rezervovať</a></div>
-      </div>
-    </div>
-
-    <div class="fac-card fac-hidden" data-type="bazen deti">
-      <div class="fac-img"><img src="assets/budatinska.jpg" alt="Bazén Budatínska"/><span class="fac-tag">Bazén</span></div>
-      <div class="fac-body">
-        <div class="fac-name">Bazén Budatínska</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Budatínska 61, Petržalka</div>
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po, Ut, Št, Pi 17:00–21:00 · So 9:00–14:00</div>
-        </div>
-        <div class="fac-footer"><div class="fac-price">4,50 € <span>/ hod</span></div><a href="https://petrzalkasportuje.sk/events/verejne-plavanie-bazen-budatinska/" target="_blank" class="fac-book">Rezervovať</a></div>
-      </div>
-    </div>
-
-    <!-- skryté karty – zobrazia sa po kliknutí na "Zobraziť viac" -->
-    <div class="fac-card fac-hidden" data-type="hala deti">
-      <div class="fac-img"><img src="assets/skola.jpg" alt="Telocvične škôl"/><span class="fac-tag">Telocvičňa</span></div>
-      <div class="fac-body">
-        <div class="fac-name">Telocvične základných škôl</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Rôzne lokality, Petržalka</div>
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Pi 16:00–21:00</div>
-        </div>
-        <div class="fac-footer"><div class="fac-price">od 3 € <span>/ vstup</span></div><a href="sportoviska.html" class="fac-book">Detail</a></div>
-      </div>
-    </div>
-
-    <div class="fac-card fac-hidden" data-type="ihrisko">
-      <div class="fac-img"><img src="assets/lozenie.jpg" alt="Lezecká stena"/><span class="fac-tag">Lezenie</span></div>
-      <div class="fac-body">
-        <div class="fac-name">Lezecká stena Petržalka</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Petržalka</div>
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Ne 10:00–22:00</div>
-        </div>
-        <div class="fac-footer"><div class="fac-price">od 8 € <span>/ vstup</span></div><a href="sporty/lezenie.html" class="fac-book">Rezervovať</a></div>
-      </div>
-    </div>
-
-    <div class="fac-card fac-hidden" data-type="hala">
-      <div class="fac-img"><img src="assets/hrobarka.jpg" alt="Tanečné sály Hrobákova"/><span class="fac-tag">Tanečné sály</span></div>
-      <div class="fac-body">
-        <div class="fac-name">Tanečné sály Hrobákova</div>
-        <div class="fac-meta">
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5A4 4 0 0 1 11 5.5c0 2.5-4 7-4 7S3 8 3 5.5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="5.5" r="1.2" stroke="currentColor" stroke-width="1.2"/></svg>Hrobákova, Petržalka</div>
-          <div class="fac-meta-row"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Po–Pi 8:00–22:00</div>
-        </div>
-        <div class="fac-footer"><div class="fac-price">od 5 € <span>/ vstup</span></div><a href="https://petrzalkasportuje.sk/" target="_blank" class="fac-book">Rezervovať</a></div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="fac-more-wrap">
-    <a href="#" class="fac-all-link" id="facMoreLink" onclick="toggleFacMore();return false;">Zobraziť viac športovísk</a>
-  </div>
-</section>
-
-<!-- ── EVENTS ── -->
-<section class="section section-gray" id="akcie">
-  <div class="section-row">
-    <h2>Najbližšie podujatia</h2>
-    <a href="#" class="link-all">Všetky podujatia →</a>
-  </div>
-  <div class="events-grid">
-    <a href="https://petrzalkasportuje.sk/summer-hero-camp" target="_blank" class="ev-card">
-      <img class="ev-banner" src="https://petrzalkasportuje.sk/wp-content/uploads/2026/03/web-banner-SHC-2026-1140x297.png" alt="Summer Hero Camp 2026"/>
-      <div class="ev-body">
-        <div class="ev-date"><div class="ev-day">Júl</div><div class="ev-mon">Aug</div></div>
-        <div>
-          <div class="ev-tag">Letný kemp</div>
-          <div class="ev-name">Summer Hero Camp 2026</div>
-          <div class="ev-loc"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>Júl – August · Petržalka</div>
-        </div>
-      </div>
-    </a>
-    <a href="https://petrzalkasportuje.sk/mini-summer-hero-camp" target="_blank" class="ev-card">
-      <img class="ev-banner" src="https://petrzalkasportuje.sk/wp-content/uploads/2025/04/SHC-foto-plavanie-2025-skolka.png" alt="Mini Summer Hero Camp 2026"/>
-      <div class="ev-body">
-        <div class="ev-date"><div class="ev-day">Júl</div><div class="ev-mon">Aug</div></div>
-        <div>
-          <div class="ev-tag">Letný kemp</div>
-          <div class="ev-name">Mini Summer Hero Camp 2026</div>
-          <div class="ev-loc"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1A3.5 3.5 0 0 1 9.5 4.5C9.5 7 6 11 6 11S2.5 7 2.5 4.5A3.5 3.5 0 0 1 6 1z" stroke="currentColor" stroke-width="1.3"/></svg>Júl – August · Petržalka</div>
-        </div>
-      </div>
-    </a>
-  </div>
-</section>
 
 <!-- ── HOW ── -->
-<section class="section" id="ako">
-  <div class="section-row"><h2>Ako to funguje</h2></div>
-  <div class="how-grid">
-    <div class="how-step"><div class="how-num">1</div><h3>Nájdi aktivitu</h3><p>Prehľadaj športy alebo zariadenia. Filtruj podľa veku, lokality alebo termínu.</p></div>
-    <div class="how-step"><div class="how-num">2</div><h3>Vyber termín</h3><p>Pozri dostupné termíny priamo v kalendári zariadenia — v reálnom čase.</p></div>
-    <div class="how-step"><div class="how-num">3</div><h3>Rezervuj online</h3><p>Zaregistruj sa, vyber termín a zaplať kartou alebo prevodom. Potvrdenie emailom.</p></div>
-    <div class="how-step"><div class="how-num">4</div><h3>Choď športovať</h3><p>Ukáž QR kód z potvrdenia pri vstupe. Žiadne čakanie, žiadna papierovačka.</p></div>
-  </div>
-</section>
 
 <!-- ── FAQ ── -->
 <section class="section section-gray" id="faq">
@@ -928,69 +715,7 @@ footer ul a:hover{color:#fff}
 </section>
 
 <!-- ── FOOTER ── -->
-<footer>
-  <div class="footer-top">
-
-    <!-- Logo -->
-    <div class="footer-brand">
-      <a href="https://petrzalkasportuje.sk" target="_blank">
-        <img src="https://petrzalkasportuje.sk/wp-content/uploads/2024/02/petrzalka_sportuje_logo_2024_horizontal_white-small.png" alt="Petržalka športuje logo"/>
-      </a>
-    </div>
-
-    <!-- Pre zákazníkov -->
-    <div>
-      <h4>Pre zákazníkov</h4>
-      <ul>
-        <li><a href="https://petrzalkasportuje.sk/gdpr/" target="_blank">Spracovanie osobných údajov</a></li>
-        <li><a href="https://petrzalkasportuje.sk/obchodne-podmienky/" target="_blank">Všeobecné obchodné podmienky</a></li>
-        <li><a href="https://petrzalkasportuje.sk/faq/" target="_blank">FAQ – Najčastejšie otázky</a></li>
-        <li><a href="https://petrzalkasportuje.sk/mapa-stranok" target="_blank">Mapa stránok</a></li>
-        <li><a href="https://petrzalkasportuje.sk/kontakty/" target="_blank">Kontakty</a></li>
-        <li><a href="https://petrzalkasportuje.sk/zamestnanecka-zona/" target="_blank">Zamestnanecká zóna</a></li>
-      </ul>
-    </div>
-
-    <!-- Kontakt -->
-    <div>
-      <h4>Kontakt</h4>
-      <div class="footer-contact-label">Adresa</div>
-      <div class="footer-contact-val">Kutlíkova 17, 851 02 Bratislava</div>
-      <div class="footer-contact-label">E-mail</div>
-      <div class="footer-contact-val"><a href="mailto:info@petrzalkasportuje.sk">info@petrzalkasportuje.sk</a></div>
-      <div class="footer-contact-label" style="margin-bottom:10px;">Sledujte nás</div>
-      <div class="footer-socials">
-        <a href="https://www.facebook.com/petrzalkasportuje" target="_blank" rel="noopener" title="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/petrzalkasportuje" target="_blank" rel="noopener" title="Instagram">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="var(--dark)"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="var(--dark)" stroke-width="2" stroke-linecap="round"/></svg>
-        </a>
-        <a href="https://youtube.com/@bratislavapetrzalka" target="_blank" rel="noopener" title="YouTube">
-          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="var(--dark)"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/company/bratislavapetrzalka/" target="_blank" rel="noopener" title="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Google reviews -->
-    <div>
-      <h4>Ohodnoťte nás</h4>
-      <div class="footer-reviews">
-        <a href="https://g.page/r/Cejl3xKjiNCHEAE/review" target="_blank" rel="nofollow">
-          <img src="https://petrzalkasportuje.sk/wp-content/uploads/2024/04/google-reviews.png" alt="Google reviews"/>
-        </a>
-      </div>
-    </div>
-
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Petržalka športuje. Všetky práva vyhradené.</span>
-    <span>Mestská časť Petržalka</span>
-  </div>
-</footer>
+<!-- Footer vkladá zdieľaný site.js -->
 
 <script>
 // NOVINKY CAROUSEL
@@ -1034,26 +759,10 @@ footer ul a:hover{color:#fff}
 
 // SPORTS TOGGLE
 let sportsExpanded = false;
-let facMoreExpanded = false;
-function toggleFacMore() {
-  facMoreExpanded = !facMoreExpanded;
-  document.querySelectorAll('.fac-card.fac-hidden').forEach(c => { c.style.display = facMoreExpanded ? '' : 'none'; });
-  document.getElementById('facMoreLink').textContent = facMoreExpanded ? 'Zobraziť menej ↑' : 'Zobraziť viac športovísk';
-}
-
 function toggleSports() {
   sportsExpanded = !sportsExpanded;
   document.querySelectorAll('.sport-hidden').forEach(c => { c.style.display = sportsExpanded ? 'flex' : 'none'; });
   document.getElementById('showSportsBtn').textContent = sportsExpanded ? 'Zobraziť menej ↑' : 'Zobraziť všetky športy ↓';
-}
-
-// FACILITY FILTER
-function filterFac(btn, type) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.fac-card').forEach(c => {
-    c.style.display = (type==='all' || (c.dataset.type||'').includes(type)) ? '' : 'none';
-  });
 }
 
 // FAQ
@@ -1094,5 +803,6 @@ function setSearch(v) { document.getElementById('heroSearch').value = v; documen
 function doSearch() { const v = document.getElementById('heroSearch').value; if(v) document.getElementById('sporty').scrollIntoView({behavior:'smooth'}); }
 document.getElementById('heroSearch').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
 </script>
+<script src="site.js?v=2" defer></script>
 </body>
 </html>
